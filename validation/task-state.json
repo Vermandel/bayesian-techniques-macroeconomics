@@ -1,0 +1,30 @@
+{
+  "taskId": "athena-long-mt079knb",
+  "worker": "Athena",
+  "currentStep": "validation and report",
+  "checkpoint": "2026-08-19 candidate student package produced",
+  "completed": [
+    "source inventory reused",
+    "four-session architecture",
+    "student repository candidate",
+    "assessment brief and rubric",
+    "four model starter folders",
+    "website publication drafts",
+    "static scientific and code review"
+  ],
+  "testsPassed": [
+    "artifact manifest and checksums",
+    "no absolute historical paths in student package",
+    "no obvious credential patterns",
+    "all Markdown relative links resolve",
+    "all four assessment folders contain PDF, MOD and README"
+  ],
+  "testsBlocked": [
+    "MATLAB execution: executable unavailable",
+    "Dynare execution: executable unavailable",
+    "web publication and live link check: write scope excludes website",
+    "GitHub creation/push: write scope excludes repository and external publication",
+    "Calendar detail lookup: read scope restricted to course YAML and historical folder"
+  ],
+  "blockingDecision": "confirm whether 08:30–11:45 Calendar slots should be extended to four hours"
+}
