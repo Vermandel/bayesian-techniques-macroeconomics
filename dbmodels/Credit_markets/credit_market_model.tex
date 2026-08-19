@@ -1,0 +1,286 @@
+% uncomment this to get the answer
+%\printanswers
+%\newtheorem{exercise}[theorem]{Exercise}
+
+\documentclass[a4paper,12pt]{article}%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}%
+\setcounter{MaxMatrixCols}{30}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2953}
+%TCIDATA{CSTFile=40 LaTeX article.cst}
+%TCIDATA{Created=Tuesday, September 15, 2015 18:10:19}
+%TCIDATA{LastRevised=Wednesday, October 28, 2020 11:44:43}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Standard LaTeX\Blank - Standard LaTeX Article">}
+%TCIDATA{Language=American English}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\def\NOMDOSSIER{A toy model\\of credit frictions}
+\def\NUMERODOSSIER{0}
+\input{../../mystyle.tex}
+\begin{document}
+\FRONTPAGE
+
+
+\section{The model}
+
+I\ develop here a toy model of credit market for firms that relies on the
+collateral constraint mechanism \textit{\`{a} la} \cite{kiyotaki1997credit}.
+See \cite{gerali2010credit} and \cite{iacoviello2015financial} for estimated
+version of the collateral constraint model for industrial loans.
+
+\subsection{Households}
+
+Suppose a welfare maximizing household enjoying current and future consumption
+and dislike working with respective curvatures $\sigma_{C}$, $\sigma_{H}$
+$>0$.\ The household maximizes the following stream of utilities discounted at
+a fixed rate $\beta_{H}$:%
+\begin{equation}
+\max_{\left\{  C_{t}^{H},d_{t},H_{t}\right\}  }\sum_{\tau=0}^{\infty}\beta
+_{H}^{\tau}E_{t}\left\{  \frac{\left(  C_{t+\tau}^{H}\right)  ^{1-\sigma_{C}}%
+}{1-\sigma_{C}}-\chi\frac{H_{t+\tau}^{1+\sigma_{H}}}{1+\sigma_{H}}\right\}
+\end{equation}
+where $C_{t}^{H}$\ is consumption, $H_{t}$ is hours worked and $\chi>0$\ is a
+shift parameter allowing to pin down the amount of hours worked in steady state.
+
+The budget constraint in real terms reads as:%
+\begin{equation}
+C_{t}^{H}+d_{t}=R_{t-1}d_{t-1}+H_{t}w_{t}-T_{t},
+\end{equation}
+where $d_{t}$ is the amount of real deposits, $R_{t-1}$ is the real interest
+rate of real deposits $d_{t}$, $w_{t}$ the real wage is computed as
+$w_{t}=W_{t}/P_{t}$ and a lump-sum tax financing the government $T_{t}$.
+
+The Lagrangian problem reads as:%
+\begin{align*}
+\mathcal{L}_{t}^{H}  &  =\sum_{\tau=0}^{\infty}\beta^{\tau}\left[
+\frac{\left(  C_{t+\tau}^{H}\right)  ^{1-\sigma_{C}}}{1-\sigma_{C}}-\chi
+\frac{H_{t+\tau}^{1+\sigma_{H}}}{1+\sigma_{H}}\right] \\
+&  +\beta^{\tau}\lambda_{t+\tau}^{H}\left[  \frac{R_{t-1+\tau}}{\pi_{t+\tau}%
+}d_{t-1+\tau}+H_{t+\tau}w_{t+\tau}-C_{t+\tau}^{H}-d_{t+\tau}-T_{t+\tau
+}\right]
+\end{align*}
+where $\lambda_{t}^{H}$ is a lagrangian multiplier.
+
+First order conditions are:%
+\begin{align}
+C_{t}^{H}  &  :\left(  C_{t}^{H}\right)  ^{-\sigma_{C}}-\lambda_{t}^{H}=0\\
+d_{t}  &  :\beta_{H}E_{t}\left\{  \lambda_{t+1}^{H}\right\}  R_{t}-\lambda
+_{t}^{H}=0\\
+H_{t}  &  :-\chi H_{t}^{\sigma_{H}}+\lambda_{t}^{H}w_{t}=0
+\end{align}
+
+
+\subsection{Entrepreneurs}
+
+Let us now suppose that there is a large number of identical entrepreneurs
+which are credit constraint. They hire workers and combine them with capital
+(both produced by them and supplied by households).\ As in
+\cite{iacoviello2015financial}, entrepreneurs are subject to a borrowing
+constraint that acts as a wedge on the capital and labor demand:
+\begin{equation}
+l_{t}=m_{K}E_{t}\left\{  q_{t+1}\right\}  \frac{K_{t}}{r_{t}^{E}}-m_{H}%
+h_{t}w_{t}%
+\end{equation}
+where $l_{t}$\ is the real stock of real loans, entrepreneurs cannot borrow
+more than a fraction $m_{K}\geq0$ of the expected value of their real capital
+stock, given by $E_{t}\left\{  q_{t+1}\right\}  K_{t}/r_{t}^{E}$. Here,
+$q_{t+1}$ is the expected selling price of capital goods, if shocks between t
+and t+1 are too large, financial intermediaries must be strongly binding and
+generate a large recession. Variable $r_{t}^{E}$\ is the real borrowing rate.
+This was one of the key result of \cite{kiyotaki1997credit} (\textit{i.e.}%
+\ small shocks, large recessions). In addition, the borrowing constraint
+stipulates that a fraction $m_{H}\geq0$ of the wage bill must be paid in advance.
+
+In the same vein as for households, the welfare function discounted at a rate
+$\beta_{E}$ (%
+%TCIMACRO{\TEXTsymbol{<}}%
+%BeginExpansion
+$<$%
+%EndExpansion
+$\beta_{H}$) reads as:
+\begin{equation}
+\max_{\left\{  C_{t}^{E},K_{t},I_{t},L_{t},h_{t}\right\}  }\sum_{\tau
+=0}^{\infty}\beta_{E}^{\tau}E_{t}\left\{  \frac{\left(  C_{t+\tau}^{E}\right)
+^{1-\sigma_{C}}}{1-\sigma_{C}}\right\}
+\end{equation}
+where $C_{t}^{E}$\ is the consumption of entrepreneurs.
+
+Firms technology is given by:%
+\begin{equation}
+Y_{t}=\varepsilon_{t}^{A}K_{t-1}^{\alpha}h_{t}^{1-\alpha}%
+\end{equation}
+where $\varepsilon_{t}^{A}$ is the a technology shock, $K_{t-1}$\ is the
+physical stock of capital with fixed intensity of $\alpha\in\lbrack0;1]$ and
+$h_{t}$\ is the labor demand.
+
+The balance sheet of the entrepreneur reads as:%
+\begin{equation}
+C_{t}^{E}+I_{t}+w_{t}h_{t}+r_{t-1}^{E}l_{t-1}=Y_{t}+l_{t}%
+\end{equation}
+where $I_{t}$ is investment, $w_{t}$\ real wage.
+
+The accumulation oh physical capital is given by:%
+\begin{equation}
+I_{t}\varepsilon_{t}^{I}\left(  1-S\left(  \frac{I_{t}}{I_{t-1}}\right)
+\right)  =K_{t}-\left(  1-\delta\right)  K_{t-1}%
+\end{equation}
+where $S\left(  \cdot\right)  $ is an adjustment cost function on investment
+introduced by \cite{christiano2005nominal}.\ This function $S\left(  x\right)
+=0.5\kappa\left(  x-\bar{x}\right)  ^{2}$ features some congestion cost when
+entrepreneurs are simulteaneously investing at the same time. Parameter
+$\kappa\geq0$\ is the degree of these adjustment costs. Capital stock is
+depreciating at a fixed rate of $\delta\in\lbrack0,1]$.
+
+The Lagrangian faced by entrepreneurs reads as:%
+\begin{align*}
+\mathcal{L}_{t}^{E}  &  =%
+%TCIMACRO{\dsum \limits_{\tau=0}^{\infty}}%
+%BeginExpansion
+{\displaystyle\sum\limits_{\tau=0}^{\infty}}
+%EndExpansion
+\beta_{E}^{\tau}\frac{\left(  C_{t+\tau}^{E}\right)  ^{1-\sigma_{C}}}%
+{1-\sigma_{C}}\\
+&  +\beta_{E}^{\tau}\lambda_{t+\tau}^{E}\left[  Y_{t+\tau}+l_{t+\tau
+}-C_{t+\tau}^{E}-I_{t+\tau}-w_{t+\tau}h_{t+\tau}-r_{t-1+\tau}^{E}l_{t-1+\tau
+}\right] \\
+&  +\beta_{E}^{\tau}\lambda_{t+\tau}^{E}\varphi_{t+\tau}^{E}\left[  m_{K}%
+E_{t}\left\{  q_{t+1+\tau}\right\}  \frac{K_{t+\tau}}{r_{t+\tau}^{E}}%
+-m_{H}h_{t+\tau}w_{t+\tau}-l_{t+\tau}\right] \\
+&  +\beta_{E}^{\tau}\lambda_{t+\tau}^{E}q_{t+\tau}\left[  K_{t+\tau}-\left(
+1-\delta\right)  K_{t-1+\tau}-I_{t+\tau}\varepsilon_{t+\tau}^{I}\left(
+1-S\left(  I_{t+\tau}/I_{t-1+\tau}\right)  ^{2}\right)  \right]
+\end{align*}
+where $\lambda_{t}^{E}$, $\varphi_{t}^{E}$ and $q_{t}$\ are lagrangian
+multipliers.\ Here, we simplify the problem for two last constraints by
+pre-multiplying to express each constraints into consumption equivalents.
+
+First order conditions are given by:%
+\begin{align}
+C_{t}^{E}  &  :\left(  C_{t}^{E}\right)  ^{-\sigma_{C}}-\lambda_{t}^{E}=0\\
+l_{t}  &  :\lambda_{t}^{E}-\beta_{E}E_{t}\left\{  \lambda_{t+1}^{E}\right\}
+r_{t}^{E}-\lambda_{t}^{E}\varphi_{t}^{E}=0\\
+I_{t}  &  :-\lambda_{t}^{E}-\lambda_{t}^{E}q_{t}\varepsilon_{t}^{I}\left(
+1-\frac{\partial S\left(  I_{t}/I_{t-1}\right)  }{\partial I_{t}}\right)
++\beta_{E}\lambda_{t+1}^{E}q_{t+1}\varepsilon_{t+1}^{I}\frac{\partial S\left(
+I_{t+1}/I_{t}\right)  }{\partial I_{t}}=0\\
+K_{t}  &  :\beta_{E}E_{t}\left\{  \lambda_{t+1}^{E}\left[  q_{t+1}\left(
+1-\delta\right)  +\alpha\frac{Y_{t+1}}{K_{t}}\right]  \right\}  -q_{t}%
+\lambda_{t}^{E}+\lambda_{t}^{E}\varphi_{t}^{E}E_{t}\left\{  q_{t+1}\right\}
+\frac{m_{K}}{r_{t}^{E}}=0\\
+h_{t}  &  :\left[  \left(  1-\alpha\right)  \frac{Y_{t}}{h_{t}}-w_{t}\right]
+\lambda_{t}^{E}-\lambda_{t}^{E}\varphi_{t}^{E}m_{H}w_{t}=0
+\end{align}
+Rewriting these conditions dividing by $\lambda_{t}^{E}$\ provides:
+\begin{align}
+\lambda_{t}^{E}  &  =\left(  C_{t}^{E}\right)  ^{-\sigma_{C}}\\
+1-\varphi_{t}^{E}  &  =\beta_{E}E_{t}\left\{  \frac{\lambda_{t+1}^{E}}%
+{\lambda_{t}^{E}}\right\}  r_{t}^{E}\\
+q_{t}\varepsilon_{t}^{I}  &  =1+q_{t}\varepsilon_{t}^{I}\frac{\kappa}%
+{2}\left(  1+\left(  3\frac{I_{t}}{I_{t-1}}-4\right)  \frac{I_{t}}{I_{t-1}%
+}\right)  +\beta_{E}\left\{  \frac{\lambda_{t+1}^{E}}{\lambda_{t}^{E}}%
+q_{t+1}\varepsilon_{t+1}^{I}\kappa\left(  1-\frac{I_{t}}{I_{t-1}}\right)
+\left(  \frac{I_{t}}{I_{t-1}}\right)  ^{2}\right\} \\
+r_{t}^{E}q_{t}  &  =\left(  1-\varphi_{t}^{E}\right)  E_{t}\left\{  \left[
+q_{t+1}\left(  1-\delta\right)  +\alpha\frac{Y_{t+1}}{K_{t}}\right]  \right\}
++\varphi_{t}^{E}m_{K}E_{t}\left\{  q_{t+1}\right\} \\
+w_{t}  &  =\frac{\left(  1-\alpha\right)  }{\left(  1+\varphi_{t}^{E}%
+m_{H}\right)  }\frac{Y_{t}}{h_{t}}%
+\end{align}
+The key friction here is the collateral constraint, whose multiplier
+$\varphi_{t}^{E}$, provides the shadow cost of one unit of loans and affect in
+turn the overall discounting of households. When the friction binds a lot,
+with high value of $\varphi_{t}^{E}$, households are actually getting more
+patient and will consume less and invest less, that is mechanically creating
+the macroeconomic conditions for recession.
+
+\subsection{Financial intermediaries}
+
+Here, we assume perfectly competitive and frictionless financial
+intermediaries, which collect deposits to households and provide loans to
+entrepreneurs:%
+\begin{equation}
+\Pi_{t}^{B}=r_{t}^{E}l_{t}+r_{t}b_{t}-r_{t}d_{t}%
+\end{equation}
+facing the following balance sheet:%
+\[
+d_{t}=l_{t}+b_{t}%
+\]
+The first order condition reads as:%
+\[
+r_{t}^{E}=r_{t}%
+\]
+so there is no wedge between the real lending rate and the real deposit rate.
+
+One of the key contributions of \cite{gerali2010credit} and
+\cite{iacoviello2015financial} is to introduce imperfect financial intermediaries.
+
+\subsection{Equilibrium conditions}
+
+Aggregate consumption reads as:%
+\begin{equation}
+C_{t}=C_{t}^{E}+C_{t}^{H}.
+\end{equation}
+
+
+And total demand is given by:%
+\begin{equation}
+Y_{t}=C_{t}+I_{t}+G_{t}.
+\end{equation}
+
+
+\subsection{The friction in steady state}
+
+The key friction here is the binding constraint. How are we sure that this
+friction is actually binding? To be sure that the friction is binding, we need
+to check whether in the deterministic steady state $\bar{\varphi}^{E}>0$, if
+so then the constraint is eternally binding. First, let's remove time
+subscripts to Euler equations:%
+\begin{align*}
+\beta_{H}\bar{r}-1  &  =0\\
+1-\beta_{E}\bar{r}-\bar{\varphi}^{E}  &  =0
+\end{align*}
+Combining these two equations through their common interest rate:%
+\[
+\bar{\varphi}^{E}=1-\frac{\beta_{E}}{\beta_{H}}%
+\]
+The constraint binds as long as $\beta_{I}/\beta_{H}<1$, $\bar{\varphi}^{E}>0$.%
+
+%TCIMACRO{\TeXButton{small}{\footnotesize}}%
+%BeginExpansion
+\footnotesize
+%EndExpansion
+\bibliographystyle{elsart-harv}
+\bibliography{chap1}%
+%TCIMACRO{\TeXButton{small}{\normalsize}}%
+%BeginExpansion
+\normalsize
+%EndExpansion
+
+\end{document}

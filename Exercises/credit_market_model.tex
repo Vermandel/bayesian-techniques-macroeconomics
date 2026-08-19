@@ -1,0 +1,173 @@
+% uncomment this to get the answer
+%\printanswers
+%\newtheorem{exercise}[theorem]{Exercise}
+
+\documentclass[a4paper,12pt]{article}%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}%
+\setcounter{MaxMatrixCols}{30}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2953}
+%TCIDATA{CSTFile=40 LaTeX article.cst}
+%TCIDATA{Created=Tuesday, September 15, 2015 18:10:19}
+%TCIDATA{LastRevised=Wednesday, September 30, 2020 15:14:05}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Standard LaTeX\Blank - Standard LaTeX Article">}
+%TCIDATA{Language=American English}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\def\NOMDOSSIER{A toy model\\of credit frictions}
+\def\NUMERODOSSIER{0}
+\input{../mystyle.tex}
+\begin{document}
+\FRONTPAGE
+
+
+\section{Pre-requisite}
+
+\begin{itemize}
+\item Having already solved the production economy model with Dynare.
+
+\item Or having physical capital in any model: this exercise can be done on
+any model.
+\end{itemize}
+
+\section{Minimum setup}
+
+Let us now suppose that production is endogenous in the same spirit as
+\cite{kydland1982time}. \ The welfare index of the representative household
+reads as follows:%
+\begin{equation}
+\mathcal{W}_{t}=\mathbb{E}_{t}\sum_{\tau=0}^{+\infty}\theta_{t+\tau}%
+\log\left(  C_{jt+\tau}\right)
+\end{equation}
+Note in this specific case here, we deal with an unit root component.\ To
+takeaway the unit root in the data generating process of consumption, we
+assume as \cite{schmitt2003closing} that the stochastic discount factor is
+time varying:%
+\begin{equation}
+\theta_{t}=\beta\exp(-\chi\left[  C_{t-1}-\bar{C}\right]  /\bar{C}),
+\end{equation}
+where $\bar{C}$\ is the steady state consumption and $\beta$\ the discount
+factor.\ Note that $\theta_{t}$\ is economy-wide, so the agent $j$ does not
+optimize over $C_{t}$.
+
+The households faces a (intertemporal) budget constraint:%
+\begin{equation}
+C_{jt}+I_{jt}=Y_{jt} \label{eq hh budget constraint}%
+\end{equation}
+
+
+The total income $Y_{jt}$\ is spent on consumption goods $C_{jt}$ and
+investment goods $I_{jt}$. An intertemporal budget constraint shows what
+consumption options are available between the present and future. The
+constraint can be used to determine the future value of present income or the
+present value of future income. This constraint binds each period,
+\textit{i.e.} households expenditures equal her income for any value of
+$t$.\ Here, the budget constraint can also be interpreted as the definition of
+the GDP using expenditure approach (neglecting both stocks and the trade balance).
+
+The law of motion of capital reads as in the \cite{solow1956contribution}'s
+model:%
+\begin{equation}
+I_{jt}=K_{jt}-\left(  1-\delta\right)  K_{jt-1}
+\label{eq hh capital law of motion}%
+\end{equation}
+Investment is determined by the gap between current capital $K_{jt}$\ and
+depreciated capital $\left(  1-\delta\right)  K_{jt-1}$. In the latter
+expression, the parameter $0\leq\delta\leq1$ denotes the depreciation rate of capital.
+
+The standard Cobb-Douglas technology is determined by:%
+\begin{equation}
+Y_{jt}=A_{t}K_{jt-1}^{\alpha}\label{eq hh production}%
+\end{equation}
+where $0<\alpha\leq1$\ is the share of capital involved in the production
+process of new goods $Y_{jt}$\ while $A_{t}$\ is a productivity shock which
+temporary affects the society's ability to produce goods, it affects all the
+households in our economy in the same way. The production combines technology
+and capital $K_{jt-1}$ bought in $t-1$ as capital requires one period to be
+settled (the so called time-to-build in the RBC literature).\ Concerning the
+productivity shock, it is assumed to follow a simple AR(1) process given by:%
+
+\begin{equation}
+\log\left(  A_{t}\right)  =\rho\log\left(  A_{t-1}\right)  +\eta_{t},
+\end{equation}
+
+
+The Lagrangian reads as follows:%
+\[
+\mathcal{L}_{t}=\mathbb{E}_{t}\sum_{\tau=0}^{+\infty}\theta_{t+\tau}\left(
+\log\left(  C_{jt+\tau}\right)  +\lambda_{t+\tau}\left[  A_{t+\tau
+}K_{jt-1+\tau}^{\alpha}+\left(  1-\delta\right)  K_{jt-1+\tau}-C_{jt+\tau
+}-K_{jt+\tau}\right]  \right)
+\]
+FOCs:%
+\[
+K_{jt}:\mathbb{E}_{t}\sum_{\tau=0}^{+\infty}\left(  \theta_{t+1}\lambda
+_{t+1}\left[  A_{t}K_{jt-1+\tau}^{\alpha}+\left(  1-\delta\right)
+K_{jt-1+\tau}-C_{jt+\tau}-K_{jt+\tau}\right]  \right)
+\]
+
+
+\section{Exercise}
+
+\begin{enumerate}
+\item Draw the system response of a negative productivity shock.\ Is the
+response perfectly symmetric with its previous positive version? Do you find
+this result realistic?
+
+\item The GDP, $Y_{t}$ and investment $I_{t}$ are not (yet) included in the
+model. Include them and draw their responses to a productivity shock. To do
+so, log-linearize their equations and find their steady state.
+
+\item Check whether the investment- to-gdp ratio $\bar{I}/\bar{Y}$ and
+$\bar{C}/\bar{Y}$ are consistent with the data (on average, investment and
+consumption represent respectively 20\%\ and 60\% of the GDP for
+OECD\ countries). Why is there such a huge gap? How could you improve the RBC model?
+
+\item Change the calibration to get a non-stationnary system response. What is
+Dynare telling you in the command window? Does\ increasing return to scale
+makes the model non-stationnary?
+
+\item 
+\end{enumerate}%
+
+%TCIMACRO{\TeXButton{small}{\footnotesize}}%
+%BeginExpansion
+\footnotesize
+%EndExpansion
+\bibliographystyle{elsart-harv}
+\bibliography{chap1}%
+%TCIMACRO{\TeXButton{small}{\normalsize}}%
+%BeginExpansion
+\normalsize
+%EndExpansion
+
+
+
+\end{document}

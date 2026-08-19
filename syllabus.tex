@@ -1,0 +1,273 @@
+% uncomment this to get the answer
+%\printanswers
+%\newtheorem{exercise}[theorem]{Exercise}
+
+\documentclass[a4paper,12pt]{article}%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}%
+\setcounter{MaxMatrixCols}{30}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2953}
+%TCIDATA{CSTFile=40 LaTeX article.cst}
+%TCIDATA{Created=Tuesday, September 15, 2015 18:10:19}
+%TCIDATA{LastRevised=Wednesday, October 17, 2018 14:50:23}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Standard LaTeX\Blank - Standard LaTeX Article">}
+%TCIDATA{Language=American English}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\def\NOMDOSSIER{Syllabus of\\Applied Macroeconometrics}
+\def\NUMERODOSSIER{-1}
+\input{mystyle.tex}
+\begin{document}
+\FRONTPAGE
+
+
+\section{Overview}
+
+The lectures provide an advanced presentation of building, simulating,
+estimating and forecasting macroeconometric models that constitute the main
+workhouse of today's macroeconomics. These models are now commonly used in
+central banks for policy projections and business cycle analysis.
+
+At the very end of the lecture, you will be able to simulate, estimate and
+forecast using AR, VAR\ and DSGE\ models. These kind of skills are highly
+sought by policymaking institutions. In the perspective of a PhD thesis,
+VAR\ and DSGE modelling is also framework well appreciated if you have one or
+more theoretical chapter in your PhD dissertation.
+
+It is probably best to warn that the class is more technical than some of the
+other options available this term. I assume people have a good familiarity
+with the statistics, econometrics and mathematical methods taught last semester.
+
+\vspace{4ex} \begin{mybox}{Plan}
+A rough outline of the course is as follows. How many of these topics we cover
+will depend on how things go.
+\begin{enumerate}
+\item Building a (stationary) dataset;
+\item The AR(p) benchmark model;
+\item Vector Auto-Regressive (VAR) models;
+\item Introduction to DSGE\ models;
+\item Forecasting with DSGE\ Models;
+\end{enumerate}
+\end{mybox}\vspace{3ex}
+
+Participants are encouraged to bring their own laptop with MATLAB installed
+prior the lectures.
+
+\section{Course Materials}
+
+There is no textbook. The main source of material for this course will be the
+lecture notes that will be available on my webpage
+(\href{http://vermandel.fr/eid-m2/}{vermandel.fr/eid-m2}) and academic
+research papers. I will provide links to papers on the course website and all
+material should be available via the internet. Some of the papers will be
+discussed more than others. Some you will need to read in depth; others are
+useful as historical references or as extra reading.
+
+\section{Contacting me}
+
+My office is P121.\ Email:
+\href{mailto:gauthier.vermandel@dauphine.fr}{gauthier.vermandel@dauphine.fr}%
+.\ The best way to send me an email to ask me your questions, and if
+necessary, arrange a meeting.\ I am fairly responsive, if you don't have any
+feedback from me, re-send your mail again.
+
+\section{Assessment}
+
+There are no midterm and final exam. Instead, you are asked to produce a note
+on a specific policy relevant topic, and employ an AR(p), a VAR and a
+DSGE.\ There is an extra pdf that details this assessment. \underline{This pdf
+should be done through LaTeX programing}, even through not compulsory, LaTeX
+is highly appreciated.
+
+Three steps:
+
+\begin{enumerate}
+\item \textbf{The data:} Select a country on dbnomics.\ You must be sure that
+you have all the data available for this country.\ Data must have the same
+frequency.\ The number of periods available must be above 50 (so if you have
+more that 50 years, you can use annual data). Your analysis must include
+\textit{minimum 3\ time series.}
+
+\item \textbf{The topic}: choose one of these topic of analysis:
+
+\begin{itemize}
+\item \textit{Labor market friction}s (compulsory data: unemployment rate and output).
+
+\item \textit{One sector vs the rest of the economy} (compulsory data: one
+sectoral data, output).
+
+\item \textit{Mortgage market} (compulsory data: housing loans, house price, output).
+
+\item \textit{Industrial loans market} (compulsory data: loans to non
+financial corporations and output).
+
+\item \textit{Price rigidities} (compulsory data: inflation, output and
+nominal rate).
+
+\item \textit{External constraint} (compulsory data: real exchange rate and output).
+\end{itemize}
+
+\item \textbf{Select your partner}. Only two students allowed per team.
+\end{enumerate}
+
+Once you have selected the topic and the country - for example, mortgage
+market in Spain, take the data for Spain and estimate a VAR\ and a
+DSGE\ model.\ Compare the propagation mechanism between the DSGE and the VAR,
+how similar are they?\ In terms of forecasting, compare the DSGE, VAR\ and
+AR.\ What is the best tool? What are your conclusion regarding the expected
+growth of this economy?
+
+Two groups \textbf{must not} have the same topic +\ country, so there should
+be some coordination between groups to avoid such a situation.
+
+Maximum is 30 pages (figure, bibliography and appendix included).\ There must
+be a non-technical summary (1/2 page max) that can be understandable by anyone
+including your granny (see for instance ECB\ working papers for examples), an
+abstract (1/2 page max), an introduction (max 2 pages) which includes
+references to both DSGE\ and VAR\ models and one conclusion (max 1/2 page). In
+appendix, your must show whether your sample is stationary.
+
+\section{An example of an assessment}
+
+Suppose that my topic is \textquotedblleft explaining the business cycles of
+the US\ economy\textquotedblright.
+
+\subsection{The dataset}
+
+I am going to select some key time series to estimate my model.\ Which
+ones?\ I am going to search on google scholar some papers about my topic.\ For
+instance, the Smets Wouters 2007 paper, or simple de Kydland Prescott (1982),
+they analyze the GDP, consumption, investment and hours worked. So I'm going
+on dbnomics, I\ detrend these variables and will use them for my final assessment.
+
+\subsection{Analyzing the propagation}
+
+Using this dataset, I am going to estimate an AR(p) model, a VAR\ model
+(eventually looking at some important papers for ordering my variables) and
+the DSGE\ model.
+
+Another problem that can arise is whether I\ can compare shocks of my
+VAR\ with those of the DSGE\ model. Some shocks are comparable, must most of
+the time they are not comparable at all.\ For instance, a public spending
+shock in my DSGE\ model is a shock on the production, this shock may thus be
+compared to a shock on the output equation.\ I\ can thus compare these two
+shock together.
+
+\begin{itemize}
+\item Compare the variance forecast error. What are the driving forces of main
+macro variables in the VAR\ and the DSGE?
+
+\item Compare the historical variance de composition.\ Are the DSGE and the
+VAR telling me the same story?
+
+\item Compare the IRFs between the VAR\ and the DSGE if you identify common
+shock.\ If you think your shocks between the VAR and DSGE\ are too different,
+then comment IRFs of each model separately.
+\end{itemize}
+
+\subsection{Forecasting}
+
+\begin{enumerate}
+\item Once my models are estimated, I\ am going to compare the forecasting
+performances of my models.\ In a table, I\ can provide the RMSE of each model
+for different time horizons. 
+
+\item I\ can also compare what are the forecasts for the future states of the economy.
+\end{enumerate}
+
+\subsection{Plans}
+
+With all these informations I\ can get from my models, what's the best plan
+for my assessment?\ I provides two plans:
+
+\subsubsection{Classic one}
+
+This can be a very classic one.\ I\ try to explain the business cycles of an
+economy by comparing the VAR and DSGE:
+
+1.\ Intro
+
+2. Dataset
+
+3. Propagation\newline
+
+3.a.\ IRF
+
+3.b. variance forecast errors
+
+3.c.\ historical decomposition
+
+4.\ Forecasting
+
+4.a.\ Best forecasting model with RMSE.
+
+4.b. Out sample forecasting
+
+5.\ Conclusion.
+
+This plan is efficient, but the exercise may be boring for the reader as they
+is no clear question left at hand.
+
+\subsubsection{Interesting one}
+
+I know that the US\ economy has been characterised by a very low unemployment
+rate and a rise in the number of hours worked. Then an interesting point would
+be to evaluate how labour supply shocks are important in explaining the
+business cycles of the US economy, in particular since the 2000s.
+
+1.\ Intro on the role of supply shocks/hours worked with some macro papers on
+this question.
+
+2.\ Dataset: how you have computed your hours worked. Discuss the time series,
+in particular the rise of hours worked after 2009.
+
+3. Propagation of a labor supply shock:
+
+3.a. comparison between the DSGE\ and the VAR: how close?
+
+3.b. Same for variance forecast errors.\ \ It's been 10 years now that the US
+has experience these labor shocks: what implication in the short run and long
+run for output? 
+
+3.c. the historical contribution of labor supply shocks after 2009
+
+4.\ Forecasting
+
+4.a.\ Compare the forecasting performance with and without these labor supply
+shocks (i.e. remove labor supply from observable variables).\ How does the
+RMSE has changed for forecasting output?
+
+4.b. What are the forecasting perspectives from the DSGE with and without
+labor supply shocks?
+
+5.\ Concluding remarks
+
+
+\end{document}

@@ -1,0 +1,1201 @@
+% uncomment this to get the answer
+%\printanswers
+%\newtheorem{exercise}[theorem]{Exercise}
+
+\documentclass[a4paper,12pt]{article}%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}%
+\setcounter{MaxMatrixCols}{30}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2953}
+%TCIDATA{CSTFile=40 LaTeX article.cst}
+%TCIDATA{Created=Tuesday, September 15, 2015 18:10:19}
+%TCIDATA{LastRevised=Tuesday, October 20, 2020 12:14:58}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Standard LaTeX\Blank - Standard LaTeX Article">}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\newenvironment{TEUB}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\def\NOMDOSSIER{Bayesian Estimation}
+\def\NUMERODOSSIER{4}
+\input{../lectures_info.tex}
+\input{../mystyle.tex}
+\begin{document}
+\FRONTPAGE%
+
+%TCIMACRO{\TeXButton{BeginDefinition}{\vspace{4ex}
+%\begin{myobjs}}}%
+%BeginExpansion
+\vspace{4ex}
+\begin{myobjs}%
+%EndExpansion
+Estimating a DSGE model using Bayesian techniques;
+
+\begin{itemize}
+\item Decomposing business cycles.
+\end{itemize}
+
+%
+
+%TCIMACRO{\TeXButton{EndDef}{\end{myobjs}}}%
+%BeginExpansion
+\end{myobjs}%
+%EndExpansion
+
+
+\newpage
+
+\section{Introduction}
+
+\noindent tbd
+
+\newpage
+
+\section{Filters}
+
+Filters are statistical methods which allows to extract relevant information
+from data. For a macro-econometrician, filtering consists of using the model
+to extract the sequence of shocks from macroeconomic time series.\ Note that
+for a given same sample, there are an infinite number of sequences of shocks
+and models that can replicate that sample.\ So the extracted sequence of
+shocks of one model provide one - among many possible - representation of the
+data. The key aspect of the estimation is therefore to pick the most likelihoo
+
+\subsection{The Kalman filter}
+
+The Kalman filter was initially developed for engeneering control problem
+(e.g. Nasa spatial program).\ In this section, we follow Hamilton's notation
+and will set up the Kalman filter on general time series model. First, the
+Kalman filter is linear, so this filter can only be employed for the
+estimation of linear models. Since most of DSGE\ models are simulated using a
+linear approximation, the Kalman has become very popular for the estimation of DSGE\ models.
+
+First, note that when we try to put the model to the data, there are observed
+and unobserved variables. Think about a RBC\ model with physical capital,
+consumption, productivity and investment, an econometrician is able to observe
+consumption and investment because these are available as macroeconomic time
+series, while physical capital and productivity are not directly
+observable.\footnote{For physical capital, we are not sure exactly at which
+rate physical capital depreciates. Similarly, the measure of productivity is
+also subject to endless controversies (think about the Solow's residual).}
+
+The set of unobserved state is given by:%
+\begin{equation}
+x_{t}=Fx_{t-1}+G\varepsilon_{t},\text{ with }\varepsilon_{t}\sim
+\mathcal{N}(0,Q) \label{eq: unobserved variables}%
+\end{equation}
+where the covariance matrix of errors is given by $E(v_{t},v_{t}^{\prime})=Q$,
+$v_{t}\sim N(0,Q)$ is a vector of stochastic disturbances, $F$ is a full rank
+matrix.\ Note that this equation transition is a transition equation as it
+describes how a set of unobservable state variations evolves over time. Note
+that the system in \autoref{eq: unobserved variables} is actually the policy
+rule of our model. Regarding the set of observable variables, the equation
+reads as:
+\begin{equation}
+y_{t}=Hx_{t}+v_{t},\text{ with }v_{t}\sim\mathcal{N}(0,R)
+\label{eq: observed variables}%
+\end{equation}
+where $w_{t}$\ is a vector of stochastic disturbances which are interpreted as
+measurement errors with $w_{t}\sim N(0,P)$, $M$\ is a matrix that describes
+how observable variables are related to unobserved ones. This equation will be
+described in the model as \textsf{measurement equations}.%
+\begin{equation}
+y_{t}=HFx_{t-1}+HG\omega_{t}+v_{t}%
+\end{equation}
+
+
+Note that we don't allow for the stochastic disturbances $\omega_{t}$\ and
+$v_{t}$\ to be correlated (but we could relax this assumption).
+
+Back to the Kalman filter, the latter allows an econometrician to retrieve the
+values of $x_{t}$, $v_{t}$\ and $w_{t}$ that replicate $y_{t}$. We assume for
+now that $H$, $F$, $G$, $R$ and $Q$ are known and time unvarying (without a
+loss of generality).\ \ We provide data Y and matrices H F\ and G, and the
+filter provides the vectors or errors and their (un)conditional moments.
+
+The prediction errors $y_{t}-E_{t-1}\{y_{t}\}$\ are given by:%
+\begin{equation}
+S_{t}=y_{t}-E_{t-1}\{y_{t}\}=y_{t}-HE_{t-1}\{x_{t}\}, \label{eq KF1}%
+\end{equation}
+while the prediction errors variance $\Omega_{t}=E\left(  S_{t}S_{t}^{\prime
+}\right)  $ is given by:
+\begin{equation}
+\Omega_{t}=HE_{t-1}E_{t-1}\{\Sigma_{t}\}H^{\prime}+R. \label{eq KF2}%
+\end{equation}
+
+
+The 'best' prediction in the Kalman filter is defined as the optimal mean
+squared error (MSE) estimator:
+\[
+\min E\left(  y_{t}-E_{t-1}\{y_{t}\}\right)  \left(  y_{t}-E_{t-1}%
+\{y_{t}\}\right)  ^{\prime},
+\]
+where $K_{t}$\ represents a closed-form expression of the estimator, it plays
+a key role in determining how the predictions of the model adjust to surprises
+(i.e. unexpected shocks $\omega_{t}$).\ The formula of $K_{t}$ reads as
+follows:%
+\begin{equation}
+K_{t}=E_{t-1}\{\Sigma_{t}\}H^{\prime}\Omega_{t}^{-1} \label{eq KF3}%
+\end{equation}
+
+
+Next, we can compute the Kalman filter's recusion. We are interested in
+computing an estimate of $x_{t}$ given 'surprises' in $y_{t}$ (surprises are
+the errors of predictions).\ Update of the state mean $x_{t}$ and
+variance-covariance $\Sigma_{t}$ based on the new surprise are given by:
+\begin{align}
+x_{t}  &  =E_{t-1}\{x_{t}\}+K_{t}S_{t}\label{eq KF4}\\
+\Sigma_{t}  &  =E_{t-1}\{\Sigma_{t}\}-K_{t}HE_{t-1}\{\Sigma_{t}\}
+\label{eq KF5}%
+\end{align}
+
+
+Finally, we can forecast state mean and variance-covariance, based on the
+current state mean and covariance $x_{t}$ and $\Sigma_{t}$, as follows:%
+\begin{align}
+E_{t}\{x_{t+1}\}  &  =Fx_{t}\label{eq KF6}\\
+E_{t}\{\Sigma_{t+1}\}  &  =F\{\Sigma_{t}\}F^{\prime}+GQG^{\prime}
+\label{eq KF7}%
+\end{align}
+
+
+Note that if you need to run the Kalman filter, you need to pre-define $H$,
+$G$, $F$, $R$, $C$, and $Q$, provide the data $y_{t}$, and the filter (based
+on equations \autoref{eq KF1}-\autoref{eq KF7}) provides $S_{t}$, $\Omega_{t}%
+$, $x_{t}$, $\Sigma_{t}$, $E_{t}\{x_{t+1}\}$\ and $E_{t}\{\Sigma_{t+1}\}$. The
+only last remaining thing that must defined are the initial conditions,
+$E_{0}\{x_{1}\}$ and $E_{0}\{\Sigma_{1}\}$, in the recursive equations
+\ref{eq KF4}-\ref{eq KF5}.
+
+\subsection{The Inversion Filter}
+
+As an alternative to the Kalman, we can use the inversion filter of
+\cite{kollmann2013estimating} that can serve the sequence of errors of any
+model (either linear or non-linear).
+
+Consider a selection matrix denoted $H$ such that the set of observable is
+given by $y_{t}=Hx_{t}$. Note that there as many rows as endogenous variables
+$n_{x}$ and as many column as observable variables $n_{y}$, this matrix is of
+all zeros except for row/column observables variables that must include a
+dummy.\ Mapping the model $y_{t}$\ to the data $Y_{t}$ implifies that:%
+\begin{align*}
+Y_{t}  &  =y_{t}\\
+&  =Hx_{t}\\
+&  =HFx_{t-1}+HG\varepsilon_{t}%
+\end{align*}
+We thus solve the equation in $\varepsilon_{t}$\ such that the closed-form
+expression for the contemporaneous realization of shocks:%
+\begin{equation}
+\varepsilon_{t}=\left(  HG\right)  ^{-1}\left(  Y_{t}-HFx_{t-1}\right)
+\label{eq 4}%
+\end{equation}
+
+
+Note that the error of forecasts, denoted $Y_{t}-HFx_{t-1}$, is the economic
+surprise that is rescaled to the model's shock size through the product with
+the term $\left(  HG\right)  ^{-1}$. Therefore using this equation, we can
+extract the sequence of errors recursively.
+
+\subsection{The particle filter}
+
+Particle filters allow the inference of dynamic macroeconomics models, the
+latter can be non-linear and/or with non-normal errors. \ We refer to
+\cite{fernandez2007estimating} for a full description of the application to DSGE\ models.
+
+\subsection{A quick discussion}
+
+What is the difference between the inversion and the Kalman filter? The Kalman
+filter is the best linear estimator, so it picks the 'best' sequence of
+shocks\ that minimizes the mean squared errors.\ But if there are as many
+shocks as observable variables (that is mostly the case for estimated DSGE)
+then there is only one possible sequence of shock so there is no 'best"
+prediction.\ However, if there are more shocks than observable variables, then
+the Kalman is useful to find the 'best' sequence of errors.\ Note in
+\autoref{eq 4}, we can use the inversion filter only if matrix $\Lambda G$\ is
+square and invertible.\ Put differently, the inversion filter only works if
+the number of observable variables is the same as the sequence of errors to be
+estimated. Given this restriction on the inversion filter, 99.9\% yet use the
+Kalman filter to evaluate the sequence of error of the model.\ For non-linear
+models, the particle filter is the best solution to smooth the shocks, however
+its application is computatinally intensive, so the big drawback is the time
+for the filter to get the sequence of errors.
+
+Now that we are able to get the sequence of errors that replicate some
+observable variable, the next step is to pick the best set of parameters that
+replicates the data.\ The maximum likelihood is the criterion for this.
+
+\newpage
+
+\section{A\ Bayesian perspective}
+
+We estimate a state-space linear model using Bayesian techniques as in
+\cite{fernandez2004comparing} and \cite{smets2007shocks}. Non-calibrated
+parameters are estimated using the Bayesian maximum likelihood principle (see
+\cite{an2007bayesian} for an extensive presentation). As exemplified by
+\cite{smets2003estimated} and \cite{smets2007shocks}, this approach can
+fruitfully be applied to macroeconomic models as it allows a DSGE model to
+perform as well as non-constrained VAR model in explaining macroeconomic time
+series. In our estimation we follow closely each of the steps defined by
+\cite{smets2003estimated}.\footnote{The successive steps of this estimation
+strategy is presented by \cite{smets2003estimated} as follows:
+\textquotedblleft this econometric approach attempts to provide a full
+characterisation of the observed data series. For example, following
+\cite{sargent1989two}, a number of authors have estimated the structural
+parameters of DSGE models using classical maximum likelihood methods. These
+maximum likelihood methods usually consist of four steps. In the first step,
+the linear rational expectations model is solved for the reduced form state
+equation in its predetermined variables. In the second step, the model is
+written in its state space form. This involves augmenting the state equation
+in the predetermined variables with an observation equation which links the
+predetermined state variables to observable variables. In this step, the
+researcher also needs to take a stand on the form of the measurement error
+that enters the observation equations. The third step consists of using the
+Kalman filter to form the likelihood function. In the final step, the
+parameters are estimated by maximising the likelihood function. Alternatively
+within this strong interpretation, a Bayesian approach can be followed by
+combining the likelihood function with prior distributions for the parameters
+of the model, to form the posterior density function. This posterior can then
+be optimised with respect to the model parameters either directly or through
+Monte-Carlo Markov-Chain (MCMC) sampling methods.\textquotedblright\ $\ \ $}
+
+\subsection{Building the likelihood function}
+
+Recall that in the first handout, any macroeconomic model with expectations
+can be casted in a compact form as follows:%
+\begin{equation}
+\mathbb{E}_{t}\left[  f_{\Theta}\left(  x_{t+1},x_{t},x_{t-1},\epsilon
+_{t}\right)  \right]  =0 \label{eq non linear system}%
+\end{equation}
+where $f_{\theta}$\ are the non-linear relations across variables $x_{t}$,
+stochastic innovations $\epsilon_{t}$, for a given set of structural
+parameters $\Theta$. By applying linearization methods
+
+By applying linearization methods on the system of non-linear equation, it is
+possible to get of solution of the form
+\begin{equation}
+\hat{x}_{t}=F\hat{x}_{t-1}+G\epsilon_{t}, \label{eq: non linear DR}%
+\end{equation}
+where elements in matrices $F$\ and $G$ are function of structural parameters
+$\Theta$.
+
+Let $H$\ be the selection matrix of observable variables -- a subset of
+$\hat{x}_{t}$ -- \ such that endogenous variables reads as $y_{t}=H\hat{x}%
+_{t}+v_{t}$ with $v_{t}$ the measurement errors. Then it is possible following
+the application of a filter (e.g. Kalman, inversion, particle,...) to get the
+errors of prediction:%
+\[
+S_{t}=Y_{t}-E_{t-1}\{y_{t}\},
+\]
+where $E_{t-1}\{y_{t}\}$\ is an output from the statistical filter and $Y_{t}%
+$\ is a sample with $n$ observed variables and $T$ periods.\ 
+
+The errors of predictions of the estimated model follows $S_{t}\sim
+\mathcal{N}(\mu_{t},\Omega_{t})$ with $\mu_{t}$\ the mean and $\Omega_{t}%
+$\ the variance-covariance of errors of predictions, the general expression of
+the likelihood function reads as follows:%
+\begin{equation}
+\log\mathcal{L}\left(  \theta|Y_{T},...Y_{1}\right)  =-\frac{nT}{2}\log
+(2\pi)-\frac{1}{2}\sum_{1}^{T}\log\left(  |\Omega_{t}|\right)  -\frac{1}%
+{2}\sum_{1}^{T}S_{t}^{\prime}\Omega_{t}^{-1}S_{t}.
+\end{equation}
+
+
+The aim is to estimate the vector of parameters $\theta,$ a subset of all the
+structural parameters of a model $\theta\in\Theta$. Finally, in most
+softwares, it's easier to minimize than maximize, so the maximum likelihood
+estimator reads as follows:%
+\begin{equation}
+\hat{\theta}_{MLE}=\arg\min_{\{\theta\}}\left\{  -\log\mathcal{L}\left(
+\theta|Y_{T},...Y_{1}\right)  )\right\}
+\end{equation}
+
+
+Note that errors of predictions $S_{t}$\ are actually a function of estimated
+parameters $\theta$, i.e. some parameters values may improve the forecasting
+performance of the model, and thus reduce the volatility of the errors of
+predictions $\Omega_{t}$. So the idea is to pick a value of $\hat{\theta
+}_{MLE}$\ that maximize the density function.
+
+\subsection{Adding prior information}
+
+The Bayesian approach consists in defining an \textit{apriori} distribution
+$p(\theta)$ on the structural parameters of $\theta$ that concerns both a
+prior value for this parameter and a distribution. The Bayesian estimate of a
+parameter thus mixes the prior mean with the maximum likelihood estimate. The
+choice of the initial values for the prior parameters requires an intuition
+for their role in the economy. We follow the standard practice of the
+literature in choosing one of the following probability distribution for
+parameters: the Normal distribution ($\mathcal{N}$), the Beta distribution
+($\mathcal{B}$, for parameters with values lying between 0 and 1), the Gamma
+distribution ($\mathcal{G}$, for priors which allow relatively diffuse and
+positive support) and the Inverse Gamma distribution ($\mathcal{IG}$, for
+shocks, as this distribution allows us to choose priors that are strongly
+diffuse and positive).
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=\textwidth]{chap4/codes/priors.pdf}
+\end{center}
+\caption{Prior distributions}%
+\label{fig smoothed shocks}%
+\end{figure}
+
+The estimates of the parameters are updated using the dataset $Y$ according to
+Bayes' rule:
+\begin{equation}
+p(\theta|Y)=\frac{p(\theta|Y)p(\theta)}{p(Y)}\approx L(\theta|Y)p(\theta),
+\end{equation}
+where $L(\theta|Y)$ denote the likelihood function, $p(\theta|Y)$ is the
+posterior distribution of parameters and $p(Y)$ is the marginal likelihood
+(marginal data density).
+
+Obtaining the analytical expression for the likelihood function is generally
+not possible. However, the posterior distribution of the model parameters can
+be constructed numerically by applying the Markov Chain Monte Carlo (MCMC)
+methods. Finally, we compute the posterior moments of the parameters using a
+sufficiently large number of draws, having made sure afterwards the MCMC
+algorithm has converged.%
+\begin{equation}
+\hat{\theta}_{BE}=\arg\max_{\theta}L(\theta|Y)p(\theta)
+\end{equation}
+
+
+One main advantage of DSGE models compared to VARs concerns the evaluation of
+monetary policy. DSGE models replicate time series by the responses of agents
+to different sequences of shocks. Once we have estimated all the sequences of
+shocks and the reaction parameters of households, firms and monetary
+authorities, we can perform counterfactual analyses by changing the parameters
+of monetary policy. Counterfactual scenarios can be derived from the estimated
+model by optimizing the policy coefficients in the Taylor to see how well the
+economy would have performed under an alternative policy regime.
+
+\subsection{An illustration with the RBC\ filter}
+
+\textsf{Generating artificial series.\ }Consider our 3\ equation RBC\ model
+estimated with maximum likelihood and inversion filter (we could have done the
+same with the Kalman filter, but it does not fit into one single MATLAB file).
+
+Recall that in the previous handout we had done the following:
+
+\begin{itemize}
+\item Simulating a model for 200 periods, we next assumeed that only
+consumption was observable, and so we used consumption to retrieve the
+sequence of productivity shocks that generated the data.
+
+\item The distribution of productivity errors is given by $\varepsilon_{t}%
+\sim\mathcal{N}(0,Q)$, let us assume that we want to estimate $Q$, i.e.\ the
+variance(-covariance) of errors. The true value of \underline{$Q$\ is $Q=1$}.
+
+\item The likelihood function is given by
+\[
+\log L(\hat{Q}|\varepsilon_{T},...\varepsilon_{1})=-\frac{nT}{2}\log
+(2\pi)-\frac{1}{2}\sum_{1}^{T}\log\left(  |\hat{Q}|\right)  -\frac{1}{2}%
+\sum_{1}^{T}\varepsilon_{t}^{\prime}\hat{Q}^{-1}\varepsilon_{t}.
+\]
+
+
+\item The Maximum Likelihood estimation is given by the value of Q that
+minimizes -$\log L$.
+\end{itemize}
+
+\textsf{Setting prior information.\ }Now we can introduce bayesian
+econometrics.\ Which prior can we set for Q? The best distribution would be
+one with a positive support, but for clarity purpose we pick the most simple
+distribution: the Gaussian distribution. Dynare, and most of macroeconomic
+papers, express any distribution into two moments: the mean and standard
+deviation of the distribution.\ Since a gaussian distribution is already
+expressed in term of mean/std, it's straightforward to parametrize the prior.\ 
+
+Let us assume that the econometrician have some information about the
+distribution of $Q$ and set as initial value $\hat{Q}\sim\mathcal{N}%
+(1,0.10)$.\ The joint probability density of observing our data (i.e. the
+log-likelihood function) is now augmented by the probability density of some
+estimated parameters, that we refer to as priors, denoted $P\left(
+\theta\right)  $.\ Since our prior is $\hat{Q}\sim\mathcal{N}(1,0.10)$, the
+log-likelihood function now reads as follows:%
+
+\[
+\underset{\text{likelihood}}{\underbrace{\log L(\hat{Q}|\varepsilon
+_{T},...\varepsilon_{1})}}+\underset{\text{priors}}{\underbrace{\log p\left(
+\hat{Q},1,0.10\right)  }}%
+\]
+where $p\left(  .\right)  $\ is a gaussian pdf with mean $1$ and stand
+deviation $0.10$. This translates into MATLAB\ as:%
+
+%TCIMACRO{\TeXButton{Minted}{\vspace{1ex}
+%\begin{minted}[bgcolor=mygray,breaklines,linenos]{matlab}
+%mu_Sige = 1;
+%sd_Sige = .1;
+%lnprior = @(x)  log(normpdf(x,mu_Sige,sd_Sige));
+%\end{minted}
+%\vspace{1ex}}}%
+%BeginExpansion
+\vspace{1ex}
+\begin{minted}[bgcolor=mygray,breaklines,linenos]{matlab}
+mu_Sige = 1;
+sd_Sige = .1;
+lnprior = @(x)  log(normpdf(x,mu_Sige,sd_Sige));
+\end{minted}
+\vspace{1ex}%
+%EndExpansion
+
+
+Let us now explore the topology of the prior function in
+\autoref{fig prior pdf}.\ We can see that $p\left(  \hat{Q},1,0.10\right)
+$\ is higher when $\hat{Q}$ get closer to prior mean 1, so the prior
+information curbs the likelihood function in order to take some knowledge from
+the econometrician about the set of estimated parameters $\theta$.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=\textwidth]{chap4/codes/priors_pdf.pdf}
+\end{center}
+\caption{Prior distributions of variance covariance Q}%
+\label{fig prior pdf}%
+\end{figure}
+
+\textsf{Optimizing the posterior density.}\ Like for maximum likelihood, we
+must optimize an objective function.\ Now this objective function is the
+posterior density: the latter is proportional to the product of the prior
+density and the density of the sample (i.e. the likelihood function). This
+posterior distribution takes into account both the contribution of the data
+(i.e.\ the log-likelihood) and the prior information.\ We solve numerically
+the following minization problem to obtain the mode of posterior
+distribution:
+\begin{equation}
+\hat{Q}_{BE}^{\text{mode}}=\arg\min_{Q}-\log L(Q|Y)-\log p(Q)
+\end{equation}
+%
+
+%TCIMACRO{\TeXButton{Minted}{\vspace{1ex}
+%\begin{minted}[bgcolor=mygray,breaklines,linenos]{matlab}
+%theta0 = [0.01];
+%theta_MLE = fmincon(@(x) -llk(x),theta0);
+%theta_BE = fmincon(@(x) -(llk(x) + lnprior(x)),theta0);
+%disp('Mode:')
+%disp(['MLE: Est. sqrt(Q) ' num2str(sqrt(theta_MLE))])
+%disp(['BE : Est. sqrt(Q) ' num2str(sqrt(theta_BE))])
+%\end{minted}
+%\vspace{1ex}}}%
+%BeginExpansion
+\vspace{1ex}
+\begin{minted}[bgcolor=mygray,breaklines,linenos]{matlab}
+theta0 = [0.01];
+theta_MLE = fmincon(@(x) -llk(x),theta0);
+theta_BE = fmincon(@(x) -(llk(x) + lnprior(x)),theta0);
+disp('Mode:')
+disp(['MLE: Est. sqrt(Q) ' num2str(sqrt(theta_MLE))])
+disp(['BE : Est. sqrt(Q) ' num2str(sqrt(theta_BE))])
+\end{minted}
+\vspace{1ex}%
+%EndExpansion
+
+
+We call 'mode' of the distribution because it is highest local value of the
+posterior density.\ We have the highest value of the posterior density, we
+also need the mean of the density as well as the dispersion of the
+density.\ Problem: there is no closed-form expression to draw the density of
+the posterior distribution of Q. So we must use numerical techniques also
+needed to evaluate the posterior.\ Economists typically use Markov Chain Monte
+Carlo (MCMC) methods -- in particular the Metropolis-Hasting algorithm -- at
+this purpose.
+
+\textsf{Drawing the uncertaintu through Monte Carlo methods}.The main purpose
+of MH\ algorithm is to explore the parameter's space of Q by weighting the
+outcomes appropriately.
+
+\begin{enumerate}
+\item \textbf{Get covariance of estimated parameters.} We first need the
+variance-covariance-matrix of $\theta$ with respect to the posterior
+density.\ There are different ways to obtain it. In this example, we obtain it
+from the inverse of the Hessian matrix as in Dynare:
+\begin{equation}
+\Sigma_{\theta}=\left(  \frac{\partial\left[  \log L(\theta Y)+\log
+p(\theta)\right]  }{\partial\theta}\right)  ^{-1}%
+\end{equation}
+
+
+\item \textbf{Draw a new candidate.} We next draw for each $i=\{1,...N\}$ a
+new candidate $\theta_{i}^{cand}$ based on the uncertainty
+\[
+\theta_{i}^{cand}\symbol{126}\mathcal{N}(\theta_{i-1}^{cand},c\Sigma_{Q})
+\]
+
+\end{enumerate}
+
+\section{Bayesian estimation with Dynare}
+
+\subsection{Priors}
+
+When we are estimating with Bayesian techniques, we need to specify prior
+distributions for each parameter to be estimated. In the estimated params
+section, for each estimated parameter, we declare a distribution, and specify
+parameters relevant for that distribution. The syntax for this is:
+
+\textsf{[parameter\_name], [initial\_value(optional)],
+[lower\_bound(optional)], [upper\_bound(optional)], [prior\_shape],
+[prior\_mean] , [prior\_standard\_deviation], [p\_3(optional)],
+[p\_4(optional)], [jscale(optional)] ;}
+
+\autoref{table priors} details the distributions.\ Prior specification (in
+terms of shape, mean and standard deviation) allows to give more information
+about the distribution of the parameters and to avoid some regions where the
+likelihood function could be flat.%
+
+%TCIMACRO{\TeXButton{BeginTable}{\begin{table}}}%
+%BeginExpansion
+\begin{table}%
+%EndExpansion
+
+
+\begin{center}%
+\begin{tabular}
+[c]{llll}%
+Shape & Name & Support & Example(s)\\\hline\hline
+\textsf{normal\_pdf} & $\mathcal{N}\left(  \mu,\sigma\right)  $ & $\left(
+-\infty,+\infty\right)  $ & Policy parameters, utility curvatures,\\
+\textsf{gamma\_pdf} & $\mathcal{G}\left(  \mu,\sigma\right)  $ & $\left(
+0,+\infty\right)  $ & Elasticities, utility curvatures, trends\\
+\textsf{beta\_pdf} & $\mathcal{B}\left(  \mu,\sigma\right)  $ & $\left[
+0,1\right]  $ & Probabilities, AR-MA\ terms, shares...\\
+\textsf{inv\_gamma\_pdf} & $\mathcal{IG}_{1}\left(  \mu,\sigma\right)  $ &
+$\left(  0,+\infty\right)  $ & Standard deviations\\
+\textsf{uniform\_pdf} & $\mathcal{U}\left(  \mu,\sigma\right)  $ & $\left(
+-\infty,+\infty\right)  $ & Same as normal distribution but with lower/upper
+bounds\\
+\textsf{weibull\_pdf} & $\mathcal{W}\left(  \mu,\sigma\right)  $ &
+$[0,+\infty)$ & For standard deviations, in particular of measurement shocks\\
+\textsf{inv\_gamma2\_pdf} & $\mathcal{IG}_{2}\left(  \mu,\sigma\right)  $ &
+$\left(  0,+\infty\right)  $ & Standard deviations\\\hline\hline
+\end{tabular}
+
+
+
+\end{center}
+
+%
+
+%TCIMACRO{\TeXButton{TableTitle}{\caption
+%{Prior distributions available in Dynare \label{table priors}}}}%
+%BeginExpansion
+\caption{Prior distributions available in Dynare \label{table priors}}%
+%EndExpansion%
+%TCIMACRO{\TeXButton{EndTable}{\end{table}}}%
+%BeginExpansion
+\end{table}%
+%EndExpansion
+
+
+To illustrate the guideline for choosing a prior, let us consider first the
+AR(1) term of the shock processes $\rho^{S}$, $\rho^{D}$ and $\rho^{R}$.\ To
+have a stationary model, these parameters must be below $1$ while they must be
+above 0\ get a smooth response. The beta distribution meets this requirement
+as it has a support on $\left[  0,1\right]  $ and will not allow this
+parameter above 1\ or below 0.\ In \textsf{estimated\_params;} block, we can
+add the following 3\ parameters:%
+
+%TCIMACRO{\TeXButton{Minted}{\vspace{1ex}
+%\begin{minted}[bgcolor=mygray,breaklines,linenos]{matlab}
+%estimated_params;
+%	stderr eta_D,   	, , ,	INV_GAMMA_PDF,		.1,	2;
+%	stderr eta_S,     	, , ,	INV_GAMMA_PDF,		.1,	2;
+%	stderr eta_R,	, , ,	INV_GAMMA_PDF,		.1,	2;
+%end;
+%\end{minted}
+%\vspace{1ex}}}%
+%BeginExpansion
+\vspace{1ex}
+\begin{minted}[bgcolor=mygray,breaklines,linenos]{matlab}
+estimated_params;
+	stderr eta_D,   	, , ,	INV_GAMMA_PDF,		.1,	2;
+	stderr eta_S,     	, , ,	INV_GAMMA_PDF,		.1,	2;
+	stderr eta_R,	, , ,	INV_GAMMA_PDF,		.1,	2;
+end;
+\end{minted}
+\vspace{1ex}%
+%EndExpansion
+
+
+In the previous specification, we assume that each parameter is likely to have
+a mean 0\textsf{.5}\ and a standard deviation of 0.20.\ This prior is quite
+uninformative as the support of this distribution allows parameters to be
+estimated near 1\ or near 0.\ Conversely, an opinionated prior with a mean of
+0.90 and a standard deviation of 0.01 would allow the parameter to be estimate
+very close to 0.90. Economists are free to calibrate their prior, and in turn
+give or not information about the estimation of the parameter.\ For instance
+here, we know that monetary policy shocks are not strongly autocorrelated, a
+prior information of 0.20 with standard deviation of 0.05\ could be fairly
+acceptable. Even through uninformative priors are preferred, it is possible to
+set tight priors but they have to be carefully justified.
+
+Let us consider another example.\ The estimated standard deviation of a shock
+has to be positive, this constraint excludes \textit{de facto} the Normal
+distribution as it has a negative support. A Beta distribution could be
+justified as we want estimated shocks to be small otherwise our first order
+approximation becomes irrelevant with large shocks. However, demand and supply
+shocks may have a standard deviation higher than $1$, which excludes the Beta
+distribution.\ It is then possible to use a Uniform distribution, as well as a
+Gamma or Inverse Gamma distributions. Here, we follow \cite{smets2007shocks}
+using an Inverse Gamma distribution with a mean of 0.10 and a standard
+deviation of 2. Accordingly, we add in the Dynare file the lines which code
+the estimation of the shocks' volatility.%
+
+%TCIMACRO{\TeXButton{Minted}{\vspace{1ex}
+%\begin{minted}[bgcolor=mygray,breaklines,linenos]{matlab}
+%	stderr eta_D,   	, , ,	INV_GAMMA_PDF,		.1,	2;
+%	stderr eta_S,     	, , ,	INV_GAMMA_PDF,		.1,	2;
+%	stderr eta_R,	, , ,	INV_GAMMA_PDF,		.1,	2;
+%\end{minted}
+%\vspace{1ex}}}%
+%BeginExpansion
+\vspace{1ex}
+\begin{minted}[bgcolor=mygray,breaklines,linenos]{matlab}
+	stderr eta_D,   	, , ,	INV_GAMMA_PDF,		.1,	2;
+	stderr eta_S,     	, , ,	INV_GAMMA_PDF,		.1,	2;
+	stderr eta_R,	, , ,	INV_GAMMA_PDF,		.1,	2;
+\end{minted}
+\vspace{1ex}%
+%EndExpansion
+
+
+\subsection{Estimation and posteriors}
+
+Once the priors are written in Dynare (which I have not totally detailed), we
+have to declare which variables are observable (and they should appear in the
+data file as well).\ Here, we estimate using our three time series:%
+
+%TCIMACRO{\TeXButton{Minted}{\vspace{1ex}
+%\begin{minted}[bgcolor=mygray,breaklines,linenos]{matlab}
+%varobs 	y_obs pi_obs r_obs;
+%\end{minted}
+%\vspace{1ex}}}%
+%BeginExpansion
+\vspace{1ex}
+\begin{minted}[bgcolor=mygray,breaklines,linenos]{matlab}
+varobs 	y_obs pi_obs r_obs;
+\end{minted}
+\vspace{1ex}%
+%EndExpansion
+
+
+Finally, we declare the estimation command as we did for maximum likelihood
+estimations. There are lots of options for Bayesian estimation which can go
+here; it's worth seeing the Dynare Manual for an overview of these options,
+and resources on Bayesian estimation for what they mean.%
+
+%TCIMACRO{\TeXButton{Minted}{\vspace{1ex}
+%\begin{minted}[bgcolor=mygray,breaklines,linenos]{matlab}
+%estimation(datafile=mydata,first_obs=1,mode_compute=4,
+%mh_replic=20000,mh_jscale=0.5,prefilter=1,lik_init=2,bayesian_irf,irf=30) y_obs pi_obs r_obs;
+%\end{minted}
+%\vspace{1ex}}}%
+%BeginExpansion
+\vspace{1ex}
+\begin{minted}[bgcolor=mygray,breaklines,linenos]{matlab}
+estimation(datafile=mydata,first_obs=1,mode_compute=4,
+mh_replic=20000,mh_jscale=0.5,prefilter=1,lik_init=2,bayesian_irf,irf=30) y_obs pi_obs r_obs;
+\end{minted}
+\vspace{1ex}%
+%EndExpansion
+
+
+Here, \textsf{mh\_replic}\ denotes the number of draws sampled by
+Metropolis-Hastings algorithm which aims at drawing the posterior
+distributions of estimated parameters. Increasing the number of draws allows
+to obtain converging chains, nonetheless it is not a sufficient condition for
+convergence. For small models, the number of draws can be low (roughly here
+50\ 000\ draws is fine), for large scale model, it is preferable to have a
+larger number of draws to get converging chains (for instance,
+\cite{smets2007shocks} draws 200 000 draws). Option \textsf{lik\_init}\ set to
+2\ allows Dynare to handle non-stationnary observable variables in the fit
+exercise, we know that the GDP\ is a non-stationary variable requiring a
+special treatment for the estimation. Option \textsf{prefilter}\ remove the
+empirical mean in the observable matrix (i.e. it demeans our
+sample).\ Estimating theoretical means would require to had a trend component
+in the production function, which we don't do here.\ Finally, option
+\textsf{mh\_jscale}\ is a parameters which has to be adjusted in order to
+obtain an acceptance ratio between 20\% and 30\% (if the final acceptance rate
+is below 20\%, we have to decrease \textsf{mh\_jscale} while if it is below we
+have to increase 30\%). The interval for the acceptance ratio relies on
+research on bayesian statistics which I\ won't develop here.
+
+Starting the estimation exercise, Dynare loads our data file, and starts to
+find the posterior mode using csminwel algorithm using optimizations methods.
+The initial value of the log-likelihood function is \textsf{-9295.463}, the
+algorithm employed by Dynare aims at maximising the value of the
+log-likelihood function by adjusting the estimated parameters.%
+
+%TCIMACRO{\TeXButton{BeginResults}{\vspace{3ex}
+%\begin{myresult}{console response}}}%
+%BeginExpansion
+\vspace{3ex}
+\begin{myresult}{console response}%
+%EndExpansion
+
+
+\textsf{Initial value of the log posterior (or likelihood): -9295.463}
+
+\textsf{-----------------}
+
+\textsf{f at the beginning of new iteration, 9295.4630399514}
+
+\textsf{Predicted improvement: 2095725.132776231}
+
+\textsf{lambda = 1; f = 9405.1065976}
+
+\textsf{lambda = 0.33333; f = 9305.6233091}
+
+\textsf{lambda = 0.11111; f = 9296.0459801}
+
+\textsf{lambda = 0.037037; f = 9295.4666624}
+
+\textsf{lambda = 0.012346; f = 859.3227388}
+
+\textsf{lambda = 0.0041152; f = 2326.0104571}
+
+\textsf{Norm of dx 20.473}%
+
+%TCIMACRO{\TeXButton{EndResults}{\end{myresult}
+%\vspace{3ex}}}%
+%BeginExpansion
+\end{myresult}
+\vspace{3ex}%
+%EndExpansion
+
+
+At the final iteration of the algorithm (here 58\ iterations), the improvement
+performed in the last iteration is low enough for the algorithm to stop the
+optimisation. The value of the log-likelihood function is now
+\textsf{-318.102525}. Dynare then prints in the console the mode of the
+posterior distribution:%
+
+%TCIMACRO{\TeXButton{BeginResults}{\vspace{3ex}
+%\begin{myresult}{console response}}}%
+%BeginExpansion
+\vspace{3ex}
+\begin{myresult}{console response}%
+%EndExpansion
+
+
+\textsf{RESULTS FROM POSTERIOR ESTIMATION}
+
+\textsf{parameters}
+
+\textsf{ prior mean mode s.d. prior pstdev}
+
+\textsf{rho\_D 0.500 0.9476 0.0153 beta 0.2000 }
+
+\textsf{rho\_S 0.500 0.9902 0.0068 beta 0.2000 }
+
+\textsf{rho\_R 0.500 0.1494 0.0610 beta 0.2000 }
+
+\textsf{sigma 1.000 2.5692 0.4385 gamm 0.4000 }
+
+\textsf{varphi 2.000 1.2936 0.5457 gamm 0.7500 }
+
+\textsf{phi\_pi 1.500 1.6380 0.0798 norm 0.1000 }
+
+\textsf{phi\_y 0.050 0.0363 0.0180 norm 0.0500 }
+
+\textsf{phi\_dy 0.050 0.1747 0.0252 norm 0.0500 }
+
+\textsf{rho 0.750 0.7739 0.0256 beta 0.0500 }
+
+\textsf{theta 0.500 0.8780 0.0220 beta 0.1000 }
+
+\textsf{standard deviation of shocks}
+
+\textsf{prior mean mode s.d. prior pstdev}
+
+\textsf{eta\_D 0.100 0.0672 0.0129 invg 2.0000 }
+
+\textsf{eta\_S 0.100 0.0649 0.0202 invg 2.0000 }
+
+\textsf{eta\_R 0.100 0.2306 0.0136 invg 2.0000 }%
+
+%TCIMACRO{\TeXButton{EndResults}{\end{myresult}
+%\vspace{3ex}}}%
+%BeginExpansion
+\end{myresult}
+\vspace{3ex}%
+%EndExpansion
+
+
+After finding the mode, the Metropolis-Hastings algorithm is employed.\ For
+each chain, it samples the number of draws we specified in the estimation()
+command: \begin{figure}[h]
+\hspace*{-0.25in} \centering
+\includegraphics[width=.5\textwidth]{chap4/fig/acceptance_ratio.pdf}\end{figure}
+
+Here, we have two chains of 20 000 draws.\ At the end of the sampling, we will
+get 40 000 samples.\ Dynare will automatically drop a certain percentages of
+draws (the percentage of drops can be manually set in the estimation command).
+Dynare compute the uncertainty (confidence intervals size can be manually set
+in the estimation command) and the mean of each parameter using the sequence
+of random samples from Metropolis-Hastings output.%
+
+%TCIMACRO{\TeXButton{BeginResults}{\vspace{3ex}
+%\begin{myresult}{console response}}}%
+%BeginExpansion
+\vspace{3ex}
+\begin{myresult}{console response}%
+%EndExpansion
+
+
+\textsf{parameters}
+
+\textsf{ prior mean post. mean 90\% HPD interval prior pstdev}
+
+\textsf{rho\_D 0.500 0.9459 0.9203 0.9690 beta 0.2000}
+
+\textsf{rho\_S 0.500 0.9890 0.9805 0.9985 beta 0.2000}
+
+\textsf{rho\_R 0.500 0.1657 0.0678 0.2573 beta 0.2000}
+
+\textsf{sigma 1.000 2.5887 1.8232 3.2544 gamm 0.4000}
+
+\textsf{varphi 2.000 1.5169 0.5959 2.4169 gamm 0.7500}
+
+\textsf{phi\_pi 1.500 1.6645 1.5350 1.7889 norm 0.1000}
+
+\textsf{phi\_y 0.050 0.0333 0.0069 0.0591 norm 0.0500}
+
+\textsf{phi\_dy 0.050 0.1734 0.1361 0.2140 norm 0.0500}
+
+\textsf{rho 0.750 0.7625 0.7172 0.8056 beta 0.0500}
+
+\textsf{theta 0.500 0.8717 0.8365 0.9066 beta 0.1000}
+
+\textsf{standard deviation of shocks}
+
+\textsf{ prior mean post. mean 90\% HPD interval prior pstdev}
+
+\textsf{eta\_D 0.100 0.0696 0.0489 0.0897 invg 2.0000}
+
+\textsf{eta\_S 0.100 0.0767 0.0419 0.1134 invg 2.0000}
+
+\textsf{eta\_R 0.100 0.2367 0.2149 0.2609 invg 2.0000}%
+
+%TCIMACRO{\TeXButton{EndResults}{\end{myresult}
+%\vspace{3ex}}}%
+%BeginExpansion
+\end{myresult}
+\vspace{3ex}%
+%EndExpansion
+
+
+Dynare prints the mean and 90\%\ confidence interval upper and lower bounds as
+well as the prior standard deviation of the parameter. The posterior mean is
+preferred than the mode for empirical exercises. Only one parameter is not
+statistically significant, the policy stance on output $\phi^{y}$ as its
+confidence interval includes 0 at 90\%. Dynare also runs some diagnostics to
+assess the convergence.
+
+\begin{figure}[ptb]
+\begin{center}
+\includegraphics[
+height=2.2139in,
+width=2.9456in
+]{chap4/fig/diagnostics.eps}
+\end{center}
+\caption{Univariate convergence diagnostic, Brooks and Gelman (1998)}%
+\label{fig univariate convergence}%
+\end{figure}
+%EndExpansion
+
+
+\autoref{fig univariate convergence} reports some of the diagnostics computed
+by Dynare to examine the convergence of the MCMC chains as in
+\cite{brooks1998general}.\ Here for instance, the red and blue lines should
+converge otherwise we should increase the number of draws, or adjust the priors/model.
+
+\begin{figure}[ptb]
+\begin{center}
+\includegraphics[
+height=3.3062in,
+width=4.4036in
+]{chap4/fig/priorsposteriors.eps}
+\end{center}
+\caption{Priors (grey) and posteriors (black) distributions of estimated
+parameters and mean (green).}%
+\label{fig prior posterior}%
+\end{figure}
+%EndExpansion
+
+
+\autoref{fig prior posterior} reports the prior and posterior distributions of
+parameters and shocks involved in the fit exercise. It is preferable to have a
+posterior distribution different than the prior one.\ Having the posterior
+diverge from the prior means that your data (the likelihood in Bayes rule) is
+very informative about the parameter (if the posterior distribution is not too
+wide around the mode). If all your posterior estimates would coincide with the
+prior mean, there would be no reason for estimation as the data does not add
+any new insights. In this situation, you should calibrate rather than estimate
+when the identification of your parameter is bad.
+
+For instance in \autoref{fig prior posterior}, $\rho^{D}$ and $\rho^{S}$\ are
+clearly identified, \textsf{i.e.}\ data were informative for these parameters
+as their priors and posteriors are different. Conversely, data were not
+informative for the identification of the labour utility curvature $\varphi$.
+The identification of parameters in the utility function is known to be
+challenging, these parameters are generally calibrated.
+
+In our situation, this model is not acceptable for a publication for 3\ reasons:
+
+\begin{enumerate}
+\item The identification of $\varphi$\ is bad.
+
+\item $\rho^{D}$ and $\rho^{S}$ captures too much information and their
+estimated means are too high, revealing a potential unit root problem the
+current set-up cannot handle (need to include a trend which some stochastic
+shock on it).
+
+\item The acceptance ratio is roughly 40\%, we should increase the mh
+acceptance rate.
+\end{enumerate}
+
+%
+
+%TCIMACRO{\TeXButton{BeginTable}{\begin{table}[h]
+%\footnotesize}}%
+%BeginExpansion
+\begin{table}[h]
+\footnotesize
+%EndExpansion
+%
+
+\begin{tabular}
+[c]{|l|l|}\hline
+Stored in & Description\\\hline
+oo\_.posterior\_mode & Parameters and shock standard errors at the posterior
+mode.\\
+oo\_.posterior\_std & Standard error of the estimated values at the posterior
+mode.\\
+oo\_.posterior\_density & Density of the posterior for each parameter (x,y
+values for each parameter).\\
+oo\_.prior\_density & Density of the prior for each parameter (x,y values for
+each parameter).\\
+oo\_.SmoothedVariables & Estimated values of each endogenous variable for all
+time periods.\\
+oo\_.SmoothedShocks & Estimated values of each shock for all time
+periods.\\\hline
+\end{tabular}
+%
+
+%TCIMACRO{\TeXButton{titre du tableau - double cliquer pour editer}%
+%{\caption{Matlab's workspace after a Bayesian estimation \label
+%{table workspace}}}}%
+%BeginExpansion
+\caption{Matlab's workspace after a Bayesian estimation \label
+{table workspace}}%
+%EndExpansion%
+%TCIMACRO{\TeXButton{EndTable}{\end{table}
+%\normalsize\newpage}}%
+%BeginExpansion
+\end{table}
+\normalsize\newpage
+%EndExpansion
+
+
+\subsection{Bayesian system response}
+
+It is also worthwhile to have a look at the bayesian system response which can
+easily be compared to the IRF\ of the BVAR(4) (a conflict with my Matlab
+version seems to have broken the plot of confidence intervals).
+
+\begin{figure}[ptb]
+\begin{center}
+\includegraphics[
+height=2.4777in,
+width=4.6449in
+]{chap4/fig/NK3eq_estim_Bayesian_IRF_eta_S_1.eps}
+\end{center}
+\caption{System response after an estimated supply shock}%
+\label{fig B IRF S}%
+\end{figure}
+%EndExpansion
+
+
+\begin{figure}[ptb]
+\begin{center}
+\includegraphics[
+height=2.4699in,
+width=4.6155in
+]{chap4/fig/NK3eq_estim_Bayesian_IRF_eta_D_1.eps}
+\end{center}
+\caption{System response after an estimated demand shock}%
+\label{fig B IRF D}%
+\end{figure}
+%EndExpansion
+
+
+\begin{figure}[ptb]
+\begin{center}
+\includegraphics[
+height=2.4699in,
+width=4.6449in
+]{chap4/fig/NK3eq_estim_Bayesian_IRF_eta_R_1.eps}
+\end{center}
+\caption{System response after an estimated monetary policy shock}%
+\label{fig B IRF R}%
+\end{figure}
+%EndExpansion
+
+
+\autoref{fig B IRF S}, \autoref{fig B IRF D} and \autoref{fig B IRF R} report
+the system response of the model to an estimated supply, demand and monetary
+policy shock (again, confidence intervals are broken).\ The high (too)
+auto-correlation of the AR(1) shock process generates a non-stationary
+response of output in case of a supply shock. Overall, the general response of
+the model is consistent with the results of the VAR.
+
+\newpage%
+
+%TCIMACRO{\TeXButton{BeginExo}{\begin{myexercise}{Empirical applications}
+%\addcontentsline{toc}{section}{Exercise \thetcbcounter}}}%
+%BeginExpansion
+\begin{myexercise}{Empirical applications}
+\addcontentsline{toc}{section}{Exercise \thetcbcounter}%
+%EndExpansion
+
+
+First, it is possible to load back the results instead of doing the estimation
+each time you run the model. Once your model has been estimated, replace the
+estimation function by:%
+
+%TCIMACRO{\TeXButton{BeginResults}{\vspace{3ex}
+%\begin{myresult}{console response}}}%
+%BeginExpansion
+\vspace{3ex}
+\begin{myresult}{console response}%
+%EndExpansion
+
+
+estimation(datafile=mydata,first\_obs=1,mh\_replic=0,mh\_jscale=0.5,prefilter=1,lik\_init=2,load\_mh\_file,mode\_file=NK3eq\_estim\_mode,mode\_compute=0)
+y y\_obs pi\_obs r\_obs;%
+
+%TCIMACRO{\TeXButton{EndResults}{\end{myresult}
+%\vspace{3ex}}}%
+%BeginExpansion
+\end{myresult}
+\vspace{3ex}%
+%EndExpansion
+
+
+Using the estimated DSGE\ model, answer the following questions:
+
+\begin{enumerate}
+\item Plot the shock decomposition. To do so, after the estimation, use the
+command:\newline\textsf{shock\_decomposition y\_obs pi\_obs r\_obs;}\newline
+What are the drivers of the business cycles?
+
+\item What are the driving forces of each observable up to 1, 5, 10, 100
+quarters? (after estimation command, use the \textsf{stoch\_simul} function
+with option \textsf{conditional\_variance\_decomposition=[1,5,10,100]}).
+
+\item Is the model able to replicate the empirical standard deviation of the
+observable variables?
+
+\item Using option forecast, perform a prediction exercise from 1\ to
+8\ quarters.\ Use Dynare User Guide to find the good syntax.
+\end{enumerate}
+
+\bigskip%
+%TCIMACRO{\TeXButton{EndExo}{\end{myexercise}}}%
+%BeginExpansion
+\end{myexercise}%
+%EndExpansion
+\newpage%
+
+%TCIMACRO{\TeXButton{BeginExo}{\begin{myexercise}{Fixing the model}
+%\addcontentsline{toc}{section}{Exercise \thetcbcounter}}}%
+%BeginExpansion
+\begin{myexercise}{Fixing the model}
+\addcontentsline{toc}{section}{Exercise \thetcbcounter}%
+%EndExpansion
+
+
+Recall that in our situation, this model is not acceptable for a publication
+for 3\ reasons: (i) the identification of $\varphi$\ is bad, (ii) parameters
+$\rho^{D}$ and $\rho^{S}$ captures too much information and their estimated
+means are too high, revealing a potential unit root problem the current set-up
+cannot handle; (iii) the acceptance ratio is roughly 40\%, we should increase
+the mh acceptance rate.
+
+Given these 3 failures:
+
+\begin{enumerate}
+\item Fix the identification problem, calibrating the parameter or adjusting
+its prior information (try a beta distribution for instance).
+
+\item To fix the information capture by AR(1) terms, our model needs to be
+more backward looking.\ Add consumption habits, denoted $h$, and inflation
+indexation $\xi$ in the relevant equations. The following backward looking
+equations are:%
+\begin{align*}
+{\widehat{\pi}}_{t}  &  =\frac{\xi}{1+\xi\beta}{\widehat{\pi}}_{t-1}%
++\frac{\beta}{1+\xi\beta}\mathbb{E}_{t}{\widehat{\pi}}_{t+1}+\kappa{\hat{y}%
+}_{t}+{\varepsilon}_{t}^{S},\\
+{\hat{y}}_{t}  &  =\frac{h}{1+h}{\hat{y}}_{t-1}+\frac{1}{1+h}\mathbb{E}%
+_{t}{\hat{y}}_{t+1}-\frac{1}{\sigma\left(  1+h\right)  }\left(  {\hat{r}}%
+_{t}-\mathbb{E}_{t}{\widehat{\pi}}_{t+1}\right)  +{\varepsilon}_{t}^{D}.
+\end{align*}
+and estimate these parameters. Is the model fit improved? Does it fix the
+excessive autocorrelation?
+
+\item Adjust the acceptance rate.
+
+\item Evaluate the empirical relevance of an ARMA(1,1) supply shock as in
+\cite{smets2007shocks}:%
+\[
+{\varepsilon}_{t}^{S}={\rho}^{S}{\varepsilon}_{t-1}^{S}+{\eta}_{t}^{S}-u{\eta
+}_{t-1}^{S}%
+\]
+where ${u}$\ is the MA term.
+\end{enumerate}
+
+%
+
+%TCIMACRO{\TeXButton{EndExo}{\end{myexercise}}}%
+%BeginExpansion
+\end{myexercise}%
+%EndExpansion
+\newpage%
+
+%TCIMACRO{\TeXButton{small}{\footnotesize}}%
+%BeginExpansion
+\footnotesize
+%EndExpansion
+\bibliographystyle{elsart-harv}
+\bibliography{dataref}%
+%TCIMACRO{\TeXButton{small}{\normalsize}}%
+%BeginExpansion
+\normalsize
+%EndExpansion
+
+\end{document}

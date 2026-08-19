@@ -1,0 +1,387 @@
+% uncomment this to get the answer
+%\printanswers
+%\newtheorem{exercise}[theorem]{Exercise}
+
+\documentclass[a4paper,12pt]{article}%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}%
+\setcounter{MaxMatrixCols}{30}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2953}
+%TCIDATA{CSTFile=40 LaTeX article.cst}
+%TCIDATA{Created=Tuesday, September 15, 2015 18:10:19}
+%TCIDATA{LastRevised=Wednesday, October 24, 2018 21:58:47}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Standard LaTeX\Blank - Standard LaTeX Article">}
+%TCIDATA{Language=American English}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\def\NOMDOSSIER{A toy model\\of two countries}
+\def\NUMERODOSSIER{0}
+\input{../../mystyle.tex}
+\begin{document}
+\FRONTPAGE
+
+
+\section{Overview}
+
+Let us suppose that there is two economies $i=\{H,F\}$ of relative size $n$
+and $1-n$ respectively.
+
+\subsection{Households}
+
+Suppose a welfare maximizing household enjoying current and future consumption
+and dislike working with respective curvatures $\sigma_{C}$, $\sigma_{H}$
+$>0$.\ The household maximizes the following stream of utilities discounted at
+a fixed rate $\beta$:%
+\begin{equation}
+\max_{\left\{  C_{t},d_{t},b_{t},H_{t}\right\}  }\sum_{\tau=0}^{\infty}%
+\beta^{\tau}E_{t}\left\{  \frac{\left(  C_{jt+\tau}-X_{t+\tau}\right)
+^{1-\sigma_{C}}}{1-\sigma_{C}}-\chi_{i}\frac{H_{jt+\tau}^{1+\sigma_{H}}%
+}{1+\sigma_{H}}\right\}
+\end{equation}
+where $C_{i,t}$\ is consumption, $X_{i,t}$\ is the stock of external habits
+$X_{i,t}=hC_{i,t-1}$ with $h\in\lbrack0;1)$ the degree of persistence habits,
+$H_{i,t}$ is hours worked and $\chi_{i}>0$\ is a shift parameter allowing to
+pin down the amount of hours worked in steady state.
+
+The budget constraint in real terms reads as:%
+\begin{equation}
+w_{t}H_{jt}+\frac{\Pi_{jt}}{P_{t}^{C}}+\frac{r_{t-1}}{\pi_{t}^{C}}%
+d_{jt-1}+e_{t}\frac{r_{t-1}^{\ast}}{\pi_{t}^{C}}b_{jt-1}=C_{jt}+b_{jt}%
++e_{t}b_{jt}^{\ast}+e_{t}\frac{P_{t}}{P_{t}^{C}}g\left(  b_{jt}\right)  ,
+\end{equation}
+where $d_{jt}$\ denotes the acquisition of domestic riskless bonds and
+$b_{jt}$\ foreign ones adjusted by the exchange rate $e_{t}$. Households pay
+an cost on foreign bonds, this is deemed necessary to remove an unit root
+component in consumption dynamics in an open economy environment. Here, the
+cost function reads as $g\left(  b_{jt}\right)  =0.5\chi_{B}\left(
+b_{jt}-\bar{b}_{j}\right)  ^{2}$.
+
+The Lagrangian problem reads as:%
+\begin{align*}
+\mathcal{L}_{t}^{H} &  =\sum_{\tau=0}^{\infty}\beta^{\tau}\left[
+\frac{\left(  C_{jt+\tau}-X_{t+\tau}\right)  ^{1-\sigma_{C}}}{1-\sigma_{C}%
+}-\chi\frac{H_{jt+\tau}^{1+\sigma_{H}}}{1+\sigma_{H}}\right]  \\
+&  +\beta^{\tau}\lambda_{t+\tau}^{c}\left[  w_{t}H_{jt}+\frac{\Pi_{jt}}%
+{P_{t}^{C}}+\frac{r_{t-1}}{\pi_{t}^{C}}d_{jt-1}+e_{t}\frac{r_{t-1}^{\ast}}%
+{\pi_{t}^{C}}b_{jt-1}\right]  \\
+&  -\beta^{\tau}\lambda_{t+\tau}^{c}\left[  C_{jt}+d_{jt}+e_{t}b_{jt}%
++\frac{P_{t}}{P_{t}^{C}}e_{t}g\left(  b_{jt}\right)  \right]
+\end{align*}
+where $\lambda_{t}^{c}$ is a lagrangian multiplier.
+
+First order conditions are:%
+\begin{align}
+C_{jt} &  :\left(  C_{jt}-X_{t}\right)  ^{-\sigma_{C}}-\lambda_{t}^{c}=0\\
+d_{jt} &  :\beta E_{t}\left\{  \lambda_{t+1}\right\}  r_{t}/E_{t}\left\{
+\pi_{t+1}^{C}\right\}  -\lambda_{t}^{c}=0\\
+b_{jt} &  :\beta E_{t}\left\{  \lambda_{t+1}e_{t+1}\right\}  r_{t}^{\ast
+}/E_{t}\left\{  \pi_{t+1}^{C}\right\}  -e_{t}\lambda_{t}^{c}=0\\
+H_{jt} &  :-\chi H_{jt}^{\sigma_{H}}+\lambda_{t}^{c}w_{t}=0
+\end{align}
+We define the real exchange rate as:%
+\begin{equation}
+rer_{t}=e_{t}\frac{P_{t}^{C\ast}}{P_{t}^{C}}.
+\end{equation}
+
+
+The households allocates their consumption on domestically produced goods and
+also imports foreign goods.\ The consumption basket of the household:%
+\begin{equation}
+C_{jt}=\left(  \left(  1-\alpha_{C}\right)  ^{\frac{1}{\mu}}\left(
+c_{jt}\right)  ^{\frac{\mu-1}{\mu}}+\left(  \varepsilon_{t}^{X}\alpha
+_{C}\right)  ^{\frac{1}{\mu}}\left(  c_{jt}^{\ast}\right)  ^{\frac{\mu-1}{\mu
+}}\right)  ^{\frac{\mu}{\mu-1}}%
+\end{equation}
+where $\alpha_{C}\in\lbrack0,0.5]$\ is the fraction of foreign goods in the
+consumption basket, conversely 1-$\alpha_{C}$ is referred to as the home bias.
+In addition, $\varepsilon_{t}^{X}$\ is an AR(1) shock process of the demand
+for foreign goods and can be interpreted as an import shock. Parameter
+$\mu\geq0$\ is the substitution degree between home goods and foreign goods,
+when $\mu$\ is high, households are more sensible to price differential
+between home and foreign goods, and will reduce their imports.
+
+The price index of goods reads as:%
+\begin{equation}
+P_{t}^{C}=\left[  \left(  1-\alpha_{C}\right)  \left(  P_{t}\right)  ^{1-\mu
+}+\alpha_{C}\left(  e_{t}P_{t}^{\ast}\right)  ^{1-\mu}\right]  ^{\frac
+{1}{1-\mu}}%
+\end{equation}
+Optimal demands for home $c_{jt}$ and foreign $c_{jt}^{\ast}$ varieties are
+given by:%
+\begin{equation}
+c_{jt}=\left(  1-\alpha_{C}\right)  \left(  \frac{P_{t}}{P_{t}^{C}}\right)
+^{-\mu}C_{jt}\text{ and }c_{jt}^{\ast}=\varepsilon_{t}^{X}\alpha_{C}\left(
+\frac{e_{t}P_{t}^{\ast}}{P_{t}^{C}}\right)  ^{-\mu}C_{jt}%
+\end{equation}
+Here, $c_{jt}^{\ast}$\ are imports.
+
+\subsection{Retailers}
+
+Final firms competitively pack different types of good varieties $i$\ drawn on
+an unitary continuum to produce an homogeneous good sold to households. This
+firm is necessary when introducing monopolistic competition as they allows to
+create an elastic demand curve that intermediate firms exploits to generate
+positive profits.\ Production of final firms employs the following CES packing
+technology:%
+\begin{equation}
+Y_{t}=\left(
+%TCIMACRO{\dint \nolimits_{0}^{1}}%
+%BeginExpansion
+{\displaystyle\int\nolimits_{0}^{1}}
+%EndExpansion
+y_{it}^{\left(  \epsilon-1\right)  /\epsilon}\text{d}i\right)  ^{\epsilon
+/\left(  \epsilon-1\right)  } \label{eq final firms}%
+\end{equation}
+where $\epsilon>1$\ is the perfect substitutability between different types of
+varieties $i$. The economy converges to a competitive equilibrium for
+$\epsilon\rightarrow1$, while for any $\epsilon>1$, goods are imperfect
+substitutes which allows firms to rise their selling price above their
+marginal cost.
+
+Final \ firms are perfectly competitive and maximize profits, $P_{t}%
+Y_{t}-p_{it}y_{it},$, under their technology constraint in
+\autoref{eq final firms} to obtain the optimal demand constraint for the i-th
+good:%
+\begin{equation}
+y_{it}=\left(  \frac{p_{it}}{P_{t}}\right)  ^{-\epsilon}Y_{t}.
+\end{equation}
+While the zero profit condition reads as: $P_{t}=(%
+%TCIMACRO{\tint \nolimits_{0}^{1}}%
+%BeginExpansion
+{\textstyle\int\nolimits_{0}^{1}}
+%EndExpansion
+p_{it}^{1-\epsilon}$d$i)^{1/(1-\epsilon)}.$
+
+\subsection{Intermediate firms}
+
+Let us now suppose that there is a large number of identical firms. They hire
+workers and combine them with capital (both produced by them and supplied by
+households). Intermediate firms' technology is given by:%
+\begin{equation}
+Y_{it}=\varepsilon_{t}^{Z}H_{it}^{\alpha}%
+\end{equation}
+
+
+Profits of the intermediate firm i are given by:%
+\begin{equation}
+\Pi_{it}=P_{it}\varepsilon_{t}^{Z}H_{it}^{\alpha}-W_{t}H_{it}%
+\end{equation}
+Intermediate firms solve a two stage problem.\ First they minimize input costs
+on a perfectly competitive market.\ First order condition provides the
+marginal cost:%
+\begin{equation}
+MC_{it}=\frac{H_{it}}{\alpha Y_{it}}W_{t}%
+\end{equation}
+
+
+Second, firms face price adjustment costs paid in terms of home goods $P_{t}%
+$.\ These are quadractic adjustment costs:%
+\begin{equation}
+\Delta_{it}^{P}=\frac{\chi_{P}}{2}\left(  \frac{P_{it+\tau}}{P_{it-1+\tau}%
+}-1\right)  ^{2}%
+\end{equation}
+
+
+The profit optimization becomes dynamic, intermediates set prices facing
+nominal rigidities by maximizing the discount sum of real profits:%
+
+\begin{equation}
+\max_{p_{it}}%
+%TCIMACRO{\dsum \limits_{\tau=0}^{\infty}}%
+%BeginExpansion
+{\displaystyle\sum\limits_{\tau=0}^{\infty}}
+%EndExpansion
+\beta^{\tau}\frac{\lambda_{t+\tau}^{c}}{\lambda_{t}^{c}}\left[  \frac
+{P_{it+\tau}}{P_{t+\tau}^{C}}\left(  \frac{P_{it+\tau}}{P_{t+\tau}}\right)
+^{-\epsilon}-\varepsilon_{t+\tau}^{P}mc_{t+\tau}\left(  \frac{P_{it+\tau}%
+}{P_{t+\tau}}\right)  ^{-\epsilon}-\frac{P_{t+\tau}}{P_{t+\tau}^{C}}\frac
+{\chi_{P}}{2}\left(  \frac{P_{it+\tau}}{P_{it-1+\tau}}-1\right)  ^{2}\right]
+Y_{t+\tau}%
+\end{equation}
+where $mc_{t}$ is the marginal cost and $\varepsilon_{t}^{P}$\ is an AR(1)
+price shock.
+
+First order condition, assuming symmetry (i.e.\ $P_{t}=P_{it}$) :%
+\begin{equation}
+\left(  1-\epsilon\right)  +\epsilon\varepsilon_{t}^{P}mc_{t}-\chi_{P}\pi
+_{t}\left(  \pi_{t}-1\right)  +\beta\frac{\lambda_{t+1}^{c}}{\lambda_{t}^{c}%
+}\frac{Y_{t+1}}{Y_{t}}\chi_{P}\pi_{t+1}\left(  \pi_{t+1}-1\right)  =0
+\end{equation}
+
+
+\subsection{Authorities}
+
+We use a \cite{taylor1993discretion} rule-type to model the setting of the
+nominal interest rate by the monetary authority:%
+\begin{equation}
+R_{t}=R_{t-1}^{\rho}\left(  \bar{R}\left(  \frac{\pi_{t}^{C}}{\bar{\pi}^{C}%
+}\right)  ^{\phi_{\pi}}\left(  \frac{Y_{t}}{\bar{Y}}\right)  ^{\phi_{y}%
+}\right)  ^{1-\rho}\varepsilon_{t}^{R}%
+\end{equation}
+where $\rho\in\lbrack0,1)$ is the smoothing coefficient of the monetary policy
+rule, $\phi_{\pi}$\ the reaction to the inflation gap and $\phi_{y}$\ the
+reaction to the ouput gap. Steady states for interest rates, inflation and
+output are respectively $\bar{R}$, $\bar{\pi}$ and $\bar{Y}$. Finally,
+$\varepsilon_{t}^{R}$\ is a monetary policy shock.
+
+\subsection{Equilibrium conditions}
+
+First, the nominal exchange rate and real exchange rates in both sides of each
+countries are related by:%
+\[
+e_{t}=1/e_{t}^{\ast}\text{ \ and \ }rer_{t}=1/rer_{t}^{\ast}%
+\]
+we can thus substitute for the foreign country and express our model in terms
+of $e_{t}$ and $rer_{t}$.
+
+Resource constraints is given by the total demand for home goods from home and
+foreign households (including also adjustment costs)%
+\begin{align}
+\int_{0}^{n}Y_{it}\text{d}i &  =\int_{0}^{n}c_{jt}\text{d}j+\int_{n}^{1}%
+c_{jt}^{\ast}\text{d}j+\int_{0}^{n}\Delta_{t}^{P}Y_{jt}\text{d}j+\int_{0}%
+^{n}e_{t}g\left(  b_{t}\right)  \text{d}j\\
+nY_{t} &  =n\left(  1-\alpha_{C}\right)  \left(  \frac{P_{t}}{P_{t}^{C}%
+}\right)  ^{-\mu_{C}}C_{t}+\left(  1-n\right)  \varepsilon_{t}^{X\ast}%
+\alpha_{C}\left(  \frac{P_{t}}{e_{t}P_{t}^{C\ast}}\right)  ^{-\mu_{C}}%
+C_{t}^{\ast}+n\Delta_{t}^{P}Y_{t}+ng\left(  b_{t}\right)  \\
+Y_{t} &  =\left(  1-\alpha_{C}\right)  \left(  \frac{P_{t}}{P_{t}^{C}}\right)
+^{-\mu_{C}}C_{t}+\frac{\left(  1-n\right)  }{n}\varepsilon_{t}^{X\ast}%
+\alpha_{C}\left(  \frac{P_{t}}{e_{t}P_{t}^{C\ast}}\right)  ^{-\mu_{C}}%
+C_{t}^{\ast}+\Delta_{t}^{P}Y_{t}+\frac{\chi_{B}}{2}\left(  b_{t}-\bar
+{b}\right)  ^{2}%
+\end{align}
+Similarly for the foreign country:%
+\[
+\int_{n}^{1}Y_{it}^{\ast}\text{d}i=\int_{n}^{1}c_{jt}^{\ast}\text{d}j+\int
+_{1}^{n}c_{jt}\text{d}j+\int_{n}^{1}\Delta_{t}^{P}Y_{jt}\text{d}j+\int_{n}%
+^{1}\frac{\chi_{B}}{2}\left(  b_{jt}^{\ast}-\bar{b}_{j}\right)  ^{2}\text{d}j
+\]
+To get the accumulation of net foreign asset, we aggregate the household
+constraint and assume the amount of domestic bonds is zero, $B_{t}=B_{t-1}%
+=0$:
+\[
+e_{t}nB_{t}-e_{t}R_{t-1}^{\ast}nB_{t-1}=W_{t}nH_{t}+n\Pi_{t}-P_{t}^{C}%
+nC_{t}-P_{t}ng\left(  b_{t}\right)
+\]
+Recall that with a zero profit condition over inputs markets, we have,
+$MC_{t}Y_{t}=W_{t}H_{t}$.\ While on final goods, a markup is applied net of
+ajustment costs of prices, $\Pi_{t}=\left[  P_{t}-MC_{t}-\Delta_{t}%
+^{P}\right]  Y_{t}$.\ We find after rewriting and injecting $Y_{t}$:%
+\begin{align*}
+e_{t}B_{t}-e_{t}R_{t-1}^{\ast}B_{t-1} &  =MC_{t}Y_{t}+\left[  P_{t}%
+-MC_{t}-P_{t}\Delta_{t}^{P}\right]  Y_{t}-P_{t}^{C}C_{t}-P_{t}g\left(
+b_{t}\right)  \\
+&  =P_{t}Y_{t}-P_{t}\Delta_{t}^{P}Y_{t}-P_{t}^{C}C_{t}-P_{t}g\left(
+b_{t}\right)  \\
+&  =P_{t}\left[  \left(  1-\alpha_{C}\right)  \left(  \frac{P_{t}}{P_{t}^{C}%
+}\right)  ^{-\mu_{C}}C_{t}+\varepsilon_{t}^{X\ast}\alpha_{C}\left(
+\frac{P_{t}}{e_{t}P_{t}^{C\ast}}\right)  ^{-\mu_{C}}C_{t}^{\ast}\frac{1-n}%
+{n}\right]  -P_{t}^{C}C_{t}%
+\end{align*}
+This equation determines the quantity of foreign asset at the end of period,
+this way the left hand side of the equation needs to be rewritten in order to
+take into account the timing effect of the echange rate over the previous
+stock of foreign debt.\ In particular, an increase in the foreign echange rate
+$e_{t}/e_{t-1}>1$ generates a wealth effect for the domestic household by
+boosting his financial revenues.\ The left hand side including this end of
+period wealth effect from changes in the nominal exchange rate reads as,
+$B_{t}^{\ast}-e_{t}/e_{t-1}R_{t-1}^{\ast}B_{t-1}^{\ast}.$ In real terms, the
+final equation of net foreign assets is given by:%
+\begin{equation}
+b_{jt}=\frac{R_{t-1}^{\ast}}{\pi_{t}^{C}}\Delta e_{t}b_{jt-1}+\frac{P_{t}%
+}{P_{t}^{C}}\left(  \left(  1-\alpha_{C}\right)  \left(  \frac{P_{t}}%
+{P_{t}^{C}}\right)  ^{-\mu_{C}}C_{t}+\varepsilon_{t}^{X\ast}\alpha_{C}\left(
+\frac{P_{t}}{e_{t}P_{t}^{\ast}}\right)  ^{-\mu_{C}}C_{t}^{\ast}\frac{1-n}%
+{n}\right)  -C_{t}%
+\end{equation}
+In a world populated by two countries, international financial markets are
+closed by:%
+\begin{equation}
+nb_{t}+\left(  1-n\right)  b_{t}^{\ast}=0
+\end{equation}
+
+
+\section{Determinacy of the equilibrium}
+
+For determinacy purpose, some variables need to be rewritten to be
+stationnary.\ In particular, prices and the exchange rate are not stationnary,
+thus requiring to express (i) the nominal exchange rate is variations $\Delta
+e_{t}$, and (ii) prices in a relative fashion $p_{t}=P_{t}/P_{t}^{C}$.
+
+First, the relative price index can be expressed in growth rates to be
+stationnary:%
+\begin{equation}
+\frac{p_{t}}{p_{t-1}}=\frac{\pi_{t}}{\pi_{t}^{C}}%
+\end{equation}
+
+
+Second, recall that $rer_{t}=e_{t}P_{t}^{C\ast}/P_{t}^{C}$, then we can
+express the real exchange in terms of growth too:%
+\begin{equation}
+\frac{rer_{t}}{rer_{t-1}}=\Delta e_{t}\frac{\pi_{t}^{C\ast}}{\pi_{t}^{C}}%
+\end{equation}
+And the FOC on foreign bonds can also be written in terms of variations of the
+nominal exchange rate:%
+\begin{equation}
+\mathbb{E}_{t}\left\{  \Delta e_{t+1}\right\}  =\left(  1+\chi_{B}%
+rer_{t}\left(  b_{t}-\bar{b}\right)  \right)  \frac{R_{t}}{R_{t}^{\ast}}%
+\end{equation}
+
+
+Third, dividing the CES\ price index by $P_{t}^{C}$, the following relation
+emerges:
+\begin{equation}
+1=\left[  \left(  1-\alpha\right)  p_{t}^{1-\mu}+\alpha rer_{t}^{1-\mu_{C}%
+}\right]  ^{\frac{1}{1-\mu}}%
+\end{equation}
+In addition, relative price setting affect the following equations:%
+\begin{align}
+Y_{t} &  =\left(  1-\alpha_{C}\right)  p_{t}^{-\mu}C_{t}+\frac{1-n}{n}%
+\alpha_{C}\left(  \frac{p_{t}}{rer_{t}}\right)  ^{-\mu}C_{t}^{\ast}%
++0.5\chi_{P}\left(  \pi_{t}-1\right)  ^{2}Y_{t}+g\left(  b_{t}\right)  \\
+b_{t}^{\ast} &  =\frac{R_{t-1}^{\ast}}{\pi_{t}^{C}}\Delta e_{t}b_{t-1}^{\ast
+}+p_{t}\left(  \left(  1-\alpha_{C}\right)  \left(  p_{t}\right)  ^{-\mu}%
+C_{t}+\frac{1-n}{n}\varepsilon_{t}^{X\ast}\alpha_{C}\left(  \frac{p_{t}%
+}{rer_{t}}\right)  ^{-\mu}C_{t}^{\ast}\right)  -C_{t}%
+\end{align}
+%
+
+%TCIMACRO{\TeXButton{small}{\footnotesize}}%
+%BeginExpansion
+\footnotesize
+%EndExpansion
+\bibliographystyle{elsart-harv}
+\bibliography{chap1}%
+%TCIMACRO{\TeXButton{small}{\normalsize}}%
+%BeginExpansion
+\normalsize
+%EndExpansion
+
+\end{document}

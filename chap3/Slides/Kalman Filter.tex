@@ -1,0 +1,660 @@
+\documentclass[notes=show]{beamer}%
+\usepackage{color}
+\usepackage{mathpazo}
+\usepackage{hyperref}
+\usepackage{multimedia}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{subcaption} 
+\usepackage{pgfplots}
+\usepackage{outlines}
+\usepackage{remreset}%
+\setcounter{MaxMatrixCols}{30}
+\useoutertheme{miniframes}
+\defbeamertemplate{mini frame}{scaled circle}[1]
+{%
+  \begin{pgfpicture}{0pt}{0pt}{#1 * 0.1cm}{#1 * 0.1cm}
+    \pgfsetlinewidth{#1 * 0.4pt}
+    \pgfpathcircle{\pgfpoint{#1 * 0.05cm}{#1 * 0.05cm}}{#1 * 0.05cm}
+    \pgfusepath{fill,stroke}
+  \end{pgfpicture}%
+}
+[action]
+{
+  \newlength{\myminiframesize}
+  \setlength{\myminiframesize}{0.14cm}
+  \newlength{\myminiframeoffset}
+  \setlength{\myminiframeoffset}{0.03cm}
+  \setbeamersize{mini frame size=#1\myminiframesize,mini frame offset=#1\myminiframeoffset}
+}
+
+\defbeamertemplate{mini frame in current section}{scaled circle}[1]
+{%
+  \begin{pgfpicture}{0pt}{0pt}{#1 * 0.1cm}{#1 * 0.1cm}
+    \pgfsetlinewidth{#1 * 0.4pt}
+    \pgfpathcircle{\pgfpoint{#1 * 0.05cm}{#1 * 0.05cm}}{#1 * 0.05cm}
+    \pgfusepath{stroke}
+  \end{pgfpicture}%
+}
+
+\defbeamertemplate{mini frame in current subsection}{scaled circle}[1]
+{%
+  \begin{pgfpicture}{0pt}{0pt}{#1 * 0.1cm}{#1 * 0.1cm}
+    \pgfsetlinewidth{#1 * 0.4pt}
+    \pgfpathcircle{\pgfpoint{#1 * 0.05cm}{#1 * 0.05cm}}{#1 * 0.05cm}
+    \pgfusepath{stroke}
+  \end{pgfpicture}%
+}
+
+\setbeamertemplate{mini frame}[scaled circle]{0.6}
+\setbeamertemplate{mini frame in current section}[scaled circle]{0.6}
+\setbeamertemplate{mini frame in current subsection}[scaled circle]{0.6}
+
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2953}
+%TCIDATA{CSTFile=beamer.cst}
+%TCIDATA{Created=Wednesday, December 14, 2016 08:32:20}
+%TCIDATA{LastRevised=Monday, October 02, 2017 09:01:02}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Other Documents\SW\Slides - Beamer">}
+%TCIDATA{ComputeDefs=
+%1$W_{e}^{h}(z)=I_{e}+z+\max\limits_{\hat{z}}\{-\hat{z}+\beta\alpha
+%_{h}[\upsilon(q)-\rho d]+\beta\rho\hat{z}+\delta W_{0}^{h}\left(  0\right)
+%+(1-\delta)W_{1}^{h}\left(  0\right)  $
+%}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\makeatletter
+\@removefromreset{subsection}{section}
+\let\beamer@writeslidentry@miniframeson=\beamer@writeslidentry
+\def\beamer@writeslidentry@miniframesoff{  \expandafter\beamer@ifempty\expandafter{\beamer@framestartpage}{}  {        \clearpage\beamer@notesactions  }
+}
+\newcommand*{\miniframeson}
+{\let\beamer@writeslidentry=\beamer@writeslidentry@miniframeson}
+\newcommand*{\miniframesoff}
+{\let\beamer@writeslidentry=\beamer@writeslidentry@miniframesoff}
+\makeatother
+\setcounter{subsection}{1}
+\addtobeamertemplate{navigation symbols}{}{    \usebeamerfont{footline}    \usebeamercolor[fg]{footline}    \hspace{1em}    \insertframenumber/\inserttotalframenumber
+}
+\setbeamercolor{footline}{fg=blue}
+\setbeamerfont{footline}{series=\bfseries}
+\newenvironment{stepenumerate}{\begin{enumerate}[<+->]}{\end{enumerate}}
+\newenvironment{stepitemize}{\begin{itemize}[<+->]}{\end{itemize} }
+\newenvironment{stepenumeratewithalert}{\begin{enumerate}[<+-| alert@+>]}{\end{enumerate}}
+\newenvironment{stepitemizewithalert}{\begin{itemize}[<+-| alert@+>]}{\end{itemize} }
+\usetheme{Frankfurt}
+\miniframesoff
+\AtBeginSection[]{
+\begin{frame}
+\vfill
+\centering
+\begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+\usebeamerfont{title}\insertsectionhead\par  \end{beamercolorbox}
+\vfill
+\end{frame}
+}
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+\AtBeginSection[]{
+\begin{frame}
+\vfill
+\centering
+\begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+\usebeamerfont{title}\secname\par  \end{beamercolorbox}
+\vfill
+\end{frame}
+}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remarks}[theorem]{Remarks}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\begin{document}
+
+\title{Kalman Filter}
+%\author[shortname]{Gauthier Vermandel}
+%\institute[shortinst]{Universit\'e Paris Dauphine -- PSL Research}
+
+
+\date{\today}
+\maketitle
+
+\section{Introduction}
+
+\miniframeson
+
+\begin{frame}
+\frametitle{Parametrization}
+
+
+\noindent There are different methods to parametrize models:\\
+\bigskip
+\begin{center}
+\begin{itemize}
+
+\item Calibration
+\item Matching Moments
+\item Estimation
+ \begin{itemize}
+\item Maximum Likelihood
+\item Bayesian Estimation
+\end{itemize}
+\end{itemize}
+
+\end{center}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Calibration}
+In a nutshell:
+\begin{center}
+ \begin{itemize}
+\item Giving values to structural parameters in such way to replicate real world observations,
+\item Use different values to perform sensitivity analysis.
+\end{itemize}
+\end{center}
+\bigskip
+The problem we calibration:
+\begin{itemize}
+\item Difficult to chose the right values for the parameters,
+\item I could lead (sometimes) to arbitrary values with very little economic sens. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+
+\frametitle{Matching Moments}
+
+Similarly to calibration:
+\begin{center}
+ \begin{itemize}
+\item Using values for parameters by choosing a set of moments that we would like our model to match,
+\item Performing a sensitivity analysis to judge the model fit by investigating the set of moments.
+\end{itemize}
+\end{center}
+\bigskip
+Contrary to calibration:
+\begin{itemize}
+\item estimated (different than the estimation we will use for Kalman filter)
+\item Allow for hypothesis testing 
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+
+\frametitle{Estimation}
+
+Full information method as we have to specify an entire distribution:
+\begin{center}
+ \begin{itemize}
+\item \textbf{Maximum Likelihood:} The model fit is then based on implied likelihood function (i.e. how consistent with the distribution assumption we have made).
+\item \textbf{Bayesian estimation:}  Need to specify a prior (will be discussed further on Bayesian estimation techniques).
+\end{itemize}
+\end{center}
+
+\end{frame}
+
+
+\miniframesoff
+
+\section{Maximum Likelihood}
+
+\miniframeson
+
+\begin{frame}
+\frametitle{Kalman Filter}
+
+The Kalman filter was initially developed for engineering control problems (e.g. NASA spatial program)
+
+\begin{center}
+ \begin{itemize}
+\item Following Hamilton notation we will set up the Kalman filter based on general time series model,
+\item Then the time series model will be linked to DSGE models.
+\end{itemize}
+\end{center}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Kalman Filter: Times Series Model}
+The model:
+\bigskip
+\begin{equation}
+y_{t}= M_{t}' x_{t}+w_{t}, \text{     } E(w_{t},w_{t}')=R, \label{obs eq}%
+\end{equation}
+\begin{equation}
+x_{t+1}= F_{t} x_{t}+v_{t+1}, \text{     } E(v_{t},v_{t}')=Q.\label{state eq}%
+\end{equation}
+
+\begin{center}
+ \begin{itemize}
+\item $y_{t}$ is an observed variable, while $x_{t}$ is not observed,
+\end{itemize}
+\end{center}
+
+$\Rightarrow$ Kalman filter allows us to retrieve an estimate of $x_{t}$.
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Kalman Filter: Some initial hypotheses}
+
+\begin{center}
+ \begin{itemize}
+\item we assume that $w$ and $v$ are uncorrelated (we can easily expend the model to account for cross correlations), 
+\item we assume for now that $H$, $F$, $R$, and $Q$ are known and time unvarying (without a loss of generality). (Later on we will show how to estimate them),
+\item we need to specify an initial condition for $x_{t}$ as it is a forward looking variable: $x_{1}$ with mean $\hat{x}_{1}$ and variance $P_{1|0}$,
+\item observation ($w_{t}$) and state ($v_{t}$) disturbances are:
+ \begin{itemize}
+\item uncorrelated over time,
+\item uncorrelated with each other (at all leads and lags)
+\item orthogonal to $x_{1}$
+\end{itemize}
+\end{itemize}
+\end{center}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Deriving the Kalman Filter}
+
+
+The main idea of Kalman filter is to give a prediction about a variable of interest (e.g. potential GDP) giving that we observed a series of a variable values in the past (e.g. GDP):
+\begin{equation}
+\hat{x}_{t+1}= \hat{E}(x_{t+1}|Y_{t}), \text{ where:  } Y_{t}=(y_{t}',y_{t-1}',....,y_{1}').
+\end{equation}
+Now the question is how well our prediction? 
+\begin{itemize}
+\item Thus, a need to specify a loss function to be able to evaluate the forecast:
+\end{itemize}
+\begin{equation}
+minE(x_{t+1}-\hat{x}_{t+1|t})^{2} \label{loss function eq}%
+\end{equation}
+\begin{itemize}
+\item $\hat{x}_{t+1|t}$ is then the projection of $x_{t+1}$ on its regressors.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Deriving the Kalman Filter}
+
+\begin{itemize}
+\item Let's recall that any projection of $x$ on $Y$ is a function of $\hat{E}[x|Y]=f(x)$. 
+\item Assuming then both a linear form for the projection where $f(x)=\alpha+\beta x$ and the existence of both first and second moments\footnote{$\bar{x}=E(x)$, $\text{Cov}(x,x)=E[(x-\bar{x})(x-\bar{x})']$, $\bar{Y}=E(Y)$, $\text{Cov}(Y,Y)=E[(Y-\bar{Y})(Y-\bar{Y})']$, and $\text{Cov}(x,Y)=E[(x-\bar{x})(Y-\bar{Y})']$.}
+\end{itemize}
+
+We then solve the minimization problem (in the general framework before going back to our time series model) as follow: 
+
+\begin{align}
+\beta&=\frac{Cov(x,Y)}{Cov(Y,Y)},\\
+\alpha&=\bar{x}-\beta \bar{Y},\\
+\hat{x}&=\hat{E}(x|Y)=\bar{x}+\frac{Cov(x,Y)}{Cov(Y,Y)}(Y-\bar{Y}).
+\end{align}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Deriving the Kalman Filter}
+
+\textbf{We should not confuse projection with regression (e.g. OLS). Although the expression we are seeking to minimize are closely similar, OLS seeks to investigate a causality, while the projection is solely focused on forecasting.}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Deriving the Kalman Filter}
+
+Jumping back to our model! 
+
+The main idea is to write down the model recursively:
+
+\begin{itemize}
+\item As we have a value for $x_{1|0}$, and the observation for $Y_{t}$ (i.e. $y_{1}$,....,$y_{T}$), we can then have an update for $\hat{x}_{1|1}$ and then have a forecast value for $\hat{x}_{2|1}$. Then we keep repeating this procedure.
+\end{itemize}
+
+Thus,
+
+\begin{align}
+\hat{x}_{t|t}&=\hat{E}(x_{t}|Y_{t}) \nonumber \\
+&=\hat{x}_{t|t-1}+E[(x_{t}-\hat{x}_{t|t-1})(y_{t}-\hat{y}_{t|t-1})']* \nonumber\\
+&E[(y_{t}-\hat{y}_{t|t-1})(y_{t}-\hat{y}_{t|t-1})']^{-1}(y_{t}-\hat{y}_{t|t-1})).
+\end{align}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Deriving the Kalman Filter}
+
+Using the model equations, we can easily rewrite and simplify the co-variance, the variance, and error terms, respectively, as following:
+
+\begin{align}
+E[(x_{t}-\hat{x}_{t|t-1})(y_{t}-\hat{y}_{t|t-1})']&=E[(x_{t}-\hat{x}_{t|t-1})(M'(x_{t}-\hat{x}_{t|t-1})+w_{t})']\nonumber\\
+&=E[(x_{t}-\hat{x}_{t|t-1})((x_{t}-\hat{x}_{t|t-1})'M]\nonumber\\
+&=P_{t|t-1}M
+\end{align}
+\begin{align}
+E[(y_{t}-\hat{y}_{t|t-1})(y_{t}-\hat{y}_{t|t-1})']&=E[M'(x_{t}-\hat{x}_{t|t-1})(x_{t}-\hat{x}_{t|t-1})M]\nonumber\\
+&+E[w_{t}w{t}']\nonumber\\
+&=M'P_{t|t-1}M+R
+\end{align}
+
+\begin{align}
+y_{t}-\hat{y}_{t|t-1} &=y_{t} - M'\hat{x}_{t|t-1}
+\end{align}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{writing down the final form of the Kalman Filter}
+\underline{The state variable:} \\
+\bigskip
+\textbf{The update step:} 
+\begin{align}
+\hat{x}_{t|t}=\hat{x}_{t|t-1}+P_{t|t-1}M(M'P_{t|t-1}M+R)^{-1}(y_{t}-M'\hat{x}_{t|t-1})
+\end{align}
+\textbf{The forecast step:} 
+\begin{align}
+\hat{x}_{t+1|t}&=\hat{E}(x_{t+1}|Y_{t})\nonumber\\
+&=F\hat{E}(x_{t}|Y_{t})\nonumber\\
+&=F\hat{x}_{t|t-1}+FP_{t|t-1}M(M'P_{t|t-1}M+R)^{-1}(y_{t}-M'\hat{x}_{t|t-1})
+\end{align}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{writing down the final form of the Kalman Filter}
+\underline{Specifying the variance matrix recursion formula:} \\
+\bigskip
+\textbf{The update step:} 
+\begin{align}
+P_{t|t}&=E[(x_{t}-\hat{x}_{t|t})(x_{t}-\hat{x}_{t|t})']\nonumber\\
+&=E[(x_{t}-\hat{x}_{t|t-1})(x_{t}-\hat{x}_{t|t-1})'] - E[(x_{t}-\hat{x}_{t|t-1})(y_{t}-\hat{y}_{t|t-1})']*\nonumber\\
+&E[(y_{t}-\hat{y}_{t|t-1})(y_{t}-\hat{y}_{t|t-1})']^{-1}*\nonumber\\
+&E[(y_{t}-\hat{y}_{t|t-1})(x_{t}-\hat{x}_{t|t-1})']\nonumber\\
+&=P_{t|t-1}-P_{t|t-1}M(M'P_{t|t-1}M+R)^{-1}M'P_{t|t-1}
+\end{align}
+\textbf{The forecast step:} 
+\begin{align}
+P_{t+1|t}&=E[(x_{t+1}-\hat{x}_{t+1|t})(x_{t+1}-\hat{x}_{t+1|t})']\nonumber\\
+&=E[(F x_{t}+v_{t+1}- F\hat{x}_{t|t})(F x_{t}+v_{t+1}-F\hat{x}_{t|t})']\nonumber\\
+&=F E[(x_{t}-\hat{x}_{t|t})(x_{t}-\hat{x}_{t|t})']F'+E[v_{t+1}v_{t+1}']\nonumber\\
+&=FP_{t|t}F'+Q
+\end{align}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Summary of the Kalman Filter}
+\textbf{The update step:} 
+\begin{align}
+&\hat{x}_{t|t}=\hat{x}_{t|t-1}+P_{t|t-1}M(M'P_{t|t-1}M+R)^{-1}(y_{t}-M'\hat{x}_{t|t-1})\\
+&P_{t|t}=P_{t|t-1}-P_{t|t-1}M(M'P_{t|t-1}M+R)^{-1}M'P_{t|t-1}
+\end{align}
+\textbf{The forecast step:} 
+\begin{align}
+&\hat{x}_{t+1|t}=F\hat{x}_{t|t-1}+FP_{t|t-1}M(M'P_{t|t-1}M+R)^{-1}(y_{t}-M'\hat{x}_{t|t-1})\\
+&P_{t+1|t}=FP_{t|t}F'+Q
+\end{align}
+
+\end{frame}
+
+\miniframesoff
+\section{Maximum Likelihood (ML)}
+
+\miniframeson
+
+\begin{frame}
+\frametitle{Estimation}
+
+\begin{itemize}
+\item We can also estimate all the parameter we assumed previously fixed (i.e. $\varkappa=\{M, F, Q, R\}$) using ML,
+\item Assuming $x_{1|0}$ and both error terms are Gaussian, then the distribution of $y_{t}/Y_{t}$ is also Gaussian
+\item We then given values of $\varkappa$ we can derive the mean and variance of y,
+\item And as we know the distribution of y, this allows for computing the likelihood of the observations $y_{t}$
+\item Finally, we just maximize the log-likelihood with respect to the parameters $\varkappa$
+\end{itemize}
+
+
+\end{frame}
+
+\miniframesoff
+\section{Liking the Time Series Model to DSGE}
+
+\miniframeson
+
+\begin{frame}
+
+\frametitle{DSGE Example: Neo-classical Growth Model}
+\textbf{Household:} 
+The household maximize their lifetime utility. They consume and invest in capital.
+
+\begin{align}
+\max_{\left\{  c_{t},k_{t+1}\right\}  }E_{0}\sum_{t=0}^{\infty
+}\beta^{t}\left( log(c_{t})\right),\nonumber\\
+c_{t}+k_{t+1}=y_{t}+(1-\delta)k_{t}
+\end{align}
+(with initial value for $k_{0}$ known.)
+
+\textbf{Production:} 
+The production follow a classical cobb-douglas function and is subject to exogenous technology shocks
+\begin{align}
+y_{t}&=a_{t}k_{t}^\alpha\\
+a_{t}&=1-\rho+\rho a_{t-1}+\epsilon_{t}
+\end{align}
+with $\epsilon_{t}$$\sim$ N(0,$\sigma^2$) and $a_{0}$ known.
+
+
+\end{frame}
+
+
+\begin{frame}
+
+\frametitle{DSGE Example: Neo-classical Growth Model}
+\textbf{Solving the modeling (i.e. finding the policy functions)} \\
+\bigskip
+The first order conditions read:
+
+\begin{align}
+c_{t}^{-1}&=E_{t}[\beta c_{t+1}^{-1}(\alpha z_{t+1}k_{t}^(\alpha-1)+1-\delta)]\\
+c_{t}+k_{t}&=a_{t}k_{t-1}^\alpha+(1-\delta)k_{t-1}
+\end{align}
+
+Thus, the policy function can be written as following:
+\begin{align}
+k_{t}&=k_{ss}+\alpha_{kk}(k_{t-1}-k_{ss})+ \alpha_{ka}(a_{t}-a_{ss})\\
+a_{t}&=(1-\rho)a_{ss}+\rho a_{t-1}+\epsilon_{t} 
+\end{align}
+where $a_{ss}=1$.
+
+\begin{itemize}
+\item $\alpha_{kk}$, $\alpha_{ka}$, $k_{ss}$ are functions which depend on the structural parameters $\varkappa=\{\alpha,\beta,\delta,\rho,\sigma,a_{0}\}$.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+
+\frametitle{DSGE Example: Neo-classical Growth Model}
+\textbf{Estimating the model: Using the state-space form} \\
+\bigskip
+\begin{itemize}
+\item Using ML we can estimate the model
+\item To do so we need to specify the likelihood function, thus the Kalman filter M and F matrices equivalents.
+\end{itemize}
+\bigskip
+\textbf{The state-space form (let's recall the general case)} \\
+
+\begin{align}
+y_{t}= M_{t}' x_{t}+w_{t}, \text{     } E(w_{t},w_{t}')=R, \nonumber\\
+x_{t+1}= F_{t} x_{t}+v_{t+1}, \text{     } E(v_{t},v_{t}')=Q,\nonumber
+\end{align}
+
+
+\end{frame}
+
+\begin{frame}
+
+\frametitle{DSGE Example: Neo-classical Growth Model}
+\textbf{Estimating the model: Using the state-space form} \\
+\bigskip
+Our Neo-classical Growth model:
+
+\begin{equation*}
+\begin{bmatrix}
+k_{t} - k_{ss} \\
+a_{t+1}-a_{ss} 
+\end{bmatrix}	
+ = 
+\begin{bmatrix}
+\alpha_{kk} & \alpha_{ka} \\
+0 & \rho  
+\end{bmatrix}	
+\begin{bmatrix}
+k_{t-1} - k_{ss}\\
+a_{t}-a_{ss}   
+\end{bmatrix}	
++
+\begin{bmatrix}
+0\\
+\epsilon_{t+1}   
+\end{bmatrix}
+\end{equation*}
+
+
+\begin{equation*}
+k_{t} - k_{ss}
+= 
+\begin{bmatrix}
+1 & 0  
+\end{bmatrix}	
+\begin{bmatrix}
+k_{t-1} - k_{ss}\\
+a_{t}-a_{ss}   
+\end{bmatrix}	
++
+\begin{bmatrix}
+0
+\end{bmatrix}
+\end{equation*}
+
+The work is done, now we just use the previous section results to compute the Kalman filter, while using ML through maximizing the log-likelihood function with respect to the parameters $\varkappa$.
+
+\end{frame}
+
+\begin{frame}
+
+\frametitle{DSGE Example: Neo-classical Growth Model}
+\textbf{Estimating the model: Using the state-space form} \\
+
+The log-likelihood function for the Gaussian distribution assumed in the beginning reads as following:
+\begin{align}
+\mathcal{L}(Y_{t}|\varkappa) = log (f(y_{0}))+ \sum_{t=1}^{T} log (f(y_{t}|Y_{t-1};\varkappa))
+\end{align}
+which in this example would be:
+\begin{align}
+log\left(\frac{1}{\sigma \sqrt{2\pi}}\right) - \frac{\epsilon(\varkappa)^2}{2\sigma^2}
+\end{align}
+\end{frame}
+
+\miniframesoff
+\section{Exercise}
+
+\miniframeson
+
+\begin{frame}
+
+\frametitle{Constructing Kalman Filter}
+
+We will be using Kalman filter to estimate the aggregate matching function using ML.\\
+\bigskip
+
+Using the aggregate matching function, which allows for capturing the relationship between the number of new jobs (hires) $H_{t}$, and the number of unemployed $U_{t}$ as well as the number of vacancies present in the economy $V_{t}$, is a wide spread technique to measure unemployment. We characteristic the functional form following a classical Cobb Douglas constant returns to scale function.
+
+\begin{align}
+H_{t} = M U_{t}^{1-\rho}V_{t}^{\rho}
+\end{align}
+\begin{itemize}
+
+\item where, $M$ the constant level parameter referring to the degree of mismatch or matching efficiency,
+\item $\rho$ the elasticity of matches with respect to the number of unemployed,
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+
+\frametitle{Constructing Kalman Filter}
+
+The goal of this exercise is to attempt an estimation of the aggregate matching function, while allowing match efficiency to 
+fluctuate over time, in order to investigate to role of the mismatch in the unemployment spike
+during the Great Recession. 
+
+\end{frame}
+
+
+\begin{frame}
+
+\frametitle{First Step:}
+\textbf{Estimating the aggregate matching function} \\
+\bigskip
+
+Let's recall that the job finding rate $F_{t}=\frac{H_{t}}{U{t}}$\\
+\bigskip
+
+The state space representation in this case is the following:
+
+\begin{align}
+F_{t} &= M_{t} + \rho (V_{t}-U_{t})+\epsilon_{t} \text{     } \epsilon_{t} \sim N(0,R) \\
+M_{t}&=M_{t-1}+\nu_{t} \text{     } \nu_{t} \sim N(0,Q)
+\end{align}
+where also, $Cov(\epsilon_{t},\nu_{t})=0$ and $(V_{t}-U_{t})$ the labor market tightness.
+
+\end{frame}
+
+\begin{frame}
+
+\frametitle{First Step:}
+\textbf{What to do} \\
+\bigskip
+
+1 - In the $Main\_File.m$ set the initial values for the three estimated parameters (Q, R, $\rho$). (Think of OLS as starting point).\\ \bigskip
+
+2 -  Next, in $Loglikelihood.m$ specify the estimated parameters in terms of the notation used in previous section. That is, determine the values of Q, R, C, F, M and A given the input of the minimization routine. \\ \bigskip
+
+3 - Finally, complete the Kalman filter recursions in $KalmanFilter.m$ Then run the program by commenting out the rest of the code and see what happened to match efficiency during the crisis.
+\end{frame}
+
+
+\miniframesoff
+\section{References}
+
+\miniframeson
+
+\begin{frame}
+
+\frametitle{References}
+
+Den Haan, W. (2019). ''Bayesian Estimation'', Tools for Macroeconomists
+
+Petrongolo, B. , C. Pissarides (2001). ''Looking into the black box: A survey of the
+matching function", Journal of Economic Literature, 39, 390-431. \\ \bigskip
+
+Sedlacek, P. (2019). ''Kalman filter and Maximum Likelihood'', Tools for Macroeconomists\\ \bigskip
+
+\end{frame}
+\end{document}

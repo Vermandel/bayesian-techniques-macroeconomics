@@ -1,0 +1,284 @@
+% the page size
+
+\documentclass{article}%
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{geometry}%
+\setcounter{MaxMatrixCols}{30}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2953}
+%TCIDATA{CSTFile=40 LaTeX article.cst}
+%TCIDATA{Created=Thursday, October 06, 2016 16:43:40}
+%TCIDATA{LastRevised=Monday, September 25, 2017 17:45:39}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Standard LaTeX\Blank - Standard LaTeX Article">}
+%TCIDATA{Language=American English}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\geometry{a4paper, top=1cm, left=1cm, right=1cm, bottom=1.0cm, includehead, includefoot}
+\graphicspath{{C:/Users/Gauthier/Dropbox/TD/2015_DSGE/chap3/codes/}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\begin{document}
+
+\title{A note on investment costs and the value of capital goods}
+\author{G.\ Vermandel}
+\maketitle
+
+\section{Model}
+
+It is possible to derive from the standard RBC\ model the endogenous asset
+price denoted $Q_{t}=\lambda_{t}^{k}/\lambda_{t}^{c}$, defined as the ratio
+between the marginal cost of raising new capitals (Lagrangian multiplier on
+capital accumulation constraint $\lambda_{t}^{k}$)\ and the marginal utility
+of consumption (Lagrangian multiplier on budget constraint $\lambda_{t}^{c}$).
+Variable $Q_{t}$\ also refers to the well-known Tobin's Q published in Tobin
+(1969).\ Tobin's Q is the ratio between a physical asset's market value and
+its replacement value, this ratio has considerable macroeconomic implications
+as it constitutes the standard bridge between financial markets and markets
+for goods and services. In steady state, the ratio must be normalised to one
+to be consistent with asset pricing theory, such that $\bar{Q}=1$.
+
+To create a wedge between the price of goods and the price of capital goods,
+we introduce a congestion cost on the accumulation process of investment goods
+as in Christiano and al.\ (2005):%
+\begin{equation}
+K_{jt}=\varepsilon_{t}^{I}I_{jt}\left(  1-AC_{jt}^{I}\right)  +\left(
+1-\delta\right)  K_{jt-1}%
+\end{equation}
+where $AC_{jt}^{I}$ is an investment cost function such that:%
+\begin{align}
+AC_{jt}^{I}  &  =\frac{\chi^{I}}{2}\left(  \frac{I_{jt}}{I_{jt-1}}-1\right)
+^{2}\\
+&  =f\left(  \frac{I_{jt}}{I_{jt-1}}\right)
+\end{align}
+This cost function has no implications on the steady state of the model, with
+$\overline{AC}^{I}=0$.
+
+\subsection{Households}
+
+The Lagrangian problem is given by:%
+
+\begin{align*}
+\mathcal{L}_{t}  &  =\mathbb{E}_{t}%
+%TCIMACRO{\dsum \limits_{\tau=0}^{\infty}}%
+%BeginExpansion
+{\displaystyle\sum\limits_{\tau=0}^{\infty}}
+%EndExpansion
+\varepsilon_{t+\tau}^{C}\beta^{\tau}\{\frac{C_{jt+\tau}^{1-\sigma_{C}}%
+}{1-\sigma_{C}}-\chi\frac{H_{jt+\tau}{}^{1+\sigma_{L}}}{1+\sigma_{L}}\\
+&  +\lambda_{t+\tau}^{c}\left[  W_{t+\tau}H_{jt+\tau}+Z_{t+\tau}K_{jt-1+\tau
+}+R_{t-1+\tau}B_{jt-1+\tau}-C_{jt+\tau}-I_{jt+\tau}-B_{jt+\tau}-T_{jt+\tau
+}\right] \\
+&  +\lambda_{t+\tau}^{k}\left[  \varepsilon_{t+\tau}^{I}I_{jt+\tau}\left(
+1-\textcolor{red}{f\left(\frac{I_{jt+\tau}}{I_{jt-1+\tau}}\right)}\right)
++\left(  1-\delta\right)  K_{jt-1+\tau}-K_{jt+\tau}\right]  \}\\
+&  -
+\end{align*}
+
+
+If you're not comfortable with infinite sums, you can develop the sum for
+$\tau=0$ and $\tau=1$ (we don't mind for value of tau above 1):%
+
+\begin{align*}
+\mathcal{L}_{t}  &  =\varepsilon_{t}^{C}\left(  \frac{C_{jt}^{1-\sigma_{C}}%
+}{1-\sigma_{C}}-\chi\frac{H_{jt}{}^{1+\sigma_{L}}}{1+\sigma_{L}}\right) \\
+&  +\varepsilon_{t}^{C}\lambda_{t}^{c}\left[  W_{t}H_{jt}+Z_{t}K_{jt-1}%
++R_{t-1}B_{jt-1}-C_{jt}-I_{jt}-B_{jt}-T_{jt}\right] \\
+&  +\varepsilon_{t}^{C}\lambda_{t}^{k}\left[  \varepsilon_{t}^{I}I_{jt}\left(
+1-\textcolor{red}{f\left(\frac{I_{jt}}{I_{jt-1}}\right)}\right)  +\left(
+1-\delta\right)  K_{jt-1}-K_{jt}\right] \\
+&  +\varepsilon_{t+1}^{C}\beta\left(  \frac{C_{jt+1}^{1-\sigma_{C}}}%
+{1-\sigma_{C}}-\chi\frac{H_{jt+1}{}^{1+\sigma_{L}}}{1+\sigma_{L}}\right) \\
+&  +\varepsilon_{t+1}^{C}\lambda_{t+1}^{c}\beta\left[  W_{t+1}H_{jt+1}%
++Z_{t+1}K_{jt}+R_{t}B_{jt}-C_{jt+1}-I_{jt+1}-B_{jt+1}-T_{jt+1}\right] \\
+&  +\varepsilon_{t+1}^{C}\lambda_{t+1}^{k}\beta\left[  \varepsilon_{t+1}%
+^{I}I_{jt+1}\left(
+1-\textcolor{red}{f\left(\frac{I_{jt+1}}{I_{jt}}\right)}\right)  +\left(
+1-\delta\right)  K_{jt}-K_{jt+1}\right] \\
+&  +\varepsilon_{t+2}^{C}\beta^{2}\left(  \frac{C_{jt+2}^{1-\sigma_{C}}%
+}{1-\sigma_{C}}-\chi\frac{H_{jt+2}{}^{1+\sigma_{L}}}{1+\sigma_{L}}\right) \\
+&  +....
+\end{align*}
+
+
+Optimal condition on investment:
+\[
+-\varepsilon_{t}^{C}\lambda_{t}^{c}+\varepsilon_{t}^{C}\lambda_{t}%
+^{k}\varepsilon_{t}^{I}\frac{\partial\left[  I_{jt}\left(  1-AC_{jt}%
+^{I}\right)  \right]  }{\partial I_{jt}}-\varepsilon_{t+1}^{C}\lambda
+_{t+1}^{k}\beta\varepsilon_{t+1}^{I}\frac{\partial\left[  I_{jt+1}%
+AC_{jt+1}^{I}\right]  }{\partial I_{jt}}=0
+\]
+
+
+Only one first order conditions is different from what we had in the standard
+RBC model:%
+\begin{align*}
+\left(  \partial C_{jt}\right)   &  :\lambda_{t}^{c}=C_{jt}{}^{-\sigma_{C}}\\
+\left(  \partial H_{jt}\right)   &  :\chi H_{jt}^{\sigma^{L}}=\lambda_{t}%
+^{c}W_{t}\\
+\left(  \partial B_{jt}\right)   &  :\mathbb{E}_{t}\left\{  \frac
+{\varepsilon_{t}^{C}\lambda_{t}^{c}}{\varepsilon_{t+1}^{C}\lambda_{t+1}^{c}%
+}\right\}  =\beta R_{t}\\
+\left(  \partial I_{jt}\right)   &  :\frac{\lambda_{t}^{k}}{\lambda_{t}^{c}%
+}\varepsilon_{t}^{I}\frac{\partial\left[  I_{jt}\left(  1-AC_{jt}^{I}\right)
+\right]  }{\partial I_{jt}}-\beta\frac{\varepsilon_{t+1}^{C}\lambda_{t+1}^{k}%
+}{\varepsilon_{t}^{C}\lambda_{t}^{c}}\varepsilon_{t+1}^{I}\frac{\partial
+\left[  I_{jt+1}AC_{jt+1}^{I}\right]  }{\partial I_{jt}}=1\\
+\left(  \partial K_{jt}\right)   &  :\varepsilon_{t}^{C}\lambda_{t}^{k}%
+=\beta\mathbb{E}_{t}\left\{  \varepsilon_{t+1}^{C}\left[  \overset{}{\left(
+1-\delta\right)  }\lambda_{t+1}^{k}+\lambda_{t+1}^{c}Z_{t+1}\right]  \right\}
+\end{align*}
+We define the asset price $q_{t}$ by the relative ratio of the marginal
+utility of buying capital goods $\lambda_{t}^{k}$ over the marginal utility of
+consumption $\lambda_{t}^{c}$ with $q_{t}=\lambda_{t}^{k}/\lambda_{t}^{c}$.
+When $q_{t}>1$, households are willing to invest in physical capital rather
+than consuming, this can be interpreted as an increase in asset prices with
+respect to its steady state. We can thus replace $\lambda_{t}^{k}$\ by the
+asset price equation $\lambda_{t}^{k}=q_{t}\lambda_{t}^{c}$. The substitution
+affects first order conditions on $\left(  \partial I_{jt}\right)  $ and
+$\left(  \partial K_{jt}\right)  $:%
+\begin{align*}
+\left(  \partial I_{jt}\right)   &  :\frac{\lambda_{t}^{k}}{\lambda_{t}^{c}%
+}\varepsilon_{t}^{I}\frac{\partial\left[  I_{jt}\left(  1-AC_{jt}^{I}\right)
+\right]  }{\partial I_{jt}}-\beta\frac{\varepsilon_{t+1}^{C}\lambda_{t+1}^{k}%
+}{\varepsilon_{t}^{C}\lambda_{t}^{c}}\varepsilon_{t+1}^{I}\frac{\partial
+\left[  I_{jt+1}AC_{jt+1}^{I}\right]  }{\partial I_{jt}}=1\\
+&  :\frac{q_{t}\lambda_{t}^{c}}{\lambda_{t}^{c}}\varepsilon_{t}^{I}%
+\frac{\partial\left[  I_{jt}\left(  1-AC_{jt}^{I}\right)  \right]  }{\partial
+I_{jt}}-\beta\frac{\varepsilon_{t+1}^{C}q_{t+1}\lambda_{t+1}^{c}}%
+{\varepsilon_{t}^{C}\lambda_{t}^{c}}\varepsilon_{t+1}^{I}\frac{\partial\left[
+I_{jt+1}AC_{jt+1}^{I}\right]  }{\partial I_{jt}}=1\\
+&  :q_{t}\varepsilon_{t}^{I}\frac{\partial\left[  I_{jt}\left(  1-AC_{jt}%
+^{I}\right)  \right]  }{\partial I_{jt}}-\frac{1}{R_{t}}\mathbb{E}_{t}%
+q_{t+1}\varepsilon_{t+1}^{I}\frac{\partial\left[  I_{jt+1}AC_{jt+1}%
+^{I}\right]  }{\partial I_{jt}}=1
+\end{align*}
+and for $\left(  \partial K_{jt}\right)  $:%
+\begin{align*}
+\left(  \partial K_{jt}\right)   &  :\varepsilon_{t}^{C}q_{t}\lambda_{t}%
+^{c}=\beta\mathbb{E}_{t}\left\{  \varepsilon_{t+1}^{C}\left[  \overset
+{}{\left(  1-\delta\right)  }q_{t+1}\lambda_{t+1}^{c}+\lambda_{t+1}^{c}%
+Z_{t+1}\right]  \right\} \\
+&  :q_{t}=\beta\mathbb{E}_{t}\left\{  \frac{\lambda_{t+1}^{c}\varepsilon
+_{t+1}^{C}}{\varepsilon_{t}^{C}\lambda_{t}^{c}}\left[  \overset{}{\left(
+1-\delta\right)  }q_{t+1}+Z_{t+1}\right]  \right\} \\
+&  :q_{t}=\mathbb{E}_{t}\left\{  \frac{1}{R_{t}}\left[  \overset{}{\left(
+1-\delta\right)  }q_{t+1}+Z_{t+1}\right]  \right\} \\
+&  :R_{t}=\frac{\overset{}{\left(  1-\delta\right)  \mathbb{E}_{t}}%
+q_{t+1}+\mathbb{E}_{t}Z_{t+1}}{q_{t}}%
+\end{align*}
+these two equations are really popular in DSGE\ modelling.\ Many papers
+re-employ this investment cost function as it generate a dynamic of investment
+consistent with empirical evidence and data friendly (response of invesment is
+hump-shaped as in VARs models).
+
+\section{Model summary}
+
+We have to include one new variables $\{\textcolor{red}{q_{t}}\}$, and one
+corresponding equation to obtain a determinate system of equations:%
+
+\begin{align*}
+&  :\beta R_{t}=\mathbb{E}_{t}\left\{  \frac{\varepsilon_{t}^{C}}%
+{\varepsilon_{t+1}^{C}}\left(  \frac{C_{jt+1}}{C_{jt}}\right)  ^{\sigma_{C}%
+}\right\} \\
+&  :W_{t}=\chi H_{t}^{\sigma_{L}}C_{t}^{\sigma_{C}}\\
+&  :R_{t}=\frac{\mathbb{E}_{t}\left\{  \left(  1-\delta\right)
+\textcolor{red}{q_{t+1}}+Z_{t+1}\right\}  }{\textcolor{red}{q_{t}}}\\
+&  :K_{t}=\varepsilon_{t}^{I}\left(
+1-\textcolor{red}{f\left(\frac{I_{jt}}{I_{jt-1}}\right)}\right)  I_{t}+\left(
+1-\delta\right)  K_{t-1}\\
+&
+:\textcolor{red}{ q_{t}\varepsilon_{t}^{I}\frac{\partial\left[ I_{jt}\left( 1-AC_{jt}^{I}\right) \right] }{\partial I_{jt}}-\frac{1}{R_{t}}\mathbb{E}_{t}q_{t+1}\varepsilon_{t+1}^{I}\frac{\partial\left[ I_{jt+1}AC_{jt+1}^{I}\right] }{\partial I_{jt}}=1 }\\
+&  :Y_{t}=\varepsilon_{t}^{A}K_{t-1}^{\alpha}H_{t}{}^{1-\alpha},\\
+&  :Z_{t}=\alpha\frac{Y_{t}}{K_{t-1}}\\
+&  :W_{t}=\left(  1-\alpha\right)  \frac{Y_{t}}{H_{t}}\\
+&  :Y_{t}=C_{t}+I_{t}+g^{y}\bar{Y}\varepsilon_{t}^{G}\\
+&  :\log\left(  \varepsilon_{t}^{A}\right)  =\rho_{A}\log\left(
+\varepsilon_{t-1}^{A}\right)  +\eta_{t}^{A}\\
+&  :\log\left(  \varepsilon_{t}^{G}\right)  =\rho_{G}\log\left(
+\varepsilon_{t-1}^{G}\right)  +\eta_{t}^{G}\\
+&  :\log\left(  \varepsilon_{t}^{C}\right)  =\rho_{C}\log\left(
+\varepsilon_{t-1}^{C}\right)  +\eta_{t}^{C}\\
+&  :\log\left(  \varepsilon_{t}^{I}\right)  =\rho_{I}\log\left(
+\varepsilon_{t-1}^{I}\right)  +\eta_{t}^{I}%
+\end{align*}
+
+
+\section{Steady state}
+
+The asset price equation is normalized to unity in steady state:%
+\[
+\bar{q}=1
+\]
+
+
+\section{Dynare writing}
+
+\begin{enumerate}
+\item Declare one new endogenous variable $\{\textcolor{red}{q_{t}}\}$
+
+\item Declare the investment cost $\chi$\ as a parameter and calibrate it to
+$\chi$\ =4
+
+\item Include the one dynamic equation defining $\{\textcolor{red}{q_{t}}\}$
+and modify equations affected by capital utilization.
+
+\item Define the steady state of $\{\textcolor{red}{q_{t}}\}$\ in the init block.
+\end{enumerate}
+
+\section{Tips}
+
+First, regarding investment costs derivation:%
+\begin{align*}
+\frac{\partial\left[  I_{t}AC_{t}^{I}\right]  }{\partial I_{t}}  &
+=\frac{\chi}{2}\left(  3\left(  \frac{I_{t}}{I_{t-1}}\right)  ^{2}%
++1-4\frac{I_{t}}{I_{t-1}}\right)  ,\\
+\frac{\partial\left[  I_{t+1}AC_{t+1}^{I}\right]  }{\partial I_{t}}  &
+=\chi\left(  \left(  \frac{I_{t+1}}{I_{t}}\right)  ^{2}-\left(  \frac{I_{t+1}%
+}{I_{t+1}}\right)  ^{3}\right)  .
+\end{align*}
+
+
+Second you may have an headache reading this equation:
+\[
+:q_{t}\varepsilon_{t}^{I}\frac{\partial\left[  I_{jt}\left(  1-AC_{jt}%
+^{I}\right)  \right]  }{\partial I_{jt}}-\frac{1}{R_{t}}\mathbb{E}_{t}%
+q_{t+1}\varepsilon_{t+1}^{I}\frac{\partial\left[  I_{jt+1}AC_{jt+1}%
+^{I}\right]  }{\partial I_{jt}}=1
+\]
+however, up to first order, this equation boils down to:%
+\[
+\hat{q}_{t}=\chi(\hat{\imath}_{t}-\hat{\imath}_{t-1})-\beta\chi(\hat{\imath
+}_{t+1}-\hat{\imath}_{t})
+\]
+
+\end{document}

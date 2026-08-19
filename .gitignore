@@ -1,0 +1,27 @@
+# LaTeX and build debris
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.run.xml
+*.bak
+*.aaa
+*.aab
+*.aac
+*.sw[0-9]*
+_minted-*/
+
+# Editor cruft
+*~
+.DS_Store
+
+# Private notes and templates
+Notes_BTM.xlsx
+Notes_BTM - Copie.xlsx
+Template_courseQEA_VERMANDEL.doc
+

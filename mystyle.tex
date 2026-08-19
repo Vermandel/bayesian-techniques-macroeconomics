@@ -1,0 +1,343 @@
+
+%\input{../lectures_info.tex}
+% basic  stuff
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{eurosym}
+\usepackage{natbib}
+\usepackage{minted}
+\usepackage[most]{tcolorbox}
+\usetikzlibrary{calc}
+\definecolor{deepblue}{RGB}{0,129,188}
+\definecolor{deepblue2}{RGB}{0,26,153}
+\definecolor{deepgreen}{RGB}{73,155,202}
+\definecolor{mygray}{gray}{0.9}
+\definecolor{myblue}{RGB}{0,163,243}
+
+\setlength\parskip{.4em plus 0.1em minus 0.2em}
+\setlength{\parindent}{15pt}%
+
+% the page size
+\usepackage{geometry}
+\geometry{a4paper, top=1.5cm, left=1cm, right=1.0cm, bottom=1.0cm, includehead, includefoot}
+\graphicspath{{../},{../../},{/chap1},{/chap2},{/chap3},{/chap4},{/chap5},{/chap6},{../2018_macroeconometrics/}}
+\pdfoptionpdfinclusionerrorlevel=0
+
+
+% TOC programming
+\usepackage{tocloft}
+\setlength{\cftbeforesecskip}{2pt}
+\setcounter{tocdepth}{1} % hide subsection in TOC
+
+%%% BULLET LIST ITEMS
+\usepackage{bm}
+\newcommand{\localtextbulletone}{\textcolor{deepblue2}{\bm{$\circ$}}}
+\renewcommand{\labelitemi}{\localtextbulletone}
+
+% section programming 
+\usepackage[calcwidth]{titlesec}
+\titleformat{\section}% sectioning command formatted
+            {\bfseries\LARGE\color{deepblue2}}% font commands applied to whole
+            {\thesection .}% label
+            {0.5em}% separation between label and title
+            {}% commands before section title
+            [{\titlerule[1pt]}]% commands after
+
+\titleformat{\part}% sectioning command formatted
+            {\bfseries\large}% font commands applied to whole
+            {PARTIE \thepart ~:}% label
+            {0.5em}% separation between label and title
+            {}% commands before section title
+            [{\titlerule[1pt]}]% commands after
+			
+%\renewcommand{\questionshook}{%
+%   \setlength{\labelsep}{6pt}%  --> espace entre la puce et le début du texte
+%    \setlength{\leftmargin}{0pt}%  --> espace entre le texte et la marge gauche (sauf pour la premiere ligne)
+%    \setlength{\labelwidth}{30pt}% --> taille de la boite contenant la puce. Aligné à droite. Si taille < taille de la puce, la taille de la boite est egale à la taille de la puce
+%   \setlength{\listparindent}{\parindent}% --> indentation des paragraphe dans la liste
+%    \setlength{\itemindent}{30pt}% --> espace entre la marge et la puce
+    %\setlength{\itemsep}{0pt}% --> espace entre les items (auquel s'ajoute \parsep}
+%}
+%\renewcommand\thequestion{\arabic{question}}
+%\renewcommand{\questionlabel}{Question No.~\thequestion.}
+
+%Pdf HYPPERREF STUFF
+\hypersetup{
+colorlinks=false,
+	breaklinks=true,
+	plainpages=false,
+	%pdftitle={\letitre},
+	pdfauthor={University of Paris-Dauphine},
+	pdfsubject={},
+	pdfcreator={TeX et TXC},
+	%pdfstartpage={1},
+	%pdfpagemode={FullScreen}
+	pdfkeywords={DSGE, Business Cycles},
+	pdfborder={0 0 0},
+	bookmarksnumbered=true,
+	pdfproducer={University Paris-Dauphine},     
+	pdfnewwindow=true,          
+	colorlinks=true,           
+	linkcolor=deepblue,              
+	citecolor=deepblue,            
+	filecolor=black,          
+	urlcolor=deepblue2 
+}
+
+% DEALING WITH BOXES
+\usepackage{tcolorbox}
+\newtcolorbox{mybox}[1]{colback=black!5,colframe=black!40,fonttitle=\bfseries,title=#1,fontlower=\sfdefault}
+\newtcolorbox{myconsole}[1]{colback=deepblue!5,colframe=deepblue!40,fonttitle=\bfseries,title=#1,fontlower=\sfdefault}
+\newtcolorbox{myresult}[1]{colback=black!5,colframe=deepgreen,fonttitle=\bfseries,title=#1,fontlower=\sfdefault}
+
+
+%%% EXERCISE BOX
+\newtcolorbox[auto counter]{assignment}{
+  breakable,
+  fonttitle=\bfseries,
+  title={Assignment \thetcbcounter}
+}
+\newtcolorbox[auto counter]{myexercise}[1]{
+  skin=enhanced,
+  breakable,
+  colback=white,
+  colframe=gray!30,
+  coltitle=black,
+  fonttitle=\bfseries,
+  leftrule=0.5cm,
+  arc=0pt,
+  outer arc=0pt,
+  title={Exercise \thetcbcounter : #1}
+}
+\newtcolorbox{definitioniii}[1]{
+  skin=enhanced,
+  breakable,
+  fonttitle=\bfseries,
+  colback=white,
+  arc=0pt,
+  outer arc=0pt,
+  title={#1},
+  shadow={1mm}{-1mm}{0mm}{fill=gray,opacity=0.5,sharp corners}
+}
+
+% DEALING WITH THE EXAM CLASS
+%\printanswers % If you want to print answers
+% \noprintanswers % If you don't want to print answers
+%\addpoints % if you want to count the points
+% \noaddpoints % if you don't want to count the points
+% Specifies the way question are displayed:
+%\qformat{\textbf{Question \thequestion}\hfill}%\quad(\thepoints)\hfill}
+%\definecolor{SolutionColor}{rgb}{0.8,0.9,1} % light blue
+%\shadedsolutions % defines the style of the solution environment
+% \framedsolutions % defines the style of the solution environment
+% Defines the title of the solution environment:
+%\renewcommand{\solutiontitle}{\noindent\textbf{Solution:}\par\noindent}
+%\renewcommand{\questionlabel}{\textbf{~\thequestion)} }
+
+% Table of content
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage[titletoc]{appendix}
+\contentsmargin{0pt}
+\renewcommand\contentspage{\color{deepblue2}p. \thecontentspage}
+\dottedcontents{section}[2.3em]{}{2.3em}{5pt}
+\dottedcontents{subsection}[5.5em]{}{3.2em}{5pt}
+\renewcommand*\contentsname{\bfseries\color{deepblue2}Content of the Handout}
+
+% FRONT PAGE STUFF
+\usepackage{setspace}
+\def\FRONTPAGE{%
+\begin{picture}(0,0)\unitlength=1cm
+%\put (1,0) {\includegraphics[width=7.5em]{PSL.png}}
+\put (7.5,-1.4) {\includegraphics[width=.6\textwidth]{logo-upd.png}}
+\end{picture}
+\begin{center}
+	\color{black!70}
+	\ifnum\NUMERODOSSIER<1
+		\rule{19cm}{.2pt}\\ \hfill Gauthier Vermandel \textcolor{deepblue2}{\bm{$\circ$}} \textit{gauthier.vermandel@dauphine.psl.eu} \\
+		\vspace{2cm}
+	\else
+		\rule{19cm}{.2pt}\\ \hfill Fall \the\year \\
+		\textbf{\large \LECTURENAME }\\
+		\vspace{0.5cm}
+		\UNIV \\ \DIPLOMA \\
+		\vspace{0.5cm}
+		Gauthier Vermandel\footnote{Department of Economics, Paris-Dauphine University. Updated slides and codes available on my website: \WEBPAGE.} \hfill \textit{gauthier.vermandel@dauphine.psl.eu} \\
+		\rule[0.25cm]{19cm}{.2pt}\\
+		\vspace{1cm}
+	\fi
+	\color{black}
+  \ifnum\NUMERODOSSIER<1
+	\ifnum\NUMERODOSSIER=0
+		\begin{spacing}{1.25}
+			\hspace{-.2cm}\textcolor{deepblue2}{\Large\textsc{A Note on}\\\textbf{\LARGE \NOMDOSSIER }}
+		\end{spacing}
+	 \else
+		\begin{spacing}{1.25}
+			\hspace{-.2cm}\textcolor{deepblue2}{\textbf{\LARGE \NOMDOSSIER }}
+		\end{spacing}	 
+	\fi
+  \else
+	\begin{center}
+		\begin{minipage}{0.5\textwidth}
+				\centering \textcolor{deepblue2}{ \hspace{-.23cm}\Large \textsc{ Chapter \NUMERODOSSIER }}\\ 
+				\vspace{1ex}
+		\end{minipage}
+		 \\ \vspace{2ex}
+		\begin{minipage}{0.65\textwidth}
+				\begin{center}
+					 \onehalfspacing
+					 \textcolor{deepblue2}{ \LARGE\textbf{\NOMDOSSIER }}
+					 \doublespacing
+				\end{center}
+		\end{minipage}
+	\end{center}
+  \fi
+	
+	\vspace{0.5cm}
+\end{center}
+\vspace{0.5cm}
+\ifnum\NUMERODOSSIER >-1
+	\tableofcontents
+\fi
+
+}
+
+% page headers
+\ifnum\NUMERODOSSIER >-1
+	\usepackage{fancyhdr} %pour modification des pieds de page
+	\pagestyle{fancy} % Finally, use the "fancy" page style to implement the FancyHdr headers
+	\setlength{\headheight}{14.5pt}
+	\fancyhf{}
+	\fancyheadoffset{0\textwidth}
+	\fancyfoot[C]{\color{black!60} page \thepage}
+	\renewcommand{\headrulewidth}{1pt}
+	\fancyhead[L]{ \color{deepblue2}\nouppercase{\rightmark}}
+\fi
+
+
+
+
+\newcounter{theexercise}
+\setcounter{theexercise}{1}
+\newenvironment{exercise}
+{	
+	\vspace{1cm} 
+	%\begin{center}\textcolor{black!40}{\rule{6cm}{1px}\\}\end{center} 
+	\Large \color{deepblue2} \underline{Exercise \arabic{theexercise}:} 
+}
+{ 
+	\vspace{.5cm}  
+	%\begin{center}\textcolor{black!40}{\rule{6cm}{1px}\\}\end{center} 
+	\stepcounter{theexercise} 
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% NICE COLORBOX
+\tcbset{mystyle/.style={
+  breakable,
+  enhanced,
+  outer arc=0pt,
+  arc=0pt,
+  colframe=myblue,
+  colback=myblue!20,
+  attach boxed title to top left,
+  boxed title style={
+    colback=myblue,
+    outer arc=0pt,
+    arc=0pt,
+    top=3pt,
+    bottom=3pt,
+    },
+  fonttitle=\sffamily
+  }
+}
+
+\newtcolorbox{myobjs}[1][]{
+  mystyle,
+  title= \large\textsc{Handout Objectives},
+  attach boxed title to top center,
+  colframe=deepblue,
+  colback=white,
+   boxed title style={
+    colback=deepblue,
+    outer arc=2pt,
+    arc=2pt,
+	top=10pt,bottom=10pt
+    },
+  outer arc=2pt,
+  arc=2pt,
+}
+
+
+\newtcolorbox[auto counter]{myproof}[1][]{
+  mystyle,
+  colback=white,
+  rightrule=0pt,
+  toprule=0pt,
+  title=Proof \thetcbcounter,
+  overlay unbroken and first={
+      \path
+        let
+        \p1=(title.north east),
+        \p2=(frame.north east)
+        in
+        node[anchor=west,font=\sffamily,color=myblue,text width=\x2-\x1] 
+        at (title.east) {#1};
+  }
+}
+
+\newtcolorbox[auto counter]{myMATLAB}[1][]{
+  mystyle,
+  colframe=deepblue,
+  colback=deepblue!0,
+  boxed title style={
+    colback=deepblue
+    },
+  title=MATLAB box~\thetcbcounter,
+  overlay unbroken and first={
+      \path
+        let
+        \p1=(title.north east),
+        \p2=(frame.north east)
+        in
+        node[anchor=west,font=\sffamily,color=deepblue,text width=\x2-\x1] 
+        at (title.east) {#1};
+  }
+}
+
+\newcommand{\MATLABbox}[1]{
+	\vspace{2ex}
+	\begin{myMATLAB}[\detokenize{#1}.m]
+	%\inputminted[bgcolor=black!10, frame=lines, framesep=8\fboxrule, rulecolor=\color{black!30},framerule=1pt, linenos=true,numbersep=3pt,fontsize=\footnotesize]{matlab}{codes/\detokenize{#1}.m}
+	{\centering\includegraphics[width=\textwidth,trim={1cm 0 1cm 0},clip]{codes/\detokenize{#1}.png}}
+	\end{myMATLAB}
+	\vspace{2ex}
+}
+
+\newcommand{\MATLABboxPDF}[1]{
+	\vspace{2ex}
+	\begin{myMATLAB}[\detokenize{#1}.m]
+	%\inputminted[bgcolor=black!10, frame=lines, framesep=8\fboxrule, rulecolor=\color{black!30},framerule=1pt, linenos=true,numbersep=3pt,fontsize=\footnotesize]{matlab}{codes/\detokenize{#1}.m}
+	{\centering\includegraphics[width=\textwidth,trim={1cm 0 1cm 0},clip]{codes/\detokenize{#1}.pdf}}
+	\end{myMATLAB}
+	\vspace{2ex}
+}
+
+
+\newcommand{\MATLABboxNoFig}[1]{
+	\vspace{2ex}
+	\begin{myMATLAB}[\detokenize{#1}.m!]
+	\inputminted[bgcolor=black!10, frame=lines, framesep=8\fboxrule, rulecolor=\color{black!30},framerule=1pt, linenos=true,numbersep=3pt,fontsize=\footnotesize]{matlab}{codes/\detokenize{#1}.m}
+	%{\centering\includegraphics[width=\textwidth]{codes/#1.png}}
+	\end{myMATLAB}
+	\vspace{2ex}
+}
+
+%%%% MAKE CODE IN BLUE PLZ
+\let\oldtextsf\textsf
+\renewcommand{\textsf}[1]{\textcolor{deepblue}{\oldtextsf{#1}}}

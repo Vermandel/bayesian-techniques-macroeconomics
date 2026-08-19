@@ -1,0 +1,335 @@
+% uncomment this to get the answer
+%\printanswers
+%\newtheorem{exercise}[theorem]{Exercise}
+
+\documentclass[a4paper,12pt]{article}%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}%
+\setcounter{MaxMatrixCols}{30}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2953}
+%TCIDATA{CSTFile=40 LaTeX article.cst}
+%TCIDATA{Created=Tuesday, September 15, 2015 18:10:19}
+%TCIDATA{LastRevised=Thursday, January 28, 2021 15:25:25}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Standard LaTeX\Blank - Standard LaTeX Article">}
+%TCIDATA{Language=American English}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\def\NOMDOSSIER{A toy model\\of unemployment}
+\def\NUMERODOSSIER{0}
+\input{../../lectures_info.tex}
+\input{../../mystyle.tex}
+\begin{document}
+\FRONTPAGE
+
+
+\section{Overview}
+
+The existence of involuntary unemployment has long been recognized as one the
+main ills of modern industrialized economies, making old Keynesian economics
+relevant in analyzing and fixing unemployment untill the
+70s.\ \cite{keynes1937general} argued that unemployment was the result of weak
+aggregate demand: radical uncertainty about future states of the economy leads
+entrepreneurs and households to hold precautionary saving, making aggregate
+consumption and investment too weak for the economy to reach full employment.
+
+At the end of the 60s, \cite{phelps1967phillips}, Milton Friedman (among
+others) questioned way the Phillips curve was designed, and criticized
+particularly the absence of expectations in the formation process of prices
+and inflation.\ Oil price shocks in the 70s proved how wrong were some
+assumptions of the keynesian model, in particular the price rigidity and the
+absence of expectations. \cite{lucas1976econometric} contributed to the
+building a new framework were involuntary unemloyment was absent. Despite the
+central role of unemployment in the policy debate, that variable has been
+absent from this new generation of models that have become the workhorse for
+the analysis of monetary policy, referred to as New Keynesian.
+
+Meantime, one strand of the economic analyzed unemployment as search and
+matching process between households and firms.\ Early contributions to the
+current vintage of search and matching models include
+\cite{diamond1982aggregate}, \cite{diamond1982wage},
+\cite{mortensen1982matching} \cite{pissarides1984search}.\ These models offers
+a central role to the interactions between firms and households in terms of
+job matching and wage negotiating. However, these contributions were partial
+equilibrium, and were not yet embedded into a dynamic macroeconomic model.
+These literature is referred to as the Diamond-Mortensen-Pissarides models.
+
+Since the 2000, economists started to include the DMP\ model into real
+business cycles models and new keynesian models as \cite{shimer2005cyclical}
+and \cite{hall2005employment}. This note aims at presenting the analytics of
+such model with a low set of frictions.
+
+Since then, there have been a large number of estimated version of the labor
+matching model.\ See \cite{gertler2009unemployment},
+\cite{gali2012unemployment} and \cite{christiano2016unemployment}.
+
+\section{The model}
+
+\subsection{Households}
+
+Suppose a welfare maximizing household enjoying current and future consumption
+and dislike working with respective curvatures $\sigma_{C}$, $\sigma_{H}$
+$>0$.\ The $j$-th household maximizes the following stream of utilities
+discounted at a fixed rate $\beta$:%
+\begin{equation}
+\max_{\left\{  c_{jt},b_{jt},n_{jt}\right\}  }\sum_{\tau=0}^{\infty}%
+\beta^{\tau}E_{t}\left\{  \frac{\varepsilon_{t+\tau}^{C}c_{jt+\tau}%
+^{1-\sigma_{C}}}{1-\sigma_{C}}-\chi n_{jt+\tau}\right\}
+\end{equation}
+where $c_{jt}$\ is consumption, $n_{jt}$ is the fraction of employed workers
+within the family j, and $\chi>0$\ is a shift parameter allowing to pin down
+the amount the employment rate in the deterministic steady state. The AR(1)
+shock $\varepsilon_{t}^{C}$\ captures exogenous changes in the utility
+obtained from consumption. Assuming that the size of the working age
+population is one, the number of family number is also one,, so the shared
+unemploymed within the family is given by:%
+\begin{equation}
+n_{jt}=1-u_{jt}%
+\end{equation}
+The law of motion of employment is given by:%
+
+\begin{equation}
+n_{jt}=\left(  1-\rho\right)  n_{jt-1}+x_{t}u_{t-1}%
+\end{equation}
+where $\rho\in\lbrack0,1]$ is the separation rate with the term $\rho
+n_{jt-1}$ that can be interpreted as the frictional unemployment.\ The term
+$x_{t}u_{t-1}$\ is the number of unemployed workers who have found a job
+between t-1 and t, while $(1-x_{t})u_{jt-1}$\ is the fraction who stays
+unemployed between $t-1$ and $t$. Here, the hiring rate $x_{t}$\ is decided by
+firms, not by the household this is why there is no $j$ subscript. Similarly,
+household $j$ is so small that its own employment decisions has no implication
+on the unemployemnt rate $u_{t-1}$.
+
+The budget constraint in real terms reads as:%
+\begin{equation}
+c_{jt}+i_{jt}+f\left(  \Delta i_{jt}\right)  i_{jt-1}+b_{jt}=r_{t-1}%
+b_{jt-1}+n_{jt}w_{t}+z_{t}k_{jt-1}+\left(  1-n_{jt}\right)  \bar{b}-T_{jt},
+\end{equation}
+where $b_{jt}$ is the amount of real bonds, $r_{t-1}$ is the pre-determined
+real interest rate of real government bonds $b_{jt-1}$, $w_{t}$ the real wage
+is computed as $w_{t}=W_{t}/P_{t}$ and a lump-sum tax financing the government
+$T_{jt}$. Here, the fraction of the family in employment is remunerated by the
+real wage $w_{t}$\ while the fraction of unemployed $1-n_{jt}$ obtains an
+unemployment insurance $\bar{b}$. Note that $i_{jt}$ is the flow of investment
+subject to adjustment costs with $f\left(  x\right)  =0.5\kappa\left(
+x-1\right)  ^{2}$ and $\Delta i_{jt}=i_{jt}/i_{jt-1}$. Physical capital reads
+as follows:%
+\begin{equation}
+\varepsilon_{t}^{i}i_{jt}=k_{jt}-\left(  1-\delta\right)  k_{jt-1}.
+\end{equation}
+
+
+Because the number of households is one, we drop the subscript j.\ The
+Lagrangian problem reads as:%
+\begin{align*}
+\mathcal{L}_{t} &  =\sum_{\tau=0}^{\infty}\beta^{\tau}\left[  \varepsilon
+_{t+\tau}^{C}\frac{C_{t+\tau}^{1-\sigma_{C}}}{1-\sigma_{C}}-\chi n_{t+\tau
+}\right]  \\
+&  +\beta^{\tau}\lambda_{t+\tau}^{C}\left[  r_{t-1+\tau}b_{t-1+\tau}%
++n_{t+\tau}w_{t+\tau}+\left(  1-n_{t+\tau}\right)  \bar{b}+z_{t+\tau
+}k_{t-1+\tau}-c_{t+\tau}-f\left(  \Delta i_{t+\tau}\right)  i_{t-1+\tau
+}-i_{t+\tau}-b_{t+\tau}-T_{t+\tau}\right]  \\
+&  +\beta^{\tau}\lambda_{t+\tau}^{C}V_{t+\tau}^{H}\left[  \left(
+1-\rho\right)  n_{t-1+\tau}+x_{t+\tau}u_{t-1+\tau}-n_{t+\tau}\right]  \\
+&  +\beta^{\tau}\lambda_{t+\tau}^{C}q_{t+\tau}\left[  k_{t+\tau}-\left(
+1-\delta\right)  k_{t-1+\tau}-\varepsilon_{t+\tau}^{i}i_{t+\tau}\right]
+\end{align*}
+where $\lambda_{t}^{C}$, $q_{t}$ and $V_{t}^{H}$\ are lagrangian multipliers
+on each constraints. Note that both\ $V_{t}^{H}$ and $q_{t}$\ are
+pre-multiplied by the marginal utility of consumption to express unemployment
+in terms of current utility-equivalent consumption.
+
+First order conditions are given by:%
+\begin{align}
+c_{t} &  :\varepsilon_{t}^{C}c_{t}^{-\sigma_{C}}-\lambda_{t}^{C}=0\\
+b_{t} &  :\beta E_{t}\left\{  \lambda_{t+1}^{C}\right\}  r_{t}-\lambda_{t}%
+^{C}=0\\
+n_{t} &  :-\chi+\lambda_{t}^{C}\left(  w_{t}-\bar{b}\right)  -\lambda_{t}%
+^{C}V_{t}^{H}+\beta\lambda_{t+1}^{C}\left(  1-\rho\right)  V_{t+1}^{H}=0\\
+i_{t} &  :-\lambda_{t}^{C}\left(  1+f^{\prime}\left(  \Delta i_{t}\right)
+\right)  -\lambda_{t}^{C}q_{t}\varepsilon_{t}^{i}-\beta\lambda_{t+1}%
+^{C}f^{\prime}\left(  \Delta i_{t+1}\right)  =0\\
+k_{t} &  :\beta\lambda_{t+1}^{C}z_{t+1}+\lambda_{t}^{C}q_{t}-\beta
+\lambda_{t+1}^{C}q_{t+1}\left(  1-\delta\right)  =0
+\end{align}
+
+
+\subsection{Firms}
+
+Firms technology is given by the following production function%
+\begin{equation}
+y_{it}=\varepsilon_{t}^{A}k_{it-1}^{\alpha}n_{it}^{1-\alpha},
+\end{equation}
+where $\varepsilon_{t}^{A}$ is the a technology shock, $k_{t-1}$\ is the
+physical stock of capital with fixed intensity of $\alpha\in\lbrack0;1]$ and
+$n_{t}$ is the employment demand.
+
+As for households, the law of motion of employment:%
+\begin{equation}
+n_{it}=\left(  1-\rho\right)  n_{it-1}+x_{it}u_{t},
+\end{equation}
+where $x_{it}$\ is the hiring rate of the i-th firm that premultiply the stock
+of unemployed.
+
+Profits reads as:%
+\begin{equation}
+\Pi_{t}=y_{it}-w_{t}n_{it}-z_{t}k_{it-1}-G\left(  x_{it}\right)  u_{t}%
+\end{equation}
+where the cost of increasing hirings reads as in \cite{gali2010monetary} and
+\cite{blanchard2010labor}:
+\[
+G\left(  x_{it}\right)  =\frac{\Gamma}{1+\phi}x_{it}^{1+\phi}%
+\]
+where $\phi$ is the elasticity of hiring costs with respect to the hiring
+rate, and $\Gamma$\ is a constant which allows to pin down the total cost of
+hiring to one percent of total production as in \cite{blanchard2010labor}.
+Variable $x_{it}$ is the probability of hiring a new worker, the associated
+costs can be interpreted as monitoring cost paid by firms to find a potential
+new worker.
+
+The dynamic Lagrangian problem reads as:%
+\begin{align*}
+\mathcal{L}_{t}  &  =E_{t}%
+%TCIMACRO{\tsum _{\tau=0}^{\infty}}%
+%BeginExpansion
+{\textstyle\sum_{\tau=0}^{\infty}}
+%EndExpansion
+\beta^{s}\frac{\lambda_{t+\tau}^{C}}{\lambda_{t}^{C}}\{\left[  y_{it+\tau
+}-w_{t+\tau}n_{it+\tau}-z_{t+\tau}k_{it-1+\tau}-G\left(  x_{it+\tau}\right)
+u_{t+\tau}\right] \\
+&  +V_{t+\tau}^{P}\left[  \left(  1-\rho\right)  n_{it-1+\tau}+x_{it+\tau
+}u_{t+\tau}-n_{it+\tau}\right]  \}
+\end{align*}
+Note that $\beta^{s}\lambda_{t+\tau}^{C}/\lambda_{t}^{C}$\ is the stochastic
+discount factor.\ As households are shareholders of firms because they own the
+physical capital, firms has the same discounting scheme as households. Also
+note that the firm takes as given the labor market situation (here measured as
+the unemployment rate) $u_{t}$, this is because each firm is so small that it
+is assumed that they cannot influence individually the aggregate unemployement rate.%
+
+\begin{align*}
+n_{it}  &  :(1-\alpha)\frac{y_{it}}{n_{it}}-w_{it}-V_{t}^{P}+\beta
+\frac{\lambda_{t+1}^{C}}{\lambda_{t}^{C}}\left(  1-\rho\right)  V_{t+1}%
+^{P}=0\\
+x_{it}  &  :-G^{\prime}\left(  x_{it}\right)  u_{t}+V_{t}^{P}u_{t}=0\\
+k_{it-1}  &  :\alpha\frac{y_{it}}{k_{it-1}}-z_{t}=0
+\end{align*}
+
+
+The standard hiring decision rate is given by this standard no arbitrage
+condition:%
+\[
+\underset{\text{Marginal cost of hiring}}{\underbrace{G^{\prime}\left(
+x_{it}\right)  }}=\underset{\text{marginal profit of hiring}}{\underbrace
+{(1-\alpha)\frac{y_{it}}{n_{it}}-w_{it}}}+\underset{\text{Future gains from
+keeping the worker employed}}{\underbrace{\beta\frac{\lambda_{t+1}^{C}%
+}{\lambda_{t}^{C}}\left(  1-\rho\right)  G^{\prime}\left(  x_{it+1}\right)  }}%
+\]
+
+
+\subsection{Wage bargaining}
+
+Bilateral bargaining between firms and workers. Following form:%
+\[
+S_{t}=\underset{\text{household marginal utility}}{\underbrace{\left(
+V_{t}^{H}\right)  }}^{\eta}\underset{\text{firm marginal profit}}%
+{\underbrace{\left(  V_{t}^{P}\right)  }}^{1-\eta}%
+\]
+where $\eta$\ is the relative bargaining power of households. Period-by-period
+Nash bargaining implies that the firm and each of its workers determine the
+wage in period t by solving the problem:%
+\begin{equation}
+\max_{\{w_{t}\}}S_{t}%
+\end{equation}
+The solution to that problem implies the following constant share rule:%
+\begin{align*}
+\frac{\partial S_{t}}{\partial w_{t}} &  =0\Leftrightarrow\eta\frac{\partial
+V_{t}^{H}}{\partial w_{t}}\frac{S_{t}}{V_{t}^{H}}+\left(  1-\eta\right)
+\frac{\partial V_{t}^{P}}{\partial w_{t}}\frac{S_{t}}{V_{t}^{P}}=0\\
+&  \Leftrightarrow\eta V_{t}^{P}=\left(  1-\eta\right)  V_{t}^{H}%
+\end{align*}
+In order to take into account some exogenous change in the negotiation power
+of households, we augment $\eta$ by an AR(1) shock, denoted $\varepsilon
+_{t}^{m}$, as follows:%
+\[
+\varepsilon_{t}^{m}\eta V_{t}^{P}=\left(  1-\varepsilon_{t}^{m}\eta\right)
+V_{t}^{H}%
+\]
+
+
+To illustrate how this equations determine the wage, we can rewrite substitute
+$V_{t}^{P}$\ and $V_{t}^{H}$:%
+\[
+w_{t}=\eta\left[  (1-\alpha)\frac{y_{it}}{n_{it}}+m_{t,t+1}V_{t+1}^{P}\right]
++\left(  1-\eta\right)  \left[  -\chi/\lambda_{t}^{C}-b+m_{t,t+1}V_{t+1}%
+^{H}\right]
+\]
+where $m_{t,t+1}=\beta\lambda_{t+1}^{C}/\lambda_{t}^{C}\left(  1-\rho\right)
+$. It is straightforward to see that the wage is the result between the
+desired wage for firms and household weighted by the bargaining power of each agent.
+
+\subsection{Authorities}
+
+Public spending $G_{t}$ is exogenous, as it follows an AR(1) shock process
+$\varepsilon_{t}^{G}$, which is expressed as a constant portion of output:
+\[
+G_{t}=g^{y}\bar{Y}\varepsilon_{t}^{G}.
+\]
+The balance sheet reads as:%
+\[
+r_{t-1}b_{t-1}+G_{t}+bu_{t}=b_{t}+T_{t},
+\]
+where $b_{t}$\ are government bonds.
+
+\subsection{Equilibrium conditions}
+
+And total demand is given by:%
+\begin{equation}
+Y_{t}=C_{t}+I_{t}+G_{t}+G\left(  x_{t}\right)  u_{t}.
+\end{equation}
+Unemployment rate:%
+\begin{equation}
+u_{t}=1-n_{t}%
+\end{equation}
+Note that as in Blanchard \& Gali (2012), it is assumed that hiring costs are
+set to match 1\%\ of output in the deterministic steady state such as
+$G\left(  \bar{x}\right)  \bar{u}=0.01\bar{Y}.$%
+
+%TCIMACRO{\TeXButton{small}{\footnotesize}}%
+%BeginExpansion
+\footnotesize
+%EndExpansion
+\bibliographystyle{elsart-harv}
+\bibliography{chap1}%
+%TCIMACRO{\TeXButton{small}{\normalsize}}%
+%BeginExpansion
+\normalsize
+%EndExpansion
+
+\end{document}

@@ -1,0 +1,106 @@
+\documentclass{standalone}
+\usepackage{pgfplots}
+\usetikzlibrary{decorations.markings}
+
+\definecolor{lightblue}{RGB}{50,97,181}
+\definecolor{lightred}{RGB}{232,39,31}
+
+\pgfplotsset{
+    ondrej's graphs/.style={
+        domain=0.2:4,
+        xmin=0,xmax=5,
+        ymin=0,
+        axis lines=left,
+        xtick=\empty, ytick=\empty,
+        xlabel=$C_t$,
+        ylabel=$C_{t+1}$,
+        every axis title/.style={
+            align=center, at={(0.5,1.1)},
+	  font=\bf
+        },
+        every axis y label/.style={
+            at={(current axis.above origin)},
+            anchor=east
+        },
+        every axis x label/.style={
+            at={(current axis.right of origin)},
+            anchor=north
+        },
+        cycle list={
+            ultra thick, orange, no markers, smooth,samples=500\\
+        },
+        shift function/.style 2 args={
+            x filter/.code={\pgfmathparse{\pgfmathresult+##1}},
+            y filter/.code={\pgfmathparse{\pgfmathresult+##2}}
+        },
+        /tikz/tangent line/.style={
+            ultra thick, black, shorten <=-4cm, shorten >=-4cm,
+            insert path={(tangent.west) -- (tangent.east)}
+        },
+        /tikz/indicator lines/.style={
+            thin, densely dashed
+        },
+        /tikz/point/.style={
+            fill=red,
+            radius=3pt,
+	draw=red!50!black
+        },
+        project point on axes/.code={
+            \pgfplotsset{/pgfplots/after end axis/.code={
+                \draw [indicator lines]
+                (tangent-|{rel axis cs:0,0}) 
+                node [anchor=east] {$C_{t+1}^*$} 
+                -| (tangent|-{rel axis cs:0,0})
+                node [anchor=north] {$C_t^*$};
+	     \draw [point] (tangent) circle;
+            }}
+        },
+        /tikz/label node/.style={
+            font=\small,
+            align=left,
+            anchor=west
+        }
+    }
+}
+
+\tikzset{
+        tangent point/.style={
+            sloped,
+            name=tangent,
+            pos=#1
+        },
+        tangent point/.default=0.5
+}
+
+\begin{document}
+\begin{tikzpicture}
+
+
+
+\begin{axis}[ondrej's graphs,name=plot1,
+title=a) Production possibilities \\between $t$ and $t+1$]
+\addplot +[shift function={0.2}{0.2},white] {e^(-x)} node [tangent point=0.3] {};
+\draw [tangent line];
+\addplot[shift function={.1}{-0.44}, ultra thick, lightblue, no markers, smooth,samples=500] {(1.57-x)^(.15)-.1};
+\addplot[shift function={0.1}{-0.44}, ultra thick, lightblue, no markers, smooth,samples=500] {(2-x)^(.2)};
+\addplot[shift function={0.2}{-0.44}, ultra thick, lightblue, no markers, smooth,samples=500] {(2.6-x)^(.3)};
+\node [label node] at (rel axis cs:0.1,0.9) {Production possibilities\\frontiers};
+\node [label node] at (rel axis cs:0.6,0.11) {Consumption \\ possibilities};
+\end{axis}
+
+
+
+\begin{axis}[ondrej's graphs,name=plot2,at=(plot1.right of south east), anchor=left of south west,
+title=b) General Equilibrium \\ on goods and financial markets]
+\addplot +[shift function={0.2}{0.2}] {e^(-x)} node [tangent point=0.3] {};
+\draw [tangent line] node [anchor=south west] {A};
+\pgfplotsset{project point on axes}
+\addplot[shift function={0.1}{-0.44}, ultra thick, lightblue, no markers, smooth,samples=500] {(2-x)^(.2)};
+\node [label node] at (rel axis cs:0.15,0.92) {Indifference\\curve};
+\node [label node] at (rel axis cs:0.2,0.11) {Supply\\curve};
+\node [label node] at (rel axis cs:0.6,0.11) {Consumption \\ possibilities};
+\end{axis}
+
+
+\end{tikzpicture}
+\end{document} 
