@@ -29,7 +29,7 @@ var y (long_name='output'),
 	lb_P (long_name='marginal utility in consumption patient'),
 	e_a e_m e_h e_c;
 varexo eta_a eta_m eta_h eta_c;
-parameters 	beta_I beta_P lambda sigmaL delta j kappa m
+parameters 	beta_I beta_P lambda sigmaL delta j m
 			% shocks 
 			rho_a rho_m rho_h rho_c ;
 
@@ -102,8 +102,8 @@ model(linear);
 	[name='Wage returns']
 	w_P = y-l_P;
 	w_I = y-l_I;
-	[name='Aggregate constraint']
-	y = c + Hss_I*(h_I-(1-delta)*h_I(-1)) + Hss_P*(h_P-(1-delta)*h_P(-1)) ;
+		[name='Aggregate constraint']
+		Yss*y = Css*c + Hss_I*(h_I-(1-delta)*h_I(-1)) + Hss_P*(h_P-(1-delta)*h_P(-1));
 	[name='Aggregate consumption']
 	Css*c = Css_I*c_I + Css_P*c_P;
 	[name='housing stock']

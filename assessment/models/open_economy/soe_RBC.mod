@@ -24,16 +24,16 @@ var c_H (long_name='home consumption'),
 	lb_F (long_name='foreign marginal utility in consumption'),
 	ex_F (long_name='foreign exports'),
 	rer (long_name='real exchange rate'),
-	e_z_H e_p_H e_r_H e_x_H
-	e_z_F e_p_F e_r_F e_x_F
-	e_e;
+		e_z_H e_x_H
+		e_z_F e_x_F
+		e_e;
 
-varexo	eta_z_H eta_p_H eta_r_H eta_x_H eta_z_F eta_p_F eta_r_F eta_x_F eta_e;
+	varexo	eta_z_H eta_x_H eta_z_F eta_x_F eta_e;
 
 parameters	sigmaC sigmaH beta alpha chi_B chi_H chi_F  mu alpha_C n rho phi_pi phi_y 
 			rho_e Yss_H Yss_F Css_H Css_F Bss_H Bss_F Rss_H Rss_F
-			rho_z_H rho_r_H rho_p_H rho_x_H
-			rho_z_F rho_r_F rho_p_F rho_x_F
+			rho_z_H rho_x_H
+			rho_z_F rho_x_F
 			;
 
 %----------------------------------------------------------------
@@ -49,13 +49,9 @@ alpha_C		= .1;		% Share of home goods in consumption basket
 n			= .4;	% share of home country
 					% size of foreign country 1-n
 rho_z_H 	= .95;
-rho_p_H 	= .95;
-rho_r_H		= .4;
-rho_x_H		= .4;
-rho_z_F 	= .95;
-rho_p_F 	= .95;
-rho_r_F		= .4;
-rho_x_F		= .4;
+	rho_x_H		= .4;
+	rho_z_F 	= .95;
+	rho_x_F		= .4;
 rho_e		= .1;
 %% SS
 Hss_H		= 1/3;
@@ -77,13 +73,13 @@ Pss_H		= 1; Pss_F		= 1;
 EXss_H 		= alpha_C*Css_F*(1-n);
 EXss_F 		= alpha_C*Css_H*n;
 chi_H		= LBss_H*Wss_H/(Hss_H^sigmaH);
-chi_F		= LBss_F*Wss_H/(Hss_F^sigmaH);
+	chi_F		= LBss_F*Wss_F/(Hss_F^sigmaH);
 
 
 %----------------------------------------------------------------
 % 3. Model (the number refers to the equation in the paper)
 %----------------------------------------------------------------
-model;
+model(linear);
 	[name='FOC c']
 	lb_H = -sigmaC*c_H;
 	lb_F = -sigmaC*c_F;
@@ -121,13 +117,9 @@ model;
 	
 	[name='Country specific shocks']
 	e_z_H = rho_z_H*e_z_H(-1) + eta_z_H;
-	e_p_H = rho_p_H*e_p_H(-1) + eta_p_H;
-	e_r_H = rho_r_H*e_r_H(-1) + eta_r_H;
-	e_x_H = rho_x_H*e_x_H(-1) + eta_x_H;
-	e_z_F = rho_z_F*e_z_F(-1) + eta_z_F;
-	e_p_F = rho_p_F*e_p_F(-1) + eta_p_F;
-	e_r_F = rho_r_F*e_r_F(-1) + eta_r_F;
-	e_x_F = rho_x_F*e_x_F(-1) + eta_x_F;
+		e_x_H = rho_x_H*e_x_H(-1) + eta_x_H;
+		e_z_F = rho_z_F*e_z_F(-1) + eta_z_F;
+		e_x_F = rho_x_F*e_x_F(-1) + eta_x_F;
 	e_e   = rho_e*e_e(-1)     + eta_e;
 	
 end;
@@ -140,9 +132,7 @@ check;
 %% SIMULATIONS
 shocks;
 var eta_z_H;  stderr 0.01;
-var eta_p_H;  stderr 0.01;
-var eta_r_H;  stderr 0.01;
-var eta_e;	  stderr 0.01;
+	var eta_e;	  stderr 0.01;
 var eta_x_H;  stderr 0.01;
 end;
 

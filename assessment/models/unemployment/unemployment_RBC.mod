@@ -103,9 +103,10 @@ model(linear);
 	[name='FOC x']
 	phi*x = v_P;
 
-	[name='wage']
-	%-e_m = VPss/VHss*(e_m+v_P-v_H);
-	-e_m = VPss/VHss*(e_m+v_P);
+		[name='wage']
+		% Log-linearization of eps_m*eta*V_P=(1-eps_m*eta)*V_H.
+		% The worker surplus must enter: omitting v_H breaks Nash bargaining.
+		-e_m = (1-eta)*(v_P-v_H);
 	
 	VHss 	= eta/(1-eta)*VPss;
 	%% AGGREGATION
@@ -143,4 +144,3 @@ end;
 resid(1);
 check;
 stoch_simul(irf=30,order=1) y c i rr u x ;
-

@@ -6,4 +6,12 @@ The baseline model distinguishes patient and impatient households, housing stock
 
 Possible observables are output/consumption growth, a real house-price measure, mortgage credit and a real interest rate. State units carefully: credit stocks, rates and house-price indices require different transformations. Estimate a restrained set such as LTV persistence/volatility, housing preference and selected shock processes.
 
-Known review points: the aggregate resource constraint mixes a log-deviation output variable with unscaled consumption and housing terms; the borrowing constraint timing (`q(+1)+h_I`) must be reconciled with the theoretical collateral constraint; declared parameter `kappa` is unused. Resolve these before estimation.
+The aggregate resource constraint is expressed in steady-state levels times log
+deviations. The collateral timing follows the handout exactly:
+`R_t b_t = m_t E_t(q_{t+1}) H_t^I`, hence `r+b=e_m+q(+1)+h_I` in the
+linear model. The unused `kappa` declaration has been removed.
+
+Run `python3 download_data.py` to preserve raw output and housing-market
+responses, then run `run_all` from MATLAB after adding Dynare to the path.
+The supplied housing indicator is not a house-price series; replace or augment
+it and document the economic meaning of the chosen observable.

@@ -1,0 +1,1035 @@
+% uncomment this to get the answer
+%\printanswers
+%\newtheorem{exercise}[theorem]{Exercise}
+
+\documentclass[a4paper,12pt]{article}%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}%
+\setcounter{MaxMatrixCols}{30}
+%TCIDATA{OutputFilter=latex2.dll}
+%TCIDATA{Version=5.50.0.2953}
+%TCIDATA{CSTFile=40 LaTeX article.cst}
+%TCIDATA{Created=Tuesday, September 15, 2015 18:10:19}
+%TCIDATA{LastRevised=Wednesday, December 07, 2022 18:11:15}
+%TCIDATA{<META NAME="GraphicsSave" CONTENT="32">}
+%TCIDATA{<META NAME="SaveForMode" CONTENT="1">}
+%TCIDATA{BibliographyScheme=Manual}
+%TCIDATA{<META NAME="DocumentShell" CONTENT="Standard LaTeX\Blank - Standard LaTeX Article">}
+%TCIDATA{Language=American English}
+%BeginMSIPreambleData
+\providecommand{\U}[1]{\protect\rule{.1in}{.1in}}
+%EndMSIPreambleData
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}[theorem]{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newenvironment{proof}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\newenvironment{TEUB}[1][Proof]{\noindent\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+\def\NOMDOSSIER{Modern Business Cycle Theory}
+\def\NUMERODOSSIER{1}
+\input{../lectures_info.tex}
+\input{../mystyle.tex}
+\begin{document}
+\FRONTPAGE%
+
+%TCIMACRO{\TeXButton{BeginDefinition}{\vspace{4ex}
+%\begin{myobjs}}}%
+%BeginExpansion
+\vspace{4ex}
+\begin{myobjs}%
+%EndExpansion
+
+
+\begin{itemize}
+\item Understanding the concept of a business cycle;
+
+\item Extracting the business cycle component from time series;
+
+\item Solving a simple rational expectation model;
+
+\item Linearizing a system of equations;
+\end{itemize}
+
+%
+
+%TCIMACRO{\TeXButton{EndDef}{\end{myobjs}}}%
+%BeginExpansion
+\end{myobjs}%
+%EndExpansion
+
+\subsection*{Session roadmap}
+\textbf{Economic intuition.} Business cycles combine shocks with propagation
+mechanisms. \textbf{Econometric intuition.} Detrending determines which
+frequencies the model must explain. \textbf{Model and data.} We map quarterly
+GDP into a cyclical component and then into a linear expectations system.
+\textbf{MATLAB/Dynare exercise.} Reproduce the filters, solve the toy model,
+and interpret impulse responses. \textbf{Takeaway.} Bayesian analysis begins
+with an explicit frequency convention and transparent model--data mapping.
+
+
+\newpage
+
+\section{What is a business cycle?}
+
+\subsection{A\ brief history}
+Back in the 1930s, the emergence of national accounting allowed economists to
+get an accurate measure of aggregate production from the demand, supply, and
+income sides. National accounts provide a complete and consistent set of
+techniques to measure a country's economic activity. Given these new measures
+of economic activity, the study of business cycles quickly emerged. As
+explained by \cite{schumpeter1930mitchell}, the pioneer of the concept of
+business cycles can be traced back to \cite{mitchell1913business}'s work on the
+interpretation of gold, prices, and wages during the US Civil War in his
+treatise on \textit{Business Cycles}. He provided the first quantitative
+study of business cycles. His pioneering work laid the foundation for modern
+business cycle analysis in \cite{burns1946measuring} by defining a business
+cycle as \textquotedblleft a \textit{type of fluctuation found in the
+aggregate economic activity of nations that organize their work mainly in
+business enterprises: a cycle consists of expansions occurring at about the
+same time in many economic activities, followed by similarly general
+recessions, contractions, and revivals which merge into the expansion phase of
+the next cycle; in duration, business cycles vary from more than one year to
+ten or twelve years; they are not divisible into shorter cycles of similar
+characteristics with amplitudes approximating their own}.\textquotedblright
+
+The contributions of Mitchell established the first dichotomy in economics by
+separating long-term and short-term analyses in macroeconomics. In particular,
+\cite{burns1946measuring} provided the first definition of the duration of a
+business cycle, which lies between one and twelve years. This definition of
+the business cycle has evolved over time; modern business cycle analysis
+determines the frequency of a business cycle as a fluctuation lying between 6
+to 32 quarters, which is shorter than the duration suggested by
+\cite{burns1946measuring}. Any component of a macroeconomic time series with a
+Components with periods between 6 and 32 quarters are retained as business-cycle fluctuations;
+components with periods longer than 32 quarters are assigned to the trend.
+
+A clear typology of an economic cycle is a primary aspect of macroeconomic
+analysis, particularly for policymakers. Consider a government facing an
+adverse event (financial turmoil, pandemic, war, etc.); dating the recession,
+gauging its magnitude and duration are all crucial for determining the size of
+any fiscal/monetary stimulus to mitigate the crisis.\footnote{For instance, in
+the European Union, there has been ongoing debate since the Maastricht Treaty
+about fiscal rules and public deficits. In order to maintain a balanced
+government budget, the EU may penalize any member state exhibiting excessive
+structural deficits. The critical aspect lies in the definition of the
+'structural' nature of the deficit, which typically relies on business cycle
+measures. A change in the computation of the cyclical budget deficit may
+alter the stance of the EU Commission on national fiscal rules.} During the
+last century, economic associations, exemplified by the NBER and CEPR, were
+established to provide start and end dates of recessions for the US and
+Europe, respectively. Therefore, significant efforts have been made by
+economists to clearly typify the economic cycle by disentangling periods of
+expansion, crisis, recession, and recovery in macroeconomic time series.
+
+Prior to the 1940s, much of the economic cycle analysis focused on determining
+the periodicity of cycles. You may have heard during your undergraduate studies
+about the Juglar, Kuznets, and Kondratiev cycles. These cycle analyses aim to
+explain how long an innovation, investment, or other spending may create a
+long-lasting cycle (i.e., determining the duration of an expansion cycle
+followed by a recession). Following the contributions of
+\cite{burns1946measuring}, cycle analysis shifted towards disentangling time
+series into cyclical versus trend components. This change in cycle analysis
+also resulted in some theoretical interpretations of the cycle through the
+establishment of short-run and long-run macroeconomics (fluctuations vs.
+growth). These materialize through new theories of economic growth (e.g.,
+\cite{harrod1948towards}, \cite{solow1956contribution}) and theories of
+fluctuations (e.g., \cite{keynes2018general}, \cite{samuelson1948foundations}).
+In this lecture, we will focus solely on the business cycle theory which
+emerged in the 1970s and 1980s.
+
+\subsection{Measuring business cycles}
+
+However, the frontier separating short run and long run analysis is however
+not as clear as what one would expect. The emergence of econometrics in the
+second half of the 20$^{th}$ century had also been accompanied by new
+statistical methods that aim at separating low and high components in economic
+time series. Any macroeconomist working in a time series face the following
+problem:%
+\begin{equation}
+y_{t}=\tau_{t}+\psi_{t},
+\end{equation}
+where $\tau_{t}$ is the secular and $\psi_{t}$ the cyclical component of time
+series $y_{t}$.\ How can we compute $\tau_{t}$ and $\psi_{t}$? Unfortunately,
+there is no unique method to disentangle $\tau_{t}$ and $\psi_{t}$. Therefore,
+the measure of business cycles is still an open question.\ In this section, we
+will discuss three different methods to extract the business cycle component
+from the data.
+
+A first preliminary step prior working on real data is to apply logs.\ Why do
+we use logs? Because GDP data exhibits an exponential shape. To illustrate
+this aspect, let us assume for now that economic growth is following an
+exponential growth process (a very common assumption).\ Formally, Let $Y_{t}$
+denote the GDP that follows the following data-generating process:
+\begin{equation}
+Y_{t}=Y_{0}\left(  1+\gamma\right)  ^{t}\exp(\varepsilon_{t}). \label{eq bs}%
+\end{equation}
+In this expression, $\left(  1+\gamma\right)  ^{t}$\ is the (exponential)
+trend, $\varepsilon_{t}$\ is the fluctuation term and $Y_{0}$\ is the initial
+observation of output. In this expression, the interpretation of $\gamma$\ is
+simply the quarterly percentage growth rate. Applying logs to this expression,
+we 'linearize' the expression (\ref{eq bs}) by flattening the exponential
+shape of output:%
+\begin{align}
+\log(Y_{t})  &  =\log(Y_{0})+\log(1+\gamma)t+\varepsilon_{t}\\
+&  \simeq\underset{\tau_{t}}{\underbrace{y_{0}+\gamma\cdot t}}+\underset
+{\psi_{t}}{\underbrace{\varepsilon_{t}}}.
+\end{align}
+As the final expression is linear, it is possible to estimate intercept
+$y_{0}$ and slope $\gamma$ through OLS.\ From these estimated parameters, the
+trend can be computed and removed from level output to obtain what we usually
+interpret as the fluctuation term $\psi_{t}$ in GDP time serie. See first
+MATLAB box to see alternative filtering methods to extract $\psi_{t}$\ from
+$Y_{t}$.%
+
+%TCIMACRO{\TeXButton{MATLABbox}{\MATLABbox{logGDP}}}%
+%BeginExpansion
+\MATLABbox{logGDP}%
+%EndExpansion
+
+
+We apply three filtering methods on the log of GDP to illustrate some
+alternative measures of business cycles:
+
+\begin{enumerate}
+\item \textsf{A linear trend:} In a nutshell, we use OLS regression to
+estimate the slope of growth. This method assumes that the data-generating
+process is the same as in \autoref{eq bs}. It allows for the quick extraction
+of the business cycle component without losing important information in the
+data. However, if output permanently shifts following a structural break,
+then the measure of the business cycle may be biased. For example, following
+the Great Recession in 2007, the US never returned to the pre-crisis trend,
+resulting in a permanently negative business cycle component after 2007.
+Considering the potential for structural changes in economic growth, it may
+be useful to consider a time-varying trend.
+
+\item \textsf{The HP filter:} The statistical method of
+\cite{hodrick1997postwar} extracts the cyclical component of a time series by
+separating long-term and short-term fluctuations. This method is two-sided,
+meaning that for computation in period \( t \), it requires both past and
+future values. Thus, end-of-sample estimations are typically biased. In
+addition, the filter may omit information in the data that could be relevant
+for analysis. This method has faced many critiques, summarized by
+\cite{hamilton2018you}.
+
+\item \textsf{The band-pass filter:} A band-pass filter is a device that
+passes frequencies within a certain range and attenuates frequencies outside
+that range. In economics, the band-pass filter can be used to isolate the
+component of a time series within a particular frequency band to separate the
+business cycle, the medium-term cycle, and the long-term cycle (i.e., the
+trend). This is useful, for instance, to examine if an economic relationship
+(e.g., money-inflation) remains significant across different frequencies of
+the cycle. \cite{baxter1999measuring} and \cite{christiano2003band} provide
+the two most renowned applications of the band-pass filter in business cycle
+analysis.
+\end{enumerate}
+
+
+%
+
+%TCIMACRO{\TeXButton{MATLABbox}{\MATLABbox{BSmeasures}}}%
+%BeginExpansion
+\MATLABbox{BSmeasures}%
+%EndExpansion
+
+
+\subsection{The analysis of business cycles}
+
+\cite{blanchard1986business} provides a nice description of modern business
+cycle analysis:\ \textquotedblleft\textit{Fluctuations in economic activity
+are seen as the result of small, white noise shocks that affect the economy
+through a complex dynamic propagation system.}\textquotedblright\ Pioneered by
+\cite{frisch1933propagation}, theoretical interpretations of economic
+fluctuations (i.e.\ the term $\varepsilon_{t}$ in \autoref{eq bs}) rely on
+system response analysis following the realization of some shocks. The
+dominant view is that even large fluctuations result from small
+shocks.\footnote{Some more recents applications to financial turmoils, such
+as\ \cite{kiyotaki1997credit} or \cite{boissay2016booms}, show that small
+shock can trigger large depressions.} Particular economic fluctuations can be
+ascribed to particularly large shocks followed by periods during which the
+economy returns to equilibrium. This interpretation contrasts with the
+\textquotedblleft old\textquotedblright\ Keynesian approach of economic
+fluctuations: the latter interpret fluctuations as imbalances in money or
+labor markets.
+
+According to \cite{lucas1977understanding}, the business cycle exhibits some
+regularities stable over time:
+
+\begin{enumerate}
+\item The main regularity is at a sectoral level: output movement across
+sector are strongly serially correlated.\ So if one sector experiences one
+boom, it's very likely that all other sector experience also experience a boom too.
+
+\item Production of durable goods is more volatile than non-durable goods.
+
+\item Price are procyclical.
+
+\item Short term interest rates are procyclical.
+
+\item Monetary aggregates and velocity measures are procyclical.
+\end{enumerate}
+
+Given these observations, \cite{lucas1977understanding} argued that
+\textquotedblleft\textit{all business cycle are alike}\textquotedblright. This
+assertion has important implications for theorists, as it implies that these
+business cycle regularities can be all interpreted from a single general
+theory of fluctuations, the real business cycle theory. In the following
+years, Lucas has provided several critical contributions to the foundation of
+a theory of business cycles. The main ingredients are a general equilibrium
+with infinitely-living and representative agents that form their expectations
+rationally. This handout provides the basis of business cycle theory pioneered
+by Bob Lucas.
+
+\newpage
+
+\section{An illustration of a business cycle model through the
+consumption-saving problem}
+
+According to \cite{lucas1977understanding}, a theory of real business cycle
+aims at providing any point in time de value of output.\ In particular, it
+provides some theoretical interpretations of the empirical relations across
+macroeconomic time series, based on agent-level decisions (usually referred to
+as \textit{microfoundations}).\ In this section, we present the
+consumption-saving problem to examine how changes in\ (expected) consumption
+affect\ the equilibrium real rate.
+
+\subsection{A toy model of consumption-saving}
+
+Consider an\ simplified version of the \cite{lucas1978asset}'s asset pricing
+model.\ This model is characterized by discrete-time and an infinite horizon
+economy populated by \textit{households}, which are infinitely lived and of
+measure one. This is an endowment economy, so the production is assumed to be
+fully exogenous and driven by an exogenous shock:%
+\begin{equation}
+y_{t}=1-\rho+\rho y_{t-1}+\varepsilon_{t}\text{ with }\varepsilon_{t}%
+\sim\mathcal{N}(0,\sigma^{2}), \label{eq: exo cons}%
+\end{equation}
+The production in this economy stems from the presence of infinitively-lived
+trees, output is the fruit that falls from trees. Therefore, we interpret
+$\varepsilon_{t}$\ as the weather that disrupt the quantity of fruits that the
+tree can provide (i.e., for a low realization of $\varepsilon_{t}$, the tree
+provides a lower quantity of fruits). The weather exhibits some persistence,
+so a low realization of the weather today is likely to affect the quantity of
+fruits in the next period by a degree $\rho$. To illustrate this persistence,
+a storm may damage a branch, the latter requires few periods to heal and
+produce fruit as usual. In this model, the only source of uncertainty is about
+current and future values of $\varepsilon_{t}$, as the household ignore how
+much of fruits she will have.\ This uncertainty can be addressed by the
+purchased of some financial claims that we discuss hereafter.
+
+Regarding the preferences, each household maximizes her lifetime utility,
+measured as the current and future discounted streams of utility:%
+\begin{equation}
+\max_{\left\{  c_{t},b_{t}\right\}  }\mathbb{E}_{t}\sum_{s=0}^{\infty}%
+\beta^{s}u\left(  c_{t+s}\right)  , \label{fig: utility}%
+\end{equation}
+where $\beta$\ is the discount factor.\footnote{For $\beta=1$, the household
+is perfectly patient and does not discount the future, \textit{i.e.} consuming
+now or later provides exactly the same utility ($\beta^{0}u\left(  c\right)
+=\beta^{1}u\left(  c\right)  =\beta^{2}u\left(  c\right)  $). For any value of
+$\beta<1$, the household is impatient, the lower $\beta$ is, the more
+impatient the household is ($\beta^{0}\mathcal{U}\left(  c\right)  >\beta
+^{1}\mathcal{U}\left(  c\right)  >\beta^{2}\mathcal{U}\left(  c\right)  $).
+Microeconomic evidence suggests that households are impatient, so the discount
+factor should lie between 0 and 1 (usually close to one).} We impose a
+logarithm for the utility function $u\left(  c_{t}\right)  =\log(c_{t})$.
+Expression $\mathbb{E}_{t}$\ denotes the expectation operator.\ In a rational
+expectation equilibrium, agents can form expectations about the future states
+of the economy at no cost.\ However in a stochastic environment, the
+expectation of $\mathbb{E}_{t}\left\{  X_{t+1}\right\}  $ is assessed with all
+information available in $t$ to agents, meaning that any shock that will
+occurs between $t$ and $t+1$ will not be anticipated: a gap between the
+expectation of $\mathbb{E}_{t}\left\{  X_{t+1}\right\}  $ and its realization
+$X_{t+1}$ is observed, thus creating a source of fluctuations.
+
+Regarding the financial aspect of the model,\ we depart from
+\cite{lucas1978asset} to introduce a (risk free) financial claim in the model.
+Given the uncertainty stemming from the weather, the household may be
+interested in purchasing a financial claim to hedge against low realizations
+of the weather.\ Put differently,\ the household may choose to consume all the
+fruits today, or postpone consumption to the next period by depositing the
+fruits to a bank.\ The bank is perfectly competitive, and provide (fruit)
+deposit services and provide an interest rate $r_{t}$ for each unit of fruit
+deposited between $t$ and $t+1$. The fruit is the numeraire, so the interest
+rate $r_{t}$\ is directly interpreted in units of fruits.
+
+So each period, the households has to possibility to consume $c_{t}$\ units of
+fruits or deposit $b_{t}$ to the bank. The budget constraint faced by the
+household at any point in time is given by:%
+\begin{equation}
+c_{t}+b_{t}\leq b_{t-1}r_{t-1}+y_{t}, \label{eq:budget}%
+\end{equation}
+where the left-hand side of the equation gathers the spending of the
+household, while the right-hand side gather the income from deposits and the
+production from trees. Note that when the household takes it deposit
+decisions, she knows the interest rate, $r_{t-1}$, so there is no uncertainty
+on the return the household may get from depositing fruits in $t+1$.
+
+The Lagrangian problem solved by the household is given by:%
+\begin{equation}
+\mathcal{L}_{t}=\sum_{s=0}^{\infty}\beta^{s}\left[  \log\left(  c_{t+s}%
+\right)  \underset{}{-}\lambda_{t+s}\left(  c_{t+s}+b_{t+s}-b_{t-1+s}%
+r_{t-1+s}-y_{t+s}\right)  \right]  , \label{eq:lagrangian}%
+\end{equation}
+where $\lambda_{t}$\ denotes the Lagrangian multiplier over the budget
+constraint. Two important assumptions are implicitly set on this Lagrangian
+problem:\ (\textit{i}) the budget constraint is also discounted, so the
+constraint is eternally binding over time (i.e., it binds today and in the
+future); (\textit{ii}) the budget constraint binds to equality, so the income
+is fully spent in \autoref{eq:budget}.\footnote{Note that we can check whether
+the constraint always binds to equality by tracking the non-negativity of the
+Lagrangian multiplier.}
+
+Maximizing \autoref{eq:lagrangian} in $c_{t}$\ and $b_{t}$ yield the following
+first order conditions:%
+\begin{align}
+(c_{t})  &  :\lambda_{t}=\frac{1}{c_{t}}\label{eq: FOC1}\\
+(b_{t})  &  :\lambda_{t}=\beta E_{t}\left\{  \lambda_{t+1}\right\}  r_{t}
+\label{eq: FOC2}%
+\end{align}
+Note that if the household consumes and saves by adopting these two equations,
+she will get the highest feasible level of lifetime utility over the business
+cycles. We provide an interpretation of these two equations in the following subsection.
+
+\subsection{A discussion of the first order conditions}
+
+The two first order conditions (\ref{eq: FOC1}-\ref{eq: FOC2}) are one of the
+main ingredient of real business cycle theory: the \textsf{Euler equation}.
+
+\begin{itemize}
+\item \textsf{Marginal utility of consumption (MUC)}.\ 
+\end{itemize}
+
+In equilibrium, the Lagrangian multiplier over the budget constraint is equal
+to the marginal utility of consumption: $\lambda_{t}=u^{\prime}(c_{t})$.\ The
+functional form of the utility function $u(c_{t})$ critically matters to
+explain the saving-consumption nexus.\ So this section provides some insights
+about the interpretation of the utility function. \begin{figure}[h]
+\begin{center}
+\includegraphics[width=\textwidth]{chap1/tikz/MUC.pdf}
+\end{center}
+\caption{Consumption, utility and marginal utility cycles under logarithmic
+utility}%
+\label{fig MUC}%
+\end{figure}
+
+Consider an exogenous consumption cycle as defined in \autoref{eq: exo cons},
+what are the implications of this cycle in terms of utility function
+$u(c_{t})$ and marginal utility of consumption $\lambda_{t}$ for the
+household? \autoref{fig MUC} reports some illustrative simulations of
+consumption, and their corresponding streams of utility and marginal utility.
+
+When consumption is high in period 3, the individual utility also increases
+with the level of consumption, so there is a perfect co-movement between
+utility and consumption. In contrast, the marginal utility exhibits a
+different pattern of fluctuations with respect to consumption.\ When
+consumption is high, the willingness to consume is low.\ Why?\ Because of
+\textbf{diminishing marginal utility}, the consumption of each additional unit
+of a good gives less extra utility than the consumption of the previous unit.
+Think about a cyclist running the Tour de France who is thirsty following some
+physical effort to run up a hill. At first, he's really willing to drink water
+($\lambda_{t}$ is high), so the first glass of water provides a lot of
+utility.\ For the second glass, he becomes less thirsty so the consumption of
+the second glass does provide utility but not as much as the previous
+one.\ This feature of the marginal utility explains the negative relation
+between consumption and the willingness to consume.\ When consumption is low,
+the utility from consuming an additional unit of goods is higher than when
+consumption is high.
+
+\begin{itemize}
+\item \textsf{Intertemporal\ Marginal Rate of Substitution (IMRS).}
+\end{itemize}
+
+The second core key ingredient of modern business cycle theory is the Euler
+equation. Consider optimal condition on bonds:
+\begin{equation}
+u^{\prime}(c_{t})=\beta E_{t}\left\{  u^{\prime}(c_{t+1})\right\}  r_{t}.
+\label{eq FOC3}%
+\end{equation}
+The left hand side of this equation provides the utility loss of saving today
+(priced in terms of present marginal utility), and the right hand side is the
+utility gain at the next period. As long as this equation holds to equality,
+there is a no-arbitrage condition that makes the household equally well off
+between consuming today or tomorrow. Note that the equilibrium interest rate
+plays here a key role as it directly determines how households are weighting
+consumption today versus tomorrow: if the equilibrium rate rises, households
+are more likely to postpone consumption and to consume more at the next
+period. Therefore, the key ingredient here is the pricing scheme that affects
+the trade-off between consuming now and tomorrow.\ The intertemporal marginal
+rate of substitution of future for present consumption is given by $u^{\prime
+}(c_{t})/E_{t}\left\{  u^{\prime}(c_{t+1})\right\}  $.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=.8\textwidth]{chap1/tikz/TMS.pdf}
+\end{center}
+\caption{Optimization scheme for the representative household}%
+\label{fig TMS}%
+\end{figure}
+
+The intertemporal analysis of consumption is actually exactly the same as in
+the standard consumer problem describing the maximization of the utility by
+determining the optimal quantity of two types of goods under a budget
+constraint.\ The difference here is that instead of having two different
+goods, the trade-off now applies between consuming today and tomorrow.\ The
+budget constraint becomes intertemporal and shapes the dynamics of the
+interest rate.
+
+\autoref{fig TMS} reports the joint-determination of the optimal level of
+financial assets and consumption.\ In the left panel, we show the consumption
+possibilities ($c_{t},c_{t+1}$) which are offered by financial markets in the
+economy (and implicitly here by the production capacities of the economy which
+are exogenous).\ The slope of this curve,$-\beta\mathbb{E}_{t}\left\{
+r_{t+1}\right\}  $, is decreasing because current and future consumption are substitutes.
+
+In the right panel of \autoref{fig TMS}, we introduce the household's
+preference with respect to consumption.\ These preferences materialize in a
+graphical representation as indifference curves. These curves are different
+pairs ($c_{t},c_{t+1}$) that provides exactly the same utility so that an
+individual is equally well of in any point of the indifference curve. Given
+the real rate on deposits, the household determines the levels of present and
+future consumption ($c_{t}^{\ast},c_{t+1}^{\ast}$) maximizing her utility
+given the consumption possibilities offered by financial markets. In
+equilibrium A, the household find the unique possible path of consumption
+maximizing her utility intertemporally and is called \textit{the consumption
+point}. \autoref{eq FOC3} is actually the (unique) consumption point that
+provides the highest level of lifetime utility for a given budget constraint.
+
+\subsection{General Equilibrium}
+
+Finally, we need to set one condition over deposits to close the model. In
+financial autarky (\textit{i.e.}, with no trading partners), the general
+equilibrium is jointly determined by the equilibrium on financial and goods
+markets, as the optimal condition of saving determine the amount of
+consumption. So clearing one market also clears the others.
+
+In absence of external borrowing/lending, at a macroeconomic level, the
+following condition on domestic saving emerges:%
+\begin{equation}
+b_{t}=0. \label{eq general equilibrium}%
+\end{equation}
+Note that since households populating our economy are all symmetric, the agent
+specific saving is also zero in equilibrium.\ Given this relation, the budget
+constraint in \autoref{eq:budget} becomes:%
+\begin{equation}
+c_{t}=y_{t}.
+\end{equation}
+
+
+Therefore, the model can be casted as the following set of two equations:%
+\begin{equation}
+\left\{
+\begin{array}
+[c]{c}%
+y_{t}=1-\rho+\rho y_{t-1}+\varepsilon_{t}\\
+r_{t}=\beta^{-1}E_{t}\left\{  y_{t+1}\right\}  /y_{t}%
+\end{array}
+\right.  . \label{eq:sys1}%
+\end{equation}
+The first equation is the quantity of fruit falling from trees, and the second
+equation is the equilibrium condition on deposits. In absence of endogenous
+production, the number of fruit over time determines the equilibrium interest
+rate that ensure that \autoref{eq general equilibrium} holds to equality.
+
+Note that in this simple setup, the household does not optimally choose
+consumption, because it is exogenous (falling from trees).\ As a result, the
+consumption-saving is not really a saving problem because saving is zero in
+equilibrium. So the interpretation of the model is the following: the agent in
+$t$ contemplates how much fruits $y_{t}$ she has by observing $\varepsilon
+_{t}$ (i.e.\ the weather). Given this new information, the agent plans how
+much fruits $y_{t+1}$ he may expect at the next period. Given the current and
+expected levels of consumption, the equilibrium rate adjusts in order to clear
+financial markets, i.e. the real rate ensures that saving remains zero in equilibrium.
+
+\subsection{Expectations}
+
+How are we supposed to cope with the term $E_{t}\left\{  y_{t+1}\right\}
+$\ in the Euler equation from system (\ref{eq:sys1})?\ This question is still
+left open in macroeconomics, as there is no perfect specification for the
+expectation scheme that portrays sufficiently well the formation process of
+expectations of agents over time.
+
+Back in the 60s, macroeconomic analysis was relying on large-scale models
+based on old Keynesian economics.\ These models were 'backward looking', in a
+sense that they did not feature any type of expectation in their modeling
+structure.\ Some purely forward looking dynamics were simply omitted, which
+questioned their empirical relevance for policy analysis as argued by
+\cite{lucas1976econometric} in his famous critique.
+
+Which forward looking dynamics are we talking about? Let us think about some
+simple examples in macroeconomics:
+
+\begin{enumerate}
+\item A\ first example is about \textbf{price setting}.\ If the central bank
+is accommodative today, a worker may expect that inflation will rise in the
+future, so the worker asks today for an increase of her wage to compensate
+future inflation (which in turn self-fulfills the increase in inflation now).
+These considerations leaded to a New reinterpretation of the Keynesian
+Phillips curve.
+
+\item Another example about\textbf{ portfolio allocation in open
+economies}.\ Suppose that a central bank in the domestic country rises its
+interest rate, following this change, investing in the domestic country is
+more profitable, so you may expect that capital will flew to the domestic
+country, so you expect that your domestic currency will rise in the future. As
+a result, the domestic currency immediately rises to an increase in the
+domestic real rate prior the inflow of foreign capitals. This narrative
+describes the uncovered interest rate parity condition. These two examples are
+simply not incorporated in purely backward models.
+\end{enumerate}
+
+Back to our problem of having an expectation scheme, Rational Expectations
+(RE) hypothesis has been the most popular tool to solve current macroeconomic
+model. RE\ provides a quick, simple and agnostic way of modelling expectations
+in macroeconomic models.\ In addition, RE are typically 'easy' to compute, as
+you even get closed-form expressions. The concept of rational expectations is
+pioneered by \cite{muth1961rational}, an agent having rational expectation
+\textbf{use all relevant information} in forming expectations of economic
+variables. In our toy model, what is the relevant information for
+$E_{t}\left\{  y_{t+1}\right\}  $? Another implicit facet of RE lies in
+assumption that agents also have perfect knowledge of the model's
+equation.\ So if our agent knows the endowment in \autoref{eq: exo cons}, by
+iterating forward this equation we get:%
+
+\begin{align*}
+E_{t}\left\{  y_{t+1}\right\}   &  =E_{t}\left\{  1-\rho+\rho y_{t}%
++\varepsilon_{t+1}\right\} \\
+&  =E_{t}\left\{  1-\rho+\rho y_{t}\right\} \\
+&  =1-\rho+\rho y_{t},
+\end{align*}
+
+
+So as you can see, we are able to transform $E_{t}\left\{  y_{t+1}\right\}
+$\ into a system of current and backward variables. Implicitly, you may have
+noticed that we imposed $E_{t}\left\{  \varepsilon_{t+1}\right\}  =0$.\ This
+is because the agent ignores the future realizations of the shock, but know
+its distribution.\ Since on average, $E(\varepsilon_{t})=0$, then it is
+rational to expect that -- on average -- the shocks are 0. So agent's
+expectations may be wrong, but \textbf{are correct on average} over time.
+
+So, forecast errors are non-zero:%
+\[
+E_{t}\left\{  y_{t+1}\right\}  -y_{t+1}\neq0\text{ for }t>0
+\]
+But converge to zero asymptotically:%
+\[
+E\left(  E_{t}\left\{  y_{t+1}\right\}  \overset{}{-}y_{t+1}\right)
+_{t=0}^{+\infty}=0\text{ }%
+\]
+
+
+Back to our two-equation system in \autoref{eq:sys1}, under rational
+expectations, the model becomes:%
+\begin{equation}
+\left\{
+\begin{array}
+[c]{c}%
+y_{t}=1-\rho+\rho y_{t-1}+\varepsilon_{t}\\
+r_{t}=\frac{\left(  1-\rho+\rho y_{t}\right)  }{\beta y_{t}}%
+\end{array}
+\right.  .\label{eq:sys2}%
+\end{equation}
+
+
+Given this system, we are able to simulate our model because as long as we
+know the value of output, we can obtain the value of the real interest rate.%
+
+%TCIMACRO{\TeXButton{BeginExo}{\begin{myexercise}%
+%{Simulating the non-linear model}
+%\addcontentsline{toc}{section}{Exercise \thetcbcounter}}}%
+%BeginExpansion
+\begin{myexercise}{Simulating the non-linear model}
+\addcontentsline{toc}{section}{Exercise \thetcbcounter}%
+%EndExpansion
+
+
+Consider the system in \autoref{eq:sys2}.
+
+\begin{enumerate}
+\item Write a MATLAB\ file that simulates this system over 400\ periods.\ Use
+the following calibration: $\beta=0.99$, $\sigma=0.1$ and $\rho=0.85.$\ 
+
+\begin{enumerate}
+\item Set the following calibration: $\beta=0.99$, $\sigma=0.1$ and
+$\rho=0.85.$\ 
+
+\item Compute the steady state of the model.
+
+\item Draw 400 exogenous realizations of $\varepsilon_{t}$ from a gaussian
+distribution using function \textsf{randn()}.
+
+\item Declare an empty vector using function \textsf{nan()} for \textsf{y} and
+\textsf{r} that we will fill next.
+
+\item Run a loop that fills recursively the vector for \textsf{y} and
+\textsf{r}.
+\end{enumerate}
+
+\item Plot the simulation.
+
+\item Compute the standard deviation of output and its correlation. Compare
+with the empirical data of real output that we have computed using a linear trend.
+
+\item If you find a gap, adjust the calibration of $\sigma$ and $\rho$ to
+match US\ data.
+
+\item Simulate an Impulse Response Function (IRF) of the model.
+
+\item Does a large output expansion has the same effect on the real rate than
+a large depression? Compare the absolute values of the IRFs.
+
+\item Plot the histograms of your simulated data and explain why the asymmetry
+is different for the distribution of output and the real rate.
+\end{enumerate}
+
+%
+
+%TCIMACRO{\TeXButton{EndExo}{\end{myexercise}}}%
+%BeginExpansion
+\end{myexercise}%
+%EndExpansion
+
+
+\subsection{A discussion on stochastic uncertainty}
+
+Note that in \autoref{eq:sys2}, our solution is fully consistent with rational
+expectations, as we analyze a case in which risk aversion is implicitely one.
+Consider a more general CRRA specification, $u\left(  c\right)  =1/\left(
+1-\sigma\right)  \left(  c^{1-\sigma}-1\right)  $, with $u^{\prime}\left(
+c\right)  =c^{-\sigma}$
+\begin{align*}
+r_{t}  & =\beta^{-1}E_{t}\left\{  y_{t+1}^{\sigma}\right\}  /y_{t}^{\sigma}\\
+& =\beta^{-1}E_{t}\left\{  \left(  1-\rho+\rho y_{t}+\varepsilon_{t+1}\right)
+^{\sigma}\right\}  /y_{t}^{\sigma}%
+\end{align*}
+In this expression, $y_{t}\sim N(E\left(  y_{t}\right)  ,V\left(
+y_{t}\right)  )$,
+\[
+\]
+
+
+\newpage
+
+\section{Approximation methods}
+
+In the two-dimensional model considered, it is possible to simulate the
+(fully) non-linear model without approximating the equations. However, if the
+model gets more complicated (in particular with state variables), it's not
+possible to get a closed-form expression of the non-linear model.\ Therefore,
+approximation methods are applied to the model's equation to obtain a
+closed-form expression of a linear transition equation.
+
+\subsection{The problem}
+
+Our 2 equation model is a non-linear system with rational expectations. In
+compact notation, the system can be represented as follows:%
+\begin{equation}
+\mathbb{E}_{t}\left[  f_{\theta}\left(  x_{t+1},x_{t},x_{t-1},\epsilon
+_{t}\right)  \right]  =0 \label{eq non linear system}%
+\end{equation}
+where:
+
+\begin{itemize}
+\item $x$ is the vector collecting $n$ endogenous variables;
+
+\item $\epsilon$ is the vector collecting the $p$ exogenous stochastic shocks;
+
+\item $\theta$ is the vector collecting the deep parameters of the model;
+
+\item $f_{\theta}(.)$ is the equations of the model;
+\end{itemize}
+
+The solution to a model like this is normally a set of functions relating
+controls to states such that our 2\ equations are satisfied at all times (i.e.
+in t+1, t and t-1).The solution of the system $x_{t}$ takes the form a
+decision rule:
+\begin{equation}
+x_{t}=g\left(  x_{t-1},\epsilon_{t}\right)  , \label{eq: non linear DR}%
+\end{equation}
+where function $g(.)$ is unknown, but theoretically can be computed from
+\autoref{eq non linear system}. Let us first rewrite the system in
+\autoref{eq non linear system} by injecting the model's solution in
+\autoref{eq: non linear DR}. Recall, that under rational expectations,
+$E_{t}\{x_{t+1}\}=g\left(  x_{t},\epsilon_{t+1}\right)  $ where $E\left(
+\epsilon_{t+1}\right)  =0_{p}$.\ To get rid off of the expectation term in the
+previous expression, we obtain:%
+\begin{equation}
+f_{\theta}\left(  \text{ }g\left(  x_{t},0_{p}\right)  ,\text{ }x_{t},\text{
+}y_{t-1},\text{ }\epsilon_{t}\right)  =0.
+\end{equation}
+Iterating again to express our system as a function of $x_{t-1}$:
+\begin{equation}
+f_{\theta}\left(  \text{ }g\left(  g\left(  x_{t-1},\epsilon_{t}\right)
+,0_{p}\right)  ,\text{ }g\left(  x_{t-1},\epsilon_{t}\right)  ,\text{ }%
+x_{t-1},\text{ }\epsilon_{t}\right)  =0 \label{eq: non linear system func}%
+\end{equation}
+Therefore, the true solution of the system \autoref{eq non linear system} is a
+function $g(.)$ that satisfies \autoref{eq: non linear system func}. The
+problem is that, in case of larger models, there is an infinite number of
+values of $y_{t-1}$ and $\epsilon_{t}$ and an infinite number of values of
+$y_{t}$ to find. Hence, except for few exceptions, the usual practice is to
+approximate $g(.)$.
+
+Note that in our two-dimensional model of consumption-saving, we are able to
+get a closed-form expression $g(.)$ but in more complicated models, it's
+impossible to obtain the true value of $g(.)$. The next subsection aims at
+explaining how we can approximate $g(.)$.
+
+The closed-form expression of the policy rule $x_{t}=g\left(  x_{t-1}%
+,\epsilon_{t}\right)  $ is given by:%
+\begin{align}
+y_{t}  &  =1-\rho+\rho y_{t-1}+\varepsilon_{t}\\
+r_{t}  &  =\frac{\rho}{\beta}+\frac{\beta^{-1}\left(  1-\rho\right)  }%
+{1-\rho+\rho y_{t-1}+\varepsilon_{t}}.
+\end{align}
+
+
+\subsection{Linearization Method}
+
+The standard way to bound the problem is to approximate the function $g\left(
+.\right)  $ by a log-linear function around the steady state. There are many
+different solution methods (e.g. Schur decomposition, undetermined
+coefficients,\ etc) to reach the linearized version of $g\left(  .\right)  .$
+Under particular conditions defined by \cite{blanchard1980solution}, our
+linear rational expectations model has a stable and convergent intertemporal equilibrium.
+
+More precisely, we usually take the following steps to solve a model:
+
+\begin{enumerate}
+\item Find the steady state of the model;
+
+\item (log-)Linearize around the steady state;
+
+\item Write the Dynare file.
+\end{enumerate}
+
+For any function $f(x_{t})$ with corresponding steady state $f(\bar{x})$, a
+Taylor expansion up to first order is given by:%
+\begin{equation}
+f(x_{t})\simeq f(\bar{x})+f^{\prime}(\bar{x})\left(  x_{t}-\bar{x}\right)
+\end{equation}
+Expressed in terms of deviation from the steady state, $f(x_{t})-f(\bar{x})$,
+the expansion can be rewritten in the following way:%
+\begin{align*}
+f(x_{t})-f(\bar{x})  &  \simeq f^{\prime}(\bar{x})\left(  x_{t}-\bar{x}\right)
+\\
+&  \simeq f^{\prime}(\bar{x})\bar{x}\frac{\left(  x_{t}-\bar{x}\right)  }%
+{\bar{x}}\\
+&  \simeq f^{\prime}(\bar{x})\bar{x}\log(\frac{x_{t}}{\bar{x}})\\
+&  \simeq f^{\prime}(\bar{x})\bar{x}\hat{x}_{t}%
+\end{align*}
+where $\hat{x}_{t}=\log(x_{t}/\bar{x})$ is the percentage variations of
+$x_{t}$ around its steady state.
+
+For a two-variable function, the approximation reads as:%
+\begin{equation}
+f(x_{t},y_{t})-f(\bar{x},\bar{y})\simeq f_{x}^{\prime}(\bar{x},\bar{y})\bar
+{x}\hat{x}_{t}+f_{y}^{\prime}(\bar{x},\bar{y})\bar{y}\hat{y}_{t}%
+\end{equation}
+We can them summarize these general approximations by some tricks that we can
+use to log-linearize quickly a model:
+
+\begin{center}%
+\begin{tabular}
+[c]{ll}\hline\hline
+\ \ \ \ \textbf{Level variable \ \ \ } & \textbf{Log-linearized variable}%
+\\\hline
+\multicolumn{1}{c}{$x_{t}$} & \multicolumn{1}{c}{$\bar{x}\hat{x}_{t}$}\\
+\multicolumn{1}{c}{$x_{t}y_{t}$} & \multicolumn{1}{c}{$\bar{x}\bar{y}(\hat
+{x}_{t}+\hat{y}_{t})$}\\
+\multicolumn{1}{c}{$\frac{x_{t}}{y_{t}}$} & \multicolumn{1}{c}{$\frac{\bar{x}%
+}{\bar{y}}(\hat{x}_{t}-\hat{y}_{t})$}\\
+\multicolumn{1}{c}{$x_{t}^{a}$} & \multicolumn{1}{c}{$\bar{x}^{a}a\hat{x}_{t}%
+$}\\
+\multicolumn{1}{c}{$\log(x_{t})$} & \multicolumn{1}{c}{$\hat{x}_{t}$}\\
+\multicolumn{1}{c}{$\exp(x_{t})$} & \multicolumn{1}{c}{$\exp(\bar{x})\bar
+{x}\hat{x}_{t}$}\\\hline
+\end{tabular}
+
+\end{center}
+
+\subsection{Linearization application}
+
+Let us now linearize our system of equations:%
+
+\begin{equation}
+\left\{
+\begin{array}
+[c]{c}%
+y_{t}=1-\rho+\rho y_{t-1}+\varepsilon_{t}\\
+r_{t}=\frac{\left(  1-\rho+\rho y_{t}\right)  }{\beta y_{t}}%
+\end{array}
+\right.  .
+\end{equation}
+
+
+\textsf{Steady state.\ }A preliminary step before performing the approximation
+to our model's equations is to characterize the steady state of the model
+(i.e. the fixed point of the approximation).\ Following the linearization,
+each variable is expressed in percentage deviation from the steady state. To
+obtain the steady state, one just needs to take off the time subscript on
+endogenous variables:%
+\begin{equation}
+\left\{
+\begin{array}
+[c]{c}%
+\bar{y}=1-\rho+\rho\bar{y}\\
+\bar{r}=\frac{\left(  1-\rho+\rho\bar{y}\right)  }{\beta\bar{y}}%
+\end{array}
+\right.  .
+\end{equation}
+Note that the following system in the (deterministic) steady state reads as
+follows:%
+\begin{equation}
+\left\{
+\begin{array}
+[c]{c}%
+\bar{y}=1\\
+\bar{r}=\frac{1}{\beta}%
+\end{array}
+\right.  .
+\end{equation}
+
+
+\textsf{Linearizing the equations. }Next, we must linearize the equations of
+the model.\ We apply here:\textsf{\ }%
+
+\[
+\underset{\bar{y}\tilde{y}_{t}}{\underbrace{y_{t}}}=\underset{0}%
+{\underbrace{1-\rho}}+\underset{\rho\bar{y}\tilde{y}_{t-1}}{\underbrace{\rho
+y_{t-1}}}+\underset{\varepsilon_{t}}{\underbrace{\varepsilon_{t}}}%
+\]
+Note that since $\bar{y}=1$, then equation boils down to:%
+\[
+\hat{y}_{t}\simeq\rho\hat{y}_{t-1}+\varepsilon_{t}%
+\]
+Some remarks on the linearization.\ You may struggle to log-linearize, but
+with learning-by-doing, you will get used to it. After some time of practice,
+linearizing equations get very quickly. Note also that the stochastic shock is
+not affected by the linearization process%
+
+\begin{align*}
+r_{t}  &  =\frac{\left(  1-\rho+\rho y_{t}\right)  }{\beta y_{t}}\\
+r_{t}  &  =\frac{\left(  1-\rho\right)  }{\beta}\frac{1}{y_{t}}+\frac{\rho
+}{\beta}\\
+\bar{r}\hat{r}_{t}  &  \simeq-\frac{1-\rho}{\beta\bar{y}}\hat{y}_{t}\\
+\hat{r}_{t}  &  \simeq-\left(  1-\rho\right)  \hat{y}_{t}%
+\end{align*}
+
+
+So the linerarized system reads as:%
+\begin{align*}
+\hat{y}_{t}  &  \simeq\rho\hat{y}_{t-1}+\varepsilon_{t}\\
+\hat{r}_{t}  &  \simeq-\left(  1-\rho\right)  \hat{y}_{t}%
+\end{align*}
+And we are looking for a solution of the form for $\hat{x}_{t}=[\hat{y}%
+_{t},\hat{r}_{t}]$:%
+\[
+\hat{x}_{t}=P\hat{x}_{t-1}+Q\epsilon_{t}%
+\]
+While equation for $\hat{y}_{t}$\ is recursive, the other in $\hat{r}_{t}$ is
+not. We simply inject $\hat{y}_{t}$ in $\hat{r}_{t}$\ to force recursion:
+$\hat{r}_{t}\simeq-\left(  1-\rho\right)  \hat{y}_{t}=-\left(  1-\rho\right)
+\rho\hat{y}_{t-1}-\left(  1-\rho\right)  \varepsilon_{t}.$The solution of the
+system reads as:%
+\[
+\underset{\hat{x}_{t}}{\underbrace{\left[
+\begin{array}
+[c]{c}%
+\hat{y}_{t}\\
+\hat{r}_{t}%
+\end{array}
+\right]  }}=\underset{P}{\underbrace{\left[
+\begin{array}
+[c]{cc}%
+\rho & 0\\
+-\left(  1-\rho\right)  \rho & 0
+\end{array}
+\right]  }}\underset{\hat{x}_{t-1}}{\underbrace{\left[
+\begin{array}
+[c]{c}%
+\hat{y}_{t-1}\\
+\hat{r}_{t-1}%
+\end{array}
+\right]  }}+\underset{Q}{\underbrace{\left[
+\begin{array}
+[c]{c}%
+1\\
+-\left(  1-\rho\right)
+\end{array}
+\right]  }}\varepsilon_{t}%
+\]
+As long as we know vector $\varepsilon_{t}$, matrices $P$\ and $Q$, and
+initial conditions $\hat{y}_{0}$\ and $\hat{r}_{0}$, we are able to
+characterize the path of $\{\hat{y}_{t},\hat{r}_{t}\}_{t=1}^{\infty}$.%
+
+%TCIMACRO{\TeXButton{BeginExo}{\begin{myexercise}{Simulating the linear model}
+%\addcontentsline{toc}{section}{Exercise \thetcbcounter}}}%
+%BeginExpansion
+\begin{myexercise}{Simulating the linear model}
+\addcontentsline{toc}{section}{Exercise \thetcbcounter}%
+%EndExpansion
+
+
+Consider now the linear system.\ This exercise can be coded in the same script
+file as Exercise 1.
+
+\begin{enumerate}
+\item Write a MATLAB\ file that simulates this system over 400\ periods.\ 
+
+\item Plot the simulation.
+
+\item Simulate an Impulse Response Function (IRF) of the model. An IRF\ is
+just the same simulation as before, but with one shock at the first period and
+next no shocks. It isolates the pure propagation mechanism.
+
+\item Does a large output expansion has the same effect on the real rate than
+a large depression? Compare the absolute values of the IRFs.
+
+\item Plot the histograms of your simulated data and explain why the asymmetry
+is different for the distribution of output and the real rate.
+
+\item Compute the Errors of approximation on the nominal rate $E\left[
+\left(  r_{t}-\hat{r}_{t}\right)  ^{2}\right]  $.
+\end{enumerate}
+
+%
+
+%TCIMACRO{\TeXButton{EndExo}{\end{myexercise}}}%
+%BeginExpansion
+\end{myexercise}%
+%EndExpansion
+
+
+\newpage%
+
+%TCIMACRO{\TeXButton{small}{\footnotesize}}%
+%BeginExpansion
+\footnotesize
+%EndExpansion
+\bibliographystyle{plainnat}
+\bibliography{dataref}%
+%TCIMACRO{\TeXButton{small}{\normalsize}}%
+%BeginExpansion
+\normalsize
+%EndExpansion
+
+
+
+\end{document}

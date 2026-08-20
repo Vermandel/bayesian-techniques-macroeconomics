@@ -43,7 +43,6 @@ rho_g	= 0.95;
 rho_c	= 0.95;
 rho_m  	= 0.95;
 rho_i	= 0.95;
-rho_r	= 0.40;
 	
 %----------------------------------------------------------------
 % 3. Model
@@ -98,9 +97,7 @@ end;
 % 4. Computation
 %----------------------------------------------------------------
 steady_state_model;
-	pi		= 1.004;
-	rr		= 1/beta_H;
-	r		= rr*pi;
+		rr		= 1/beta_H;
 	h		= 1/3;
 	q		= 1;
 	phi_E	= 1-beta_E/beta_H;
@@ -132,7 +129,7 @@ shocks;
 end;
 	
 resid(1);
-%check;
+check;
 
 stoch_simul(irf=30,order=1) y c_E c_H i rr q;
 

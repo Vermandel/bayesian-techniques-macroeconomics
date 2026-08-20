@@ -6,4 +6,12 @@ The baseline model contains home/foreign households and production, trade flows,
 
 An empirical version may use home and foreign output growth, the real exchange rate and a trade quantity. Explicitly map national sources, currencies, price deflators and seasonal adjustment. Keep the observable set smaller than the effective number of innovations unless justified measurement errors are added.
 
-Known review points: `chi_F` is calibrated with `Wss_H` rather than `Wss_F`; several declared shock states (`e_p_*`, `e_r_*`) do not enter the corresponding structural equations; the model uses `model;` although equations appear log-linear. Resolve these against the theory PDF before estimation.
+The student baseline is explicitly linear. The foreign labour-disutility scale uses
+the foreign steady-state wage. Price and monetary-policy shocks from the richer
+theory note are not part of this reduced real model and have been removed instead
+of leaving inactive innovations. Reintroducing them requires the corresponding
+nominal equations, not only new AR(1) processes.
+
+Run `python3 download_data.py` to preserve the raw home/foreign DBnomics
+responses, then run `run_all` from MATLAB after adding Dynare to the path.
+Country pairing and exchange-rate construction must be documented explicitly.

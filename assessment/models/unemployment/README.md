@@ -6,4 +6,10 @@ The baseline model combines capital accumulation with employment separations, hi
 
 Candidate estimated objects include shock persistence/standard deviations and a small subset of labour-market parameters (`delta_N`, bargaining weight `eta`, hiring-cost curvature `phi`). Priors must respect support. Do not estimate all calibrated parameters simultaneously.
 
-Known review point: the wage equation contains a commented alternative and the active equation omits `v_H`; justify the intended bargaining equation from the handout before treating the model as empirically final.
+The canonical wage equation is the log-linearization of the handout's Nash condition
+`eps_m*eta*V_P=(1-eps_m*eta)*V_H`; it therefore retains both firm and worker
+surpluses. Treat variants that omit `v_H` only as misspecification exercises.
+
+Run `python3 download_data.py` to preserve the raw DBnomics responses, then run
+`run_all` from MATLAB after adding Dynare to the path. Record retrieval date,
+sample transformations and any missing observations before estimation.
