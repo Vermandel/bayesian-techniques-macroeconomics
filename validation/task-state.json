@@ -1,30 +1,32 @@
 {
   "taskId": "athena-long-mt079knb",
+  "resumeTaskId": "athena-long-mt0sltx5",
   "worker": "Athena",
-  "currentStep": "validation and report",
-  "checkpoint": "2026-08-19 candidate student package produced",
+  "status": "needs_review",
+  "currentStep": "external numerical and publication gates",
+  "checkpoint": "2026-08-20 local package validated at commit 67cb71c",
   "completed": [
-    "source inventory reused",
-    "four-session architecture",
-    "student repository candidate",
-    "assessment brief and rubric",
-    "four model starter folders",
-    "website publication drafts",
-    "static scientific and code review"
+    "scientific corrections",
+    "four rebuilt handouts",
+    "82-page visual review",
+    "four autonomous assessment entries",
+    "local git milestones",
+    "local package validation"
   ],
   "testsPassed": [
-    "artifact manifest and checksums",
-    "no absolute historical paths in student package",
-    "no obvious credential patterns",
-    "all Markdown relative links resolve",
-    "all four assessment folders contain PDF, MOD and README"
+    "latexmk 4/4",
+    "visual review 82/82 pages",
+    "assessment PDF+MOD+README+run+downloader 4/4",
+    "Python downloader syntax 4/4",
+    "Markdown relative links",
+    "secret and historical-path scan",
+    "SHA-256 manifest"
   ],
-  "testsBlocked": [
-    "MATLAB execution: executable unavailable",
-    "Dynare execution: executable unavailable",
-    "web publication and live link check: write scope excludes website",
-    "GitHub creation/push: write scope excludes repository and external publication",
-    "Calendar detail lookup: read scope restricted to course YAML and historical folder"
+  "blocked": [
+    "MATLAB/Dynare: executables absent from PATH and installation directories outside read whitelist",
+    "DBnomics live endpoint validation: network outside active read whitelist",
+    "GitHub push: external write outside drafts-only scope",
+    "WordPress publication and live desktop/mobile/link checks: outside drafts-only scope"
   ],
-  "blockingDecision": "confirm whether 08:30–11:45 Calendar slots should be extended to four hours"
+  "calendarConflict": "5, 12, 19, 26 November 2026, 08:30-11:45 = 13 hours versus declared 16 hours; calendar unchanged"
 }
