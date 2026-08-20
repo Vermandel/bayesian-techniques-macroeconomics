@@ -6,9 +6,20 @@ fail=0
 for model in unemployment open_economy mortgage credit_market; do
   dir="$root/assessment/models/$model"
   test -f "$dir/README.md" || { echo "FAIL missing README: $model"; fail=1; }
+  test -f "$dir/run_all.m" || { echo "FAIL missing run_all.m: $model"; fail=1; }
+  test -f "$dir/download_data.py" || { echo "FAIL missing downloader: $model"; fail=1; }
   find "$dir" -maxdepth 1 -type f -name '*.mod' -print -quit | grep -q . || { echo "FAIL missing MOD: $model"; fail=1; }
   find "$dir" -maxdepth 1 -type f -name '*.pdf' -print -quit | grep -q . || { echo "FAIL missing PDF: $model"; fail=1; }
 done
+
+python3 -m py_compile "$root"/assessment/models/*/download_data.py || fail=1
+echo "PASS assessment downloaders parse"
+
+for pdf in "$root"/handouts/*.pdf; do
+  pages="$(pdfinfo "$pdf" | awk '/^Pages:/{print $2}')"
+  test "${pages:-0}" -gt 0 || { echo "FAIL unreadable PDF: $pdf"; fail=1; }
+done
+echo "PASS four handout PDFs readable"
 
 python3 - "$root" <<'PY' || fail=1
 import pathlib, re, sys

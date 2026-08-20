@@ -1,10 +1,8 @@
-# Visual review of rebuilt handouts
+# Visual review — rebuilt 2026 handouts
 
-All 78 pages were rendered at 72 dpi and inspected through complete contact sheets (`visual/session1` … `session4`).
-
-- Session 1: 17/17 pages present; title, objectives, equations, MATLAB boxes, figures, exercises and references visible; no clipped page or missing figure observed.
-- Session 2: 17/17 pages present; equations, Dynare code boxes, output tables/IRFs and exercises visible; no clipped page or missing figure observed.
-- Session 3: 22/22 pages present; Kalman-filter equations, likelihood figures, code/output boxes and exercises visible; no clipped page or missing figure observed.
-- Session 4: 22/22 pages present; prior/posterior figures, MCMC diagnostics, equations and exercises visible; no clipped page or missing figure observed.
-
-The review establishes rendering completeness, not scientific correctness. The documents retain a dense handout layout appropriate for reading; projection legibility would require a separate slide deck.
+- Session 1: 18/18 pages rendered and inspected; the new roadmap and 6--32-quarter correction fit without clipping.
+- Session 2: 18/18 pages rendered and inspected; the roadmap, equations, code blocks and figures are legible.
+- Session 3: 23/23 pages rendered and inspected; the roadmap and DBnomics workflow fit; no material overflow or missing figure.
+- Session 4: 23/23 pages rendered and inspected; the long Dynare reload command was resized; equations, priors, diagnostics and exercises remain visible.
+- Evidence: individual JPEG pages and one complete contact sheet per session under `validation/visual/`.
+- Final LaTeX logs: no undefined references, undefined citations, fatal errors, or material page clipping. Session 4 retains minor TeX overfull-box diagnostics in legacy dense passages; visual inspection shows no content outside the printable page.

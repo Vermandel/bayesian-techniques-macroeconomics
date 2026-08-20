@@ -1,4 +1,5 @@
 *.asv
+data_raw/
 *.bak
 *.log
 *.aux
@@ -21,3 +22,5 @@
 output/
 data/processed/
 .DS_Store
+__pycache__/
+validation/latex/
