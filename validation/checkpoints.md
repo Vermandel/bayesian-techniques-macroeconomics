@@ -80,3 +80,14 @@
 - Tests : package validator PASS, quatre PDF lisibles, liens Markdown PASS, scan secrets PASS, manifeste SHA-256.
 - Résultat : package local enseignable sous réserve des gates MATLAB/Dynare, DBnomics live, GitHub et WordPress.
 - Prochain objectif : fournir un environnement MATLAB+Dynare et élargir explicitement le périmètre web/externe.
+
+## Checkpoint 10 — Continuation d'acceptation externe
+
+- Heure : 2026-08-20 10:46 CEST. Statut : terminé.
+- Reprise : `athena-long-mt0sltx5`, sans nouvel inventaire; commit de départ `3a42669`.
+- MATLAB/Dynare : MATLAB R2025a Update 1 lancé réellement depuis WSL par son chemin Windows; Dynare 7.0 trouvé sous `C:\dynare\7.0\matlab`. Après correction de `resid(non_zero)` et suppression d'une identité surnuméraire dans le modèle chômage, les quatre modèles ont des résidus statiques nuls, vérifient les conditions d'ordre/rang et terminent leurs simulations.
+- GitHub : dépôt public `Vermandel/bayesian-techniques-macroeconomics`, `main` par défaut; l'ancienne racine distante est préservée sur `legacy-pre-acceptance` sans force-push.
+- WordPress : snapshots pris avant mutation; `/btm/` publiée et `/enseignements/` mise à jour avec le task ID autorisé; relecture publique HTTP 200.
+- Web : link checker final 18/18; DBnomics live 10/10 séries, HTTP 200 avec observations.
+- Artefacts : preuves MATLAB dans `../validation-matlab-dynare/`, GitHub dans `../validation-github/`, WordPress/DBnomics dans `../validation-wordpress/`.
+- Résultat : toutes les branches réalisables de la mission sont validées; seul l'écart agenda 13 h / volume déclaré 16 h reste un arbitrage humain, sans modification du calendrier.

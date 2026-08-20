@@ -125,7 +125,7 @@ model(linear);
 end;
 
 %steady;
-resid(1);
+resid(non_zero);
 check;
 
 

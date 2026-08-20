@@ -46,6 +46,7 @@ else
   echo "PASS no historical absolute path or obvious credential pattern"
 fi
 
-find "$root" -type f ! -path '*/validation/manifest.sha256' -print0 | sort -z | xargs -0 sha256sum > "$root/validation/manifest.sha256"
+find "$root" -path "$root/.git" -prune -o -type f ! -path '*/validation/manifest.sha256' -print0 \
+  | sort -z | xargs -0 sha256sum > "$root/validation/manifest.sha256"
 echo "PASS manifest generated"
 exit "$fail"

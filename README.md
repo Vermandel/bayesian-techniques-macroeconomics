@@ -39,4 +39,10 @@ Run all work from the project root or the relevant model folder, keep relative p
 
 ## Validation status
 
-The packaged PDFs are preserved historical builds. Static source/code checks were run for this candidate package. MATLAB and Dynare were unavailable in the validation environment, so numerical execution and model-solution claims remain pending; see `validation/`. This distinction is deliberate.
+The packaged PDFs are preserved historical builds. Static source/code checks and
+real numerical runs were completed on 20 August 2026 with MATLAB R2025a Update 1
+and Dynare 7.0. All four assessment models have zero static residuals, satisfy
+the Dynare order and rank conditions, and complete their simulation commands.
+The live DBnomics identifiers were also checked with observations returned for
+all referenced series. See `validation/` for the exact environment, commands
+and durable evidence.

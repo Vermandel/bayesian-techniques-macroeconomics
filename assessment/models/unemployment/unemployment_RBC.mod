@@ -108,7 +108,6 @@ model(linear);
 		% The worker surplus must enter: omitting v_H breaks Nash bargaining.
 		-e_m = (1-eta)*(v_P-v_H);
 	
-	VHss 	= eta/(1-eta)*VPss;
 	%% AGGREGATION
 	[name='Resources Constraint']
 	y = Css/Yss*c + Iss/Yss*i + gy*e_g + Gam/(1+phi)*Xss^(1+phi)*Uss*((1+phi)*x+u);
@@ -141,6 +140,6 @@ shocks;
 	var eta_i;	stderr 1;
 end;
 	
-resid(1);
+resid(non_zero);
 check;
 stoch_simul(irf=30,order=1) y c i rr u x ;

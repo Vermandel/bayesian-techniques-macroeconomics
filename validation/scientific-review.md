@@ -15,6 +15,11 @@
 ## Remaining numerical gate
 
 - MATLAB, Octave, `dynare`, and `dynare_m` are absent from PATH in the permitted environment. The four corrected models therefore remain `BLOCKED_DEPENDENCY`, not execution-validated.
+
+> Continuation note (2026-08-20): this dependency statement records the first
+> restricted probe and is superseded by checkpoint 10. MATLAB R2025a was later
+> launched through its absolute Windows path and Dynare 7.0 executed all four
+> models successfully; see `execution-status.md` and the durable external logs.
 - The read restriction prevented searching Windows installation directories outside the historical course folder and prevented live DBnomics endpoint checks.
 - Historical Bayesian RBC example uses only one observable (`dy`) and estimates only `rho_a` and `stderr eta_a`; this is pedagogically useful but insufficient as a template for the richer assessment models.
 

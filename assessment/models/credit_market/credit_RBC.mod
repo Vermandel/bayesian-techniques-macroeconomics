@@ -128,7 +128,7 @@ shocks;
 	var eta_i;	stderr 1;
 end;
 	
-resid(1);
+resid(non_zero);
 check;
 
 stoch_simul(irf=30,order=1) y c_E c_H i rr q;
