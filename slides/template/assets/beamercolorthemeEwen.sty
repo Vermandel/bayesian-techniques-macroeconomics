@@ -1,0 +1,133 @@
+\mode<presentation>
+
+% Utilise les couleurs du theme TUM
+
+
+% Couleurs principales
+
+%\definecolor{TUMblau}{RGB}{47,124,188}
+\definecolor{TUMblau}{RGB}{0,129,188}
+\definecolor{TUMei}{RGB}{218,215,203}
+\definecolor{TUMgelbgruen}{RGB}{162,173,0}
+%\definecolor{TUMorange}{RGB}{231,139,8}
+%\definecolor{TUMorange}{RGB}{163,195,31} % du vert pomme
+\definecolor{TUMorange}{RGB}{0,157,87} % du vert
+\definecolor{TUMgrey}{RGB}{156,156,156}
+\definecolor{TUMred}{RGB}{168,022,030}
+
+% Un peu plus de couleurs
+
+\definecolor{TUMblauHell}{RGB}{152,198,234}
+\definecolor{TUMblauDunkel}{RGB}{0,82,147}
+\definecolor{TUMblauGanzDunkel}{RGB}{0,51,89}
+\definecolor{TUMgruen}{RGB}{103,154,29}
+\definecolor{TUMgruenDunkel}{RGB}{0,124,48}
+\definecolor{TUMgruenAkzent}{RGB}{145,172,107}
+\definecolor{TUMgruenAkzentHell}{RGB}{181,202,130}
+\definecolor{TUMlila}{RGB}{105,8,90}
+\definecolor{TUMgelb}{RGB}{255,220,0}
+\definecolor{TUMorangeHell}{RGB}{249,186,0}
+\definecolor{TUMrot}{RGB}{168,22,30}
+\definecolor{TUMrotMittel}{RGB}{196,7,27}
+\definecolor{TUMrotDunkel}{RGB}{156,13,22}
+
+% Couleurs d'accents ?
+
+\definecolor{TUMgelbAkzent}{RGB}{255,180,0}
+\definecolor{TUMorangeAkzent}{RGB}{255,128,0}
+\definecolor{TUMrotAkzent}{RGB}{168,22,30}
+\definecolor{TUMrotAkzentDunkel}{RGB}{202,33,63}
+\definecolor{TUMblauAkzent}{RGB}{0,153,255}
+\definecolor{TUMblauAkzentHell}{RGB}{65,190,255}
+\definecolor{TUMgruenAkzent}{RGB}{145,172,107}
+\definecolor{TUMgruenAkzentHell}{RGB}{181,202,130}
+\definecolor{Rot}{RGB}{255,0,0}
+
+% Normales
+
+\setbeamercolor{normal}{fg=black}
+\setbeamercolor{justred}{fg=Rot}
+\setbeamercolor{normalred}{fg=TUMrot}
+\setbeamercolor{normalmediumred}{fg=TUMrotMittel}
+\setbeamercolor{normalorange}{fg=TUMorange}
+\setbeamercolor{normalblue}{fg=TUMblau}
+\setbeamercolor{normalgreen}{fg=TUMgelbgruen}
+\setbeamercolor{normaldarkgreen}{fg=TUMgruenDunkel}
+\setbeamercolor{normalgray}{use=normalbg,fg=black!50!normalbg.bg}
+\setbeamercolor{normalwhite}{fg=white}
+\setbeamercolor{darkblue}{fg=TUMblauDunkel}
+\setbeamercolor{verydarkblue}{fg=TUMblauGanzDunkel}
+\setbeamercolor{normalred}{fg=TUMrot}
+
+\setbeamercolor{normalbg}{bg=TUMei!50}
+
+% Background
+
+\setbeamercolor{background canvas}{parent=white}
+
+% Couleurs de texte
+
+\setbeamercolor{normal text}{parent=normal}
+\setbeamercolor{inverted text}{fg=white}
+\setbeamercolor{alerted text}{parent=justred}
+\setbeamercolor{example text}{parent=normalred}
+
+% Ombre
+
+\setbeamercolor{shade}{fg=TUMorange!70,bg=TUMorange!10}
+
+% Titres
+
+\setbeamercolor{title}{parent=black}
+\setbeamercolor{titlelike}{parent=black}
+\setbeamercolor{section in toc shaded}{use=structure,fg=gray}
+\setbeamercolor{section in toc}{fg=TUMblau}
+\setbeamercolor{subsection in toc shaded}{fg=gray}
+\setbeamercolor{subsection in toc}{fg=TUMblau}
+\setbeamercolor{section number projected}{bg=TUMorange,fg=white}
+\setbeamercolor{subsection number projected}{bg=TUMorange,fg=white}
+
+% Listes
+
+%\setbeamercolor{structure}{normalorange}
+\setbeamercolor{enumerate item}{use=block title,fg=block title.bg}
+%\setbeamercolor{itemize item}{use=block title,fg=block title.bg}
+\setbeamercolor{item}{use=block title,fg=TUMblau}
+\setbeamercolor{itemize subitem}{use=block title,fg=gray}
+\setbeamercolor{itemize subsubitem}{use=block title,fg=black}
+
+% Gammes
+
+\setbeamercolor{palette}{bg=TUMblau,fg=white}
+
+\setbeamercolor{palette primary}{parent=palette,fg=white}
+\setbeamercolor{palette secondary}
+  {parent=palette,use=palette,bg=palette.bg!85}
+\setbeamercolor{palette tertiary}
+  {parent=palette,use=palette,bg=palette.bg!70}
+\setbeamercolor{palette quaternary}
+  {parent=palette,use=palette,bg=palette.bg!55}
+
+% Divers
+
+\setbeamercolor{block title}{bg=TUMgrey,fg=white}
+\setbeamercolor{block body}{use={block title,normalbg}, bg=block title.bg!1!normalbg.bg}
+
+\setbeamercolor{block title alerted}{parent=inverted text,use=justred,bg=justred.fg}
+\setbeamercolor{block body alerted}{use={block title alerted ,normalbg}, bg=block title alerted.bg!1!normalbg.bg}
+
+\setbeamercolor{block title example}{parent=inverted text,use=normalgray,bg=normalgray.fg}
+\setbeamercolor{block body example}{use={block title example ,normalbg}, bg=block title example.bg!25!normalbg.bg}
+
+\setbeamercolor{button}{bg=TUMorange,fg=white}
+
+% En-tetes / pieds de page
+
+\setbeamercolor{title in head}{parent=palette primary}
+\setbeamercolor{date in head/foot}{parent=palette primary}
+\setbeamercolor{institute in head/foot}{parent=palette primary}
+\setbeamercolor{author in head/foot}{parent=palette primary}
+\setbeamercolor{separation line}{parent=normal}
+\setbeamercolor{hook}{use=palette quaternary,fg=palette quaternary.bg}
+
+\mode<all>

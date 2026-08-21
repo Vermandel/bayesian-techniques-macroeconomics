@@ -1,0 +1,36 @@
+% Course-local adaptation of the copied Sorbonne Beamer reference assets.
+% The files in template/assets/ are preserved verbatim from the reference copy.
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
+\usepackage{ragged2e}
+\usepackage{hyperref}
+\definecolor{bleu}{RGB}{0,129,188}
+\definecolor{rouge}{RGB}{238,50,78}
+\definecolor{orange}{RGB}{255,100,0}
+\definecolor{vert}{RGB}{0,157,87}
+\definecolor{dp}{RGB}{181,73,60}
+\usetheme{Frankfurt}
+\useoutertheme[subsection=false,shadow]{miniframes}
+\usepackage{template/assets/beamercolorthemeEwen}
+\usepackage{template/assets/beamerouterthemeEwen}
+\usepackage{template/assets/beamerhighlight}
+\usefonttheme{serif}
+\setbeamerfont{title like}{shape=\scshape}
+\setbeamerfont{frametitle}{shape=\scshape}
+\setbeamercolor{frametitle}{fg=dp,bg=white}
+\setbeamercolor{structure}{fg=black}
+\setbeamercolor{alerted text}{fg=dp}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{items}[triangle]
+\setbeamertemplate{footline}{%
+  \leavevmode\hbox{\begin{beamercolorbox}[wd=1\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}
+  \hfill\hspace*{8em}\insertshorttitle\hspace*{2em}\insertframenumber{} / \inserttotalframenumber\hspace*{1ex}
+  \end{beamercolorbox}}\vskip0pt}
+\newcommand{\key}[1]{\textcolor{dp}{\textbf{#1}}}
+\AtBeginSection[]{\begin{frame}{Plan}\tableofcontents[currentsection,hideallsubsections]\end{frame}}

@@ -1,0 +1,114 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=2.4cm]{geometry}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{titlesec}
+
+\definecolor{courseblue}{RGB}{0,82,147}
+\hypersetup{colorlinks=true,linkcolor=courseblue,urlcolor=courseblue,citecolor=courseblue}
+\titleformat{\section}{\large\bfseries\color{courseblue}}{}{0pt}{}
+\setlist[itemize]{leftmargin=*,nosep}
+\setlist[enumerate]{leftmargin=*,nosep}
+\newcommand{\course}{Bayesian Techniques in Macroeconomics}
+\newcommand{\yearcourse}{2026--2027}
+\newcommand{\coursepage}{\url{https://vermandel.org/btm/}}
+\newcommand{\repository}{\url{https://github.com/Vermandel/bayesian-techniques-macroeconomics}}
+
+\begin{document}
+\begin{center}
+{\LARGE\bfseries \course\par}
+\vspace{0.35em}
+{\large Academic year \yearcourse\par}
+\vspace{0.8em}
+{\small\begin{tabular}{rl}
+Format: & Four sessions, 08:30--11:45 \\
+Course page: & \coursepage \\
+Public material: & \repository
+\end{tabular}}
+\end{center}
+
+\section*{Course description}
+This course develops the practical and conceptual tools used to estimate modern macroeconomic models. Starting from business-cycle measurement and simple rational-expectations economies, it introduces state-space methods, maximum likelihood and Bayesian estimation of DSGE models. The emphasis is on a transparent workflow: economic assumptions, data, likelihood, computation, diagnostics and interpretation.
+
+\section*{Learning objectives}
+By the end of the course, students should be able to:
+\begin{itemize}
+\item formulate and solve a small macroeconomic model with uncertainty;
+\item translate a model into a state-space representation and explain filtering;
+\item construct and interpret a likelihood for macroeconomic data;
+\item estimate a DSGE model with MATLAB and Dynare using likelihood-based and Bayesian tools;
+\item document a reproducible data and estimation workflow, including diagnostics.
+\end{itemize}
+
+\section*{Prerequisites}
+Students should be comfortable with graduate macroeconomics, linear algebra, probability and basic econometrics. Familiarity with MATLAB is expected. Prior experience with Dynare is useful but not required; the course material provides the necessary entry points.
+
+\section*{Schedule and session structure}
+\begin{center}
+\begin{tabular}{p{0.21\linewidth}p{0.25\linewidth}p{0.46\linewidth}}
+\toprule
+Date & Session & Main topics \\
+\midrule
+5 November 2026 & 1. Modern Business Cycle Theory & Measurement, consumption--saving, expectations and approximation. \\
+12 November 2026 & 2. A Production Economy & RBC structure, linear rational expectations and Dynare programming. \\
+19 November 2026 & 3. Maximum Likelihood Estimation & State-space models, Kalman filtering, likelihood and DSGE estimation. \\
+26 November 2026 & 4. Bayesian Estimation of DSGE Models & Priors, posterior inference, MCMC, diagnostics and policy analysis. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Teaching material}
+The public repository contains a handout and an oral slide deck for each session, MATLAB scripts, Dynare \texttt{.mod} files, small assessment models and concise build instructions. Sources and compiled PDFs are both provided. Students should work from a clean clone of the repository rather than from a copy containing generated outputs.
+
+\section*{Software, data and DBnomics}
+Use a current version of MATLAB and a Dynare version compatible with it. The course scripts use DBnomics for reproducible macroeconomic data retrieval. No downloaded dataset is stored in the repository: run \texttt{data/download\_data.m} (or a documented assessment-specific downloader) before running a model. Record the provider, dataset, series identifier, frequency, retrieval date and all transformations. General DBnomics guidance is maintained in the shared DBnomics teaching repository; course-specific scripts remain in this repository.
+
+\section*{Assessment}
+Students choose one of the four published assessment models. The submission has two parts: an empirical/macroeconomic report and the complete code needed to reproduce it.
+
+\medskip
+\noindent\textbf{Submission deadline: 15 January 2027.}
+
+\begin{itemize}
+\item Write the report in English and submit it as a PDF produced from LaTeX.
+\item Submit the complete reproducible code. It must run from documented instructions.
+\item Explain data sources and transformations; present and interpret estimation results.
+\item Include relevant diagnostics, such as convergence and posterior or likelihood checks.
+\item Do not submit generated caches, Dynare output or unnecessary downloaded data.
+\end{itemize}
+
+Detailed model choices, deliverables and public rules are in \href{https://github.com/Vermandel/bayesian-techniques-macroeconomics/tree/main/assessment}{\texttt{assessment/README.md}}.
+
+\section*{Grading rubric}
+\begin{center}
+\begin{tabular}{p{0.67\linewidth}r}
+\toprule
+Criterion & Weight \\
+\midrule
+Economic question, model specification and identification discussion & 25\% \\
+Data provenance, transformations and reproducible implementation & 20\% \\
+Estimation, diagnostics and robustness of computation & 25\% \\
+Interpretation of results and economic reasoning & 20\% \\
+Clarity, organization and professional presentation & 10\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{References}
+\begin{itemize}
+\item An, S. and F. Schorfheide (2007), ``Bayesian Analysis of DSGE Models,'' \emph{Econometric Reviews}.
+\item Canova, F. (2007), \emph{Methods for Applied Macroeconomic Research}. Princeton University Press.
+\item Fernández-Villaverde, J. (2010), ``The Econometrics of DSGE Models,'' \emph{SERIEs}.
+\item Herbst, E. and F. Schorfheide (2015), \emph{Bayesian Estimation of DSGE Models}. Princeton University Press.
+\item Judd, K. (1998), \emph{Numerical Methods in Economics}. MIT Press.
+\end{itemize}
+
+\section*{Contact and public links}
+Consult the \href{https://vermandel.org/btm/}{course webpage} for the current public information and the \href{https://github.com/Vermandel/bayesian-techniques-macroeconomics}{GitHub repository} for materials and issue reporting related to reproducibility.
+\end{document}

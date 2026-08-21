@@ -1,48 +1,70 @@
-# Bayesian Techniques in Macroeconomics — 2026
+# Bayesian Techniques in Macroeconomics — 2026--2027
 
-Graduate course, Université Paris-Dauphine PSL · Gauthier Vermandel · 16 hours (four sessions).
+Graduate course at Université Paris-Dauphine PSL, taught by Gauthier Vermandel.
+Four sessions connect economic mechanisms to equilibrium conditions, state-space
+representation, likelihood, prior information, posterior inference and
+diagnostics. The course treats Dynare as an implementation of explicit model
+objects, never as a black box.
 
-The course builds one continuous chain: economic mechanism → equilibrium conditions → state-space representation → likelihood → prior information → posterior inference and diagnostics. Students should not treat Dynare as a black box: every command is linked to a model object and an econometric quantity.
+Start with the [syllabus](syllabus/btm-syllabus-2026-2027.pdf). The public
+repository contains the scientifically validated handouts, runnable starting
+code, assessment models and concise oral decks.
 
 ## Schedule
 
-Four Calendar events are confirmed between 5 and 26 November 2026. The source of truth records 08:30–11:45 for each current slot, whereas the official teaching volume is four hours per session. Exact end times must therefore be confirmed before publication; no extra time is assumed here.
+| Date | Session |
+| --- | --- |
+| 5 November 2026, 08:30--11:45 | Modern Business Cycle Theory |
+| 12 November 2026, 08:30--11:45 | A Production Economy |
+| 19 November 2026, 08:30--11:45 | Maximum Likelihood Estimation |
+| 26 November 2026, 08:30--11:45 | Bayesian Estimation of DSGE Models |
 
-## Sessions
+Detailed learning outcomes and teaching sequence are in
+[docs/course-plan.md](docs/course-plan.md).
 
-1. **Modern business-cycle theory and data** — measurement, detrending, shocks, propagation, linearization and a first Dynare model.
-2. **A production economy** — equilibrium, steady state, log-linearization, solution, moments and impulse responses.
-3. **From the model to the likelihood** — observables, state-space form, Kalman filter, maximum likelihood and identification.
-4. **Bayesian estimation of DSGE models** — priors, posterior mode, Metropolis–Hastings, diagnostics, posterior IRFs, forecasts and shock decomposition.
+## Materials
 
-Detailed learning outcomes and the four-hour teaching sequence are in [docs/course-plan.md](docs/course-plan.md).
+| Session | Handout | Slides | Code |
+| --- | --- | --- | --- |
+| 1. Modern Business Cycle Theory | [PDF](handouts/session1-modern-business-cycle-theory.pdf) | [PDF](slides/session1-modern-business-cycle-theory.pdf) | [MATLAB/Dynare](code/session1/) |
+| 2. A Production Economy | [PDF](handouts/session2-production-economy.pdf) | [PDF](slides/session2-production-economy.pdf) | [MATLAB/Dynare](code/session2/) |
+| 3. Maximum Likelihood Estimation | [PDF](handouts/session3-maximum-likelihood.pdf) | [PDF](slides/session3-maximum-likelihood.pdf) | [MATLAB/Dynare](code/session3/) |
+| 4. Bayesian Estimation of DSGE Models | [PDF](handouts/session4-bayesian-estimation.pdf) | [PDF](slides/session4-bayesian-dsge.pdf) | [MATLAB/Dynare](code/session4/) |
 
-## Software
+The slide sources and the course-local copy of the Sorbonne Beamer assets are
+in `slides/`. Compile a deck with `latexmk -pdf <file>.tex` from that folder.
 
-- MATLAB (a currently supported release).
-- Dynare compatible with that MATLAB release. Add Dynare's `matlab` directory to the MATLAB path once per session.
-- A PDF reader and a plain-text editor.
+## Software and data
 
-From MATLAB, move to an example directory and run `dynare filename.mod`. Start with the simulation examples in `code/session2`, then the likelihood example in `code/session3`, and finally the Bayesian example in `code/session4`. Generated Dynare files and estimation outputs are intentionally excluded from version control.
+Use a current MATLAB release and a compatible Dynare version. From MATLAB,
+move to an example directory and run `dynare filename.mod`. Begin with the
+simulation examples in `code/session2`, then the likelihood example in
+`code/session3`, and finally the Bayesian example in `code/session4`.
+Generated Dynare files and estimation outputs are intentionally excluded from
+version control.
 
-## Data
-
-The historical examples include the data files needed for classroom demonstrations. For the assessment, students must document the provider, exact series identifiers, retrieval date, sample, frequency, units, seasonal adjustment, transformations and any missing-value treatment. The 2026 package does not claim that the historical DBnomics MATLAB client remains supported; use the documented DBnomics API or export and preserve a raw snapshot plus a retrieval script. See [docs/data-and-reproducibility.md](docs/data-and-reproducibility.md).
+Data provenance is part of the empirical model. For each series, document its
+provider, dataset and identifier, retrieval date, sample, frequency, units,
+seasonal adjustment, transformations and missing-value treatment. The
+[DBnomics teaching repository](https://github.com/Vermandel/dbnomics-teaching)
+and its [guide PDF](https://github.com/Vermandel/dbnomics-teaching/blob/main/guide/dbnomics-teaching.pdf)
+are the canonical general reference. Assessment downloaders and course-specific
+scripts remain in this repository; see [docs/data-and-reproducibility.md](docs/data-and-reproducibility.md).
 
 ## Assessment
 
-Choose one model in `assessment/models`, add a transparent data pipeline and an estimable measurement block, then submit reproducible code and a concise report. The four starting points are unemployment, a two-country/open-economy model, mortgage markets and corporate credit. These are student starting models, not complete solutions. See [assessment/README.md](assessment/README.md).
+Choose one model in `assessment/models`, add a transparent data pipeline and
+an estimable measurement block, then submit reproducible code and a concise
+report. The four starting points are unemployment, a two-country/open-economy
+model, mortgage markets and corporate credit. They are student starting models,
+not complete solutions. See [assessment/README.md](assessment/README.md).
 
-## Reproducibility
+**Submission deadline: 15 January 2027.**
 
-Run all work from the project root or the relevant model folder, keep relative paths, never overwrite raw data, and include a one-command entry point. A clean clone must rebuild every reported table and figure. Record MATLAB, Dynare and operating-system versions.
+## Public-repository policy
 
-## Validation status
-
-The packaged PDFs are preserved historical builds. Static source/code checks and
-real numerical runs were completed on 20 August 2026 with MATLAB R2025a Update 1
-and Dynare 7.0. All four assessment models have zero static residuals, satisfy
-the Dynare order and rank conditions, and complete their simulation commands.
-The live DBnomics identifiers were also checked with observations returned for
-all referenced series. See `validation/` for the exact environment, commands
-and durable evidence.
+This is a pedagogical release rather than a workspace dump. It contains
+student-facing handouts, slides, useful code, assessment statements and concise
+documentation; it excludes logs, caches, validation captures, task state,
+downloaded data, generated outputs, private material and solutions. See
+[docs/public-file-audit.md](docs/public-file-audit.md).
