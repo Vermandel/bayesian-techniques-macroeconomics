@@ -81,7 +81,7 @@ resources:
   data:
     label: Course data downloader
     type: Data
-    url: https://github.com/Vermandel/bayesian-techniques-macroeconomics/tree/main/data
+    url: https://github.com/Vermandel/bayesian-techniques-macroeconomics/tree/main/data/
   github:
     label: Course repository
     type: GitHub
