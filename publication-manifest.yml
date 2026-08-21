@@ -7,8 +7,8 @@ course:
     and Bayesian DSGE methods with MATLAB, Dynare and reproducible data.
   course_page: https://vermandel.org/btm/
   github_repository: https://github.com/Vermandel/bayesian-techniques-macroeconomics
-  revision: "Set by the final reconciliation commit."
-  revision_note: "Public URLs target main when pushed."
+  revision: e6d78506df0dfde79ffab77de15f2d74e76b7fb2
+  revision_note: "Reconciled resource-release commit; public URLs target main when pushed."
   illustration:
     preserve_existing_editorial_illustration: true
     placement: inline-right-on-desktop
