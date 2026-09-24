@@ -1,3 +1,7 @@
+% Course: Bayesian Techniques in Macroeconomics (2026-2027)
+% Instructor: Gauthier Vermandel
+% Institution: Universite Paris-Dauphine PSL
+%
 %%% 
 %%% New Classical Growth Model
 %%% gauthier@vermandel.fr
@@ -40,7 +44,7 @@ c2 = beta*alpha*Kss^(alpha-1)*(alpha-1);
 % find roots of the equation - roots([A*x^2 B*x C])
 Fcs = roots([-k3 (-1+k3*c2+k2) -k2*c2]);
 % pick the stable one
-Fc 	= Fcs(find((Fcs<1).*(Fcs>0)));
+Fc 	= Fcs((Fcs<1) & (Fcs>0));
 Fk = k2 - k3*Fc;
 % 2) Compute matrix G:
 Gc = ((Fc-c2)*k1-c1*rho_A)/((Fc-c2)*k3+1-rho_A);
@@ -59,7 +63,7 @@ e_ = randn(exo_nbr,Tsim)*chol(Q);
 for t = 2:(Tsim+1)
 	x_(:,t) = F*x_(:,t-1)+G*e_(t-1);
 end
-% remove inital period of all zeros
+% remove initial period of all zeros
 x_ = x_(:,2:end);
 
 
@@ -72,24 +76,21 @@ y_obs = H *x_;
 % set initial value
 % should be steady state
 x0 		= zeros(3,1);
-Esig0 	= 1;
+Esig0 	= eye(3);
 R		= 0;
 
 % use the Kalman filter
-[x_hat, Omega, S] = KF(y_obs,x0,Esig0,Q,R,F,G,H)
+[x_hat, Omega, S] = KF(y_obs,x0,Esig0,Q,R,F,G,H);
 
 
 % Suppose now that we want to estimate 
 % the covariance of error Sige
 
-% The likelihood function reads as follows:
-llk = @(x) -( -T/2*log(2*pi*x(1))  -1/(2)*e_hat*inv(x(1))*e_hat');
-
 % Maximum likelihood estimation
 % use fmincon to estimate theta
-theta0 = [0.01]; % initial guess e
-theta_MLE = fmincon('KalmanLLK',theta0,[],[],[],[],[],[],[],[],...
-			y_obs,x0,Esig0,Q,R,F,G,H);
+theta0 = Q; % initial guess for the innovation variance
+theta_MLE = fmincon(@(theta) KalmanLLK(theta,y_obs,x0,Esig0,Q,R,F,G,H), ...
+    theta0,[],[],[],[],eps,[]);
 disp(['Estimated standard deviation of errors is ' num2str(sqrt(theta_MLE))])
 
 

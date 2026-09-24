@@ -1,3 +1,7 @@
+// Course: Bayesian Techniques in Macroeconomics (2026-2027)
+// Instructor: Gauthier Vermandel
+// Institution: Universite Paris-Dauphine PSL
+//
 close all;
 %----------------------------------------------------------------
 % 0. Housekeeping (close all graphic windows)
@@ -22,7 +26,7 @@ parameters beta delta alpha sigmaC sigmaL hc chi gy kappa rho_a rho_g rho_h rho_
 
 
 
-%Parametres exogenes RBC Cycles
+% Exogenous RBC-cycle parameters
 beta 	= 0.99; 	%Discount Factor
 delta 	= 0.025;	%Depreciation rate
 alpha 	= 0.36;		%Capital share

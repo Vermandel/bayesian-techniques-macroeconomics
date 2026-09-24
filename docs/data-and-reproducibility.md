@@ -10,7 +10,11 @@ Typical transformations must be justified, not copied mechanically: log differen
 
 The robust workflow is provider/dataset/series identifiers plus a scripted HTTPS request to the DBnomics API, with the unmodified response stored as a raw snapshot. Validate HTTP status, series identity, frequency, units, observation count and date range. Cache raw data so a clean replication does not depend on a live service after retrieval.
 
-The historical corpus does not expose a clearly identified `call_dbnomics.m`; therefore no claim is made that an old MATLAB helper was modernized. A new retrieval implementation must be tested against the selected assessment series once observables are chosen.
+The course provides `btm_call_dbnomics.m`, a small MATLAB helper that queries
+the DBnomics API and returns the observations, their dates and basic metadata.
+The session scripts add the course root to the MATLAB path before calling it.
+Internet access is required only for the retrieval step; the estimation scripts
+then work from the locally generated `mydata.mat` file.
 
 ## Folder contract for assessment work
 

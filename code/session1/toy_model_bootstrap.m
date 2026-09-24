@@ -1,10 +1,13 @@
+% Course: Bayesian Techniques in Macroeconomics (2026-2027)
+% Instructor: Gauthier Vermandel
+% Institution: Universite Paris-Dauphine PSL
+%
 T=100;
 sd_e = 0.1;
 e    = sd_e *[0;randn(T,1)];
 rho  = .85;
 beta =.99;
 
-Te = 10000;
 ey = sd_e*randn(T,1);
 yf = @(y,e) (1-rho+rho*y + e);
 

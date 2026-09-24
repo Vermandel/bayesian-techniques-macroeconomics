@@ -1,3 +1,7 @@
+// Course: Bayesian Techniques in Macroeconomics (2026-2027)
+// Instructor: Gauthier Vermandel
+// Institution: Universite Paris-Dauphine PSL
+//
 % Toy model of borrowing constraint for entrepreneurs
 % gauthier@vermandel.fr
 
@@ -36,6 +40,7 @@ sigmaL 	= 1; 		% Elasticity of labor
 mk      = 0.8;		% Capital borrowing constraint
 mh      = 1;		% Labor borrowing constraint
 kappa	= 4;		% adjustment costs on investment
+chi     = 1;		% initial value; updated in steady_state_model
 
 % autoregressive roots parameters
 rho_a	= 0.95;

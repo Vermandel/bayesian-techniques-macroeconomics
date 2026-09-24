@@ -1,3 +1,7 @@
+% Course: Bayesian Techniques in Macroeconomics (2026-2027)
+% Instructor: Gauthier Vermandel
+% Institution: Universite Paris-Dauphine PSL
+%
 % file that simulates the RBC model
 
 % number of period
@@ -51,30 +55,24 @@ c_obs =  y_(3,:);
 % y = H*x + v;
 H = [0  0  1];
 
-Q = 0.01; 
+Q = sde^2;
 R = 0;
-P = G*Q*G';         % Initial error covariance
-x = zeros(3,1);     % Initial condition on the state
-ye = zeros(length(c_obs),1);
-ycov = zeros(length(c_obs),1); 
+x0 = zeros(3,1);
+ESig0 = eye(3);
+[x_hat, Omega, prediction_error] = KF(c_obs,x0,ESig0,Q,R,F,G,H);
 
-for t = 1:length(c_obs)
-  % Measurement update
-  Mn = P*H'/(H*P*H'+R);
-  x = x + Mn*(c_obs(i)-H*x);   % x[n|n]
-  P = (eye(3)-Mn*H)*P;      % P[n|n]
+figure
+subplot(2,1,1)
+plot(1:length(c_obs),c_obs,1:length(c_obs),H*x_hat,'--')
+legend('Observed consumption','Filtered consumption')
+title('Kalman filter: observed and filtered consumption')
+subplot(2,1,2)
+plot(1:length(c_obs),prediction_error)
+title('One-step-ahead prediction errors')
+xlabel('Period')
 
-  ye(i) = H*x;
-  errcov(i) = H*P*H';
-
-  % Time update
-  x = F*x + B*u(i);        % x[n+1|n]
-  P = F*P*F' + B*Q*B';     % P[n+1|n]
-end
-
-RBC_kf = ss(F,G,[0  0  1],0,T,'inputname',{'e'},'outputname','c','StateName',{'k','a','c'});
-
-[kalmf,L,P,M] = kalman(Plant,Q,R);
+assert(all(isfinite(Omega)) && all(Omega > 0), ...
+    'The Kalman filter returned an invalid innovation variance.');
 
 
 

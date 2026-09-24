@@ -1,4 +1,11 @@
 # LaTeX and editor build debris
+# Public teaching releases contain rendered PDFs only.  Keep all LaTeX source
+# files and local theme assets out of Git while retaining them for maintenance.
+*.tex
+*.sty
+*.cls
+*.bib
+*.bst
 *.aux
 *.bbl
 *.blg
@@ -70,6 +77,7 @@ publication-manifest.local.yml
 .task-state/
 checkpoints/
 reports/internal/
+private/
 worker-logs/
 *.manifest.local.yml
 

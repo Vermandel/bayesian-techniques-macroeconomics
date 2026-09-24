@@ -7,8 +7,8 @@ course:
     and Bayesian DSGE methods with MATLAB, Dynare and reproducible data.
   course_page: https://vermandel.org/btm/
   github_repository: https://github.com/Vermandel/bayesian-techniques-macroeconomics
-  revision: e6d78506df0dfde79ffab77de15f2d74e76b7fb2
-  revision_note: "Reconciled resource-release commit; public URLs target main when pushed."
+  revision: main
+  revision_note: "The publication handoff records the exact audited commit."
   illustration:
     preserve_existing_editorial_illustration: true
     placement: inline-right-on-desktop
@@ -33,6 +33,10 @@ schedule:
       title: Bayesian Estimation of DSGE Models
 
 assessment:
+  mode: rendu_ecrit
+  mode_label:
+    fr: Rendu écrit
+    en: Written submission
   deadline: "15 January 2027"
   summary: >-
     Choose one of four models. Submit an English report as a PDF produced from
@@ -45,39 +49,39 @@ assessment:
   models:
     - label: Credit market model
       type: PDF
-      url: https://github.com/Vermandel/bayesian-techniques-macroeconomics/blob/main/assessment/models/credit_market/credit_market_model.pdf
+      url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/assessment/models/credit_market/credit_market_model.pdf
     - label: Mortgage model
       type: PDF
-      url: https://github.com/Vermandel/bayesian-techniques-macroeconomics/blob/main/assessment/models/mortgage/mortgage_market_model.pdf
+      url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/assessment/models/mortgage/mortgage_market_model.pdf
     - label: Open-economy model
       type: PDF
-      url: https://github.com/Vermandel/bayesian-techniques-macroeconomics/blob/main/assessment/models/open_economy/two_countries.pdf
+      url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/assessment/models/open_economy/two_countries.pdf
     - label: Unemployment model
       type: PDF
-      url: https://github.com/Vermandel/bayesian-techniques-macroeconomics/blob/main/assessment/models/unemployment/unemployment.pdf
+      url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/assessment/models/unemployment/unemployment.pdf
 
 resources:
   syllabus:
     label: Syllabus 2026-2027
     type: PDF
-    url: https://github.com/Vermandel/bayesian-techniques-macroeconomics/blob/main/syllabus/btm-syllabus-2026-2027.pdf
+    url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/syllabus/btm-syllabus-2026-2027.pdf
   sessions:
     - title: Modern Business Cycle Theory
-      handout: {type: PDF, url: https://github.com/Vermandel/bayesian-techniques-macroeconomics/blob/main/handouts/session1-modern-business-cycle-theory.pdf}
-      slides: {type: PDF, url: https://github.com/Vermandel/bayesian-techniques-macroeconomics/blob/main/slides/session1-modern-business-cycle-theory.pdf}
-      code: {type: MATLAB, url: https://github.com/Vermandel/bayesian-techniques-macroeconomics/tree/main/code/session1}
+      handout: {type: PDF, url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/handouts/session1-modern-business-cycle-theory.pdf}
+      slides: {type: PDF, url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/slides/session1-modern-business-cycle-theory.pdf}
+      code: {type: MATLAB, url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/downloads/session1-code.zip}
     - title: A Production Economy
-      handout: {type: PDF, url: https://github.com/Vermandel/bayesian-techniques-macroeconomics/blob/main/handouts/session2-production-economy.pdf}
-      slides: {type: PDF, url: https://github.com/Vermandel/bayesian-techniques-macroeconomics/blob/main/slides/session2-production-economy.pdf}
-      code: {type: Dynare, url: https://github.com/Vermandel/bayesian-techniques-macroeconomics/tree/main/code/session2}
+      handout: {type: PDF, url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/handouts/session2-production-economy.pdf}
+      slides: {type: PDF, url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/slides/session2-production-economy.pdf}
+      code: {type: Dynare, url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/downloads/session2-code.zip}
     - title: Maximum Likelihood Estimation
-      handout: {type: PDF, url: https://github.com/Vermandel/bayesian-techniques-macroeconomics/blob/main/handouts/session3-maximum-likelihood.pdf}
-      slides: {type: PDF, url: https://github.com/Vermandel/bayesian-techniques-macroeconomics/blob/main/slides/session3-maximum-likelihood.pdf}
-      code: {type: MATLAB, url: https://github.com/Vermandel/bayesian-techniques-macroeconomics/tree/main/code/session3}
+      handout: {type: PDF, url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/handouts/session3-maximum-likelihood.pdf}
+      slides: {type: PDF, url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/slides/session3-maximum-likelihood.pdf}
+      code: {type: MATLAB, url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/downloads/session3-code.zip}
     - title: Bayesian Estimation of DSGE Models
-      handout: {type: PDF, url: https://github.com/Vermandel/bayesian-techniques-macroeconomics/blob/main/handouts/session4-bayesian-estimation.pdf}
-      slides: {type: PDF, url: https://github.com/Vermandel/bayesian-techniques-macroeconomics/blob/main/slides/session4-bayesian-dsge.pdf}
-      code: {type: Dynare, url: https://github.com/Vermandel/bayesian-techniques-macroeconomics/tree/main/code/session4}
+      handout: {type: PDF, url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/handouts/session4-bayesian-dsge.pdf}
+      slides: {type: PDF, url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/slides/session4-bayesian-dsge.pdf}
+      code: {type: Dynare, url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/downloads/session4-code.zip}
   data:
     label: Course data downloader
     type: Data

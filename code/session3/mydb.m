@@ -1,7 +1,13 @@
+% Course: Bayesian Techniques in Macroeconomics (2026-2027)
+% Instructor: Gauthier Vermandel
+% Institution: Universite Paris-Dauphine PSL
+%
+course_root = fileparts(fileparts(fileparts(mfilename('fullpath'))));
+addpath(course_root);
 
 %% Getting US output through db.nomics
 % quarterly real output
-[my_mat,~,T] = call_dbnomics('OECD/QNA/USA.B1_GS1.LNBQRSA.Q');
+[my_mat,~,T] = btm_call_dbnomics('OECD/QNA/USA.B1_GS1.LNBQRSA.Q');
 
 % selecting the 2nd column to select GDP
 gross_y = my_mat (:,2);

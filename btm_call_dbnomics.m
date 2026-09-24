@@ -1,3 +1,7 @@
+% Course: Bayesian Techniques in Macroeconomics (2026-2027)
+% Instructor: Gauthier Vermandel
+% Institution: Universite Paris-Dauphine PSL
+%
 function [output_table, series_names, T] = btm_call_dbnomics(varargin)
 %BTM_CALL_DBNOMICS Fetch and align DBnomics series for this course.
 %   [DATA,NAMES,T] = BTM_CALL_DBNOMICS('provider/dataset/series', ...)

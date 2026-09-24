@@ -1,3 +1,7 @@
+% Course: Bayesian Techniques in Macroeconomics (2026-2027)
+% Instructor: Gauthier Vermandel
+% Institution: Universite Paris-Dauphine PSL
+%
 mu    = 0.1;    % mean 
 sig   = 1;      % std
 T     = 1000;    % number of draws

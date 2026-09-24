@@ -1,10 +1,17 @@
+% Course: Bayesian Techniques in Macroeconomics (2026-2027)
+% Instructor: Gauthier Vermandel
+% Institution: Universite Paris-Dauphine PSL
+%
+course_root = fileparts(fileparts(fileparts(mfilename('fullpath'))));
+addpath(course_root);
+
 % get real US GDP
-[mydata,~,T] = call_dbnomics('OECD/QNA/USA.B1_GS1.LNBQRSA.Q');
+[mydata,~,T] = btm_call_dbnomics('OECD/QNA/USA.B1_GS1.LNBQRSA.Q');
 % statistics
 gdp = log(mydata(:,2));
 % Linear Trend
 y_lin = gdp-detrend(gdp,1);
-y_hp    = hpfilter(gdp,1600);
+y_hp    = hpfilter(gdp,'Smoothing',1600);
 y_bp    = gdp-bpass(gdp,6,32);
 % plot result
 figure;
@@ -19,7 +26,7 @@ xlim([min(T) max(T)])
 legend('Linear','HP','BP','Location','south')
 subplot(3,1,3)
 plot(T,gdp-y_lin,'r',T,gdp-y_hp,'g--',T,gdp-y_bp,'k:')
-title('BS cycle measures')
+title('Business-cycle measures')
 xlim([min(T) max(T)])
 legend('Linear','HP','BP','Location','south')
 

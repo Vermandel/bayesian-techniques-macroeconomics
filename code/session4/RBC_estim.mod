@@ -1,3 +1,7 @@
+// Course: Bayesian Techniques in Macroeconomics (2026-2027)
+// Instructor: Gauthier Vermandel
+// Institution: Universite Paris-Dauphine PSL
+//
 var y c k a;
 varexo e_a;
 parameters rho_A beta delta alpha;

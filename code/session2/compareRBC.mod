@@ -1,3 +1,7 @@
+// Course: Bayesian Techniques in Macroeconomics (2026-2027)
+// Instructor: Gauthier Vermandel
+// Institution: Universite Paris-Dauphine PSL
+//
 %%% 
 %%% New Classical Growth Model
 %%% gauthier@vermandel.fr

@@ -1,3 +1,7 @@
+// Course: Bayesian Techniques in Macroeconomics (2026-2027)
+// Instructor: Gauthier Vermandel
+// Institution: Universite Paris-Dauphine PSL
+//
 var y c k a;
 varexo e_a;
 parameters rho_A beta delta alpha Kss Css;
@@ -47,10 +51,11 @@ title('Productivity')
 
 
 % REVERSING
+trend_index = (0:numel(T)-1)';
 figure;
 subplot(2,1,1);
-plot(T,exp(.005*(T-T(1))+oo_.SmoothedVariables.y))
+plot(T,exp(.005*trend_index+oo_.SmoothedVariables.y))
 title('Output')
 subplot(2,1,2);
-plot(T,exp(.005*(T-T(1))+oo_.SmoothedVariables.k))
+plot(T,exp(.005*trend_index+oo_.SmoothedVariables.k))
 title('Capital')

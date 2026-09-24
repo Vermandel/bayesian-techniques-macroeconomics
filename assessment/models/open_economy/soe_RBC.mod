@@ -1,3 +1,7 @@
+// Course: Bayesian Techniques in Macroeconomics (2026-2027)
+// Instructor: Gauthier Vermandel
+// Institution: Universite Paris-Dauphine PSL
+//
 close all;
 %format long
 
@@ -30,8 +34,8 @@ var c_H (long_name='home consumption'),
 
 	varexo	eta_z_H eta_x_H eta_z_F eta_x_F eta_e;
 
-parameters	sigmaC sigmaH beta alpha chi_B chi_H chi_F  mu alpha_C n rho phi_pi phi_y 
-			rho_e Yss_H Yss_F Css_H Css_F Bss_H Bss_F Rss_H Rss_F
+parameters	sigmaC sigmaH alpha chi_B mu alpha_C n
+			rho_e Yss_H Yss_F Css_H Css_F Bss_H Bss_F Rss_F
 			rho_z_H rho_x_H
 			rho_z_F rho_x_F
 			;
@@ -41,7 +45,6 @@ parameters	sigmaC sigmaH beta alpha chi_B chi_H chi_F  mu alpha_C n rho phi_pi p
 %----------------------------------------------------------------
 sigmaC		= 1.5;		% risk aversion
 sigmaH		= 2;		% labor supply
-beta		= .994;		% discount factor
 alpha		= .7;		% share of labor in production
 chi_B		= 0.007;	% cost of foreign debt
 mu			= 2;		% Substitution between home/foreign goods
@@ -62,8 +65,7 @@ Css_H		= (Yss_H-alpha_C/(1-alpha_C)*(1-n)/n*Yss_F)/((1-alpha_C)-alpha_C^2/(1-alp
 Css_F		= 1/(1-alpha_C)*Yss_F-alpha_C/(1-alpha_C)*Css_H*n/(1-n);
 LBss_H 		= (Css_H)^-sigmaC;
 LBss_F 		= (Css_F)^-sigmaC;
-Rss_H		= 1/beta;
-Rss_F		= 1/beta;
+Rss_F		= 1/.994;	% gross steady-state interest rate
 Bss_H		= (((1-alpha_C)*Css_H + alpha_C*Css_F*(1-n)/n) - Css_H)/(1-Rss_F);
 Bss_F		= -n/(1-n)*Bss_H;
 RERss		= 1;
@@ -72,8 +74,6 @@ Wss_F		= 1/Hss_F*(alpha*Yss_F);
 Pss_H		= 1; Pss_F		= 1;
 EXss_H 		= alpha_C*Css_F*(1-n);
 EXss_F 		= alpha_C*Css_H*n;
-chi_H		= LBss_H*Wss_H/(Hss_H^sigmaH);
-	chi_F		= LBss_F*Wss_F/(Hss_F^sigmaH);
 
 
 %----------------------------------------------------------------

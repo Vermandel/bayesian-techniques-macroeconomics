@@ -1,3 +1,7 @@
+% Course: Bayesian Techniques in Macroeconomics (2026-2027)
+% Instructor: Gauthier Vermandel
+% Institution: Universite Paris-Dauphine PSL
+%
 function [x_hat, Omega, S] = KF(Y,x0,Esig0,Q,R,F,G,H)
 
 T = size(Y,2);           
@@ -5,7 +9,7 @@ n = size(F,1);
 
 % allocating memory
 Sigma   = nan(n,n,T);		% Sigma_{t}
-ESigma  = nan(n,n,T);		% E_{t-1}(Sigma_{t})
+ESigma  = nan(n,n,T+1);		% E_{t-1}(Sigma_{t})
 x_hat   = nan(n,T);    		% x_{t}
 Ex_hat  = nan(n,T);			% E_{t-1}(x_{t})
 Omega   = nan(T,1);			% conditional forecast error variance
@@ -23,7 +27,7 @@ for t = 1:T
     % Prediction error
 	S(t)   		= Y(t) - (H)*Ex_hat(:,t);
 	% Kalman Update 
-    K           = (ESigma(:,:,t)'*(H)' )*(Omega(t))^(-1);
+    K           = ESigma(:,:,t)*H'/Omega(t);
     
     % Update state mean
     x_hat(:,t)  = Ex_hat(:,t) + K*S(t); 

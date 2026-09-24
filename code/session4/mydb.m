@@ -1,4 +1,11 @@
-[output_table,~,T] = call_dbnomics('OECD/QNA/USA.B1_GE.CQRSA.Q','OECD/QNA/USA.P31DC.CQRSA.Q','OECD/QNA/USA.P51.CQRSA.Q','OECD/QNA/USA.B1_GE.DNBSA.Q','OECD/MEI/USA.HOHWMN02.STSA.Q','OECD/MEI/USA.LFACTTTT.STSA.Q','OECD/KEI/IR3TIB01.USA.ST.Q');
+% Course: Bayesian Techniques in Macroeconomics (2026-2027)
+% Instructor: Gauthier Vermandel
+% Institution: Universite Paris-Dauphine PSL
+%
+course_root = fileparts(fileparts(fileparts(mfilename('fullpath'))));
+addpath(course_root);
+
+[output_table,~,T] = btm_call_dbnomics('OECD/QNA/USA.B1_GE.CQRSA.Q','OECD/QNA/USA.P31DC.CQRSA.Q','OECD/QNA/USA.P51.CQRSA.Q','OECD/QNA/USA.B1_GE.DNBSA.Q','OECD/MEI/USA.HOHWMN02.STSA.Q','OECD/MEI/USA.LFACTTTT.STSA.Q','OECD/KEI/IR3TIB01.USA.ST.Q');
 % Output, Consumption, Investment, Deflator, Weekly Hours, Active Pop, Nominal Rate
 
 % select non NaN ids
@@ -8,9 +15,10 @@ T				= T(idx);
 
 
 % we normalize to one prices and in population for 2015
-id2015 = find(T==2015);
-pop = output_table(:,5)/output_table(id2015,5);
-def = output_table(:,7)/output_table(id2015,7);
+id2015 = find(year(T)==2015,1,'first');
+assert(~isempty(id2015),'The aligned dataset does not contain a 2015 observation.');
+pop = output_table(:,7)/output_table(id2015,7);
+def = output_table(:,5)/output_table(id2015,5);
 
 
 %% taking in real growth rates per capita
@@ -21,7 +29,7 @@ di  = 100*diff(log(output_table(:,4)./(pop.*def)));
 dh	= 100*output_table(2:end,6)/(7*24);
 
 % output gap
-y = 100*detrend(log(log(output_table(:,2)./(pop.*def))));
+y = 100*detrend(log(output_table(:,2)./(pop.*def)));
 y = y - mean(y);
 
 % inflation rate

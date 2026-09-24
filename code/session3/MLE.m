@@ -1,3 +1,7 @@
+% Course: Bayesian Techniques in Macroeconomics (2026-2027)
+% Instructor: Gauthier Vermandel
+% Institution: Universite Paris-Dauphine PSL
+%
 mu    = 0.1;    % mean 
 sig   = 1;      % std
 T     = 5000;    % number of draws
@@ -12,7 +16,7 @@ llk = @(x) -( -T/2*log(2*pi*x(2)^2)  -1/(2*x(2)^2)*((y_obs-x(1))'*(y_obs-x(1))))
 % Maximum likelihood estimation
 % use fmincon to estimate theta
 theta0 = [0 5]; % initial guess 
-theta_MLE = fmincon(llk,theta0);
+theta_MLE = fmincon(llk,theta0,[],[],[],[],[-Inf 1e-8]);
 
 % explore the neighborhood of the max of the llk function
 x1=linspace(0,.5,100);

@@ -1,3 +1,7 @@
+% Course: Bayesian Techniques in Macroeconomics (2026-2027)
+% Instructor: Gauthier Vermandel
+% Institution: Universite Paris-Dauphine PSL
+%
 %%% 
 %%% New Classical Growth Model
 %%% gauthier@vermandel.fr
@@ -40,7 +44,7 @@ c2 = beta*alpha*Kss^(alpha-1)*(alpha-1);
 % find roots of the equation - roots([A*x^2 B*x C])
 Fcs = roots([-k3 (-1+k3*c2+k2) -k2*c2]);
 % pick the stable one
-Fc 	= Fcs(find((Fcs<1).*(Fcs>0)));
+Fc 	= Fcs((Fcs<1) & (Fcs>0));
 Fk = k2 - k3*Fc;
 % 2) Compute matrix G:
 Gc = ((Fc-c2)*k1-c1*rho_A)/((Fc-c2)*k3+1-rho_A);
@@ -59,7 +63,7 @@ e_ = randn(exo_nbr,Tsim)*chol(Q);
 for t = 2:(Tsim+1)
 	x_(:,t) = F*x_(:,t-1)+G*e_(t-1);
 end
-% remove inital period of all zeros
+% remove initial period of all zeros
 x_ = x_(:,2:end);
 
 
@@ -74,7 +78,7 @@ x_hat = zeros(endo_nbr,Tsim+1);
 e_hat = zeros(exo_nbr,Tsim+1);
 for t = 2:(Tsim+1)
 	% invert the model
-	e_hat(:,t) = inv(H*G)*(y_obs(:,t-1)-H*F*x_hat(:,t-1));
+	e_hat(:,t) = (H*G)\(y_obs(:,t-1)-H*F*x_hat(:,t-1));
 	% feed the model with new shock
 	x_hat(:,t) = F*x_hat(:,t-1)+G*e_hat(:,t);
 end
@@ -105,7 +109,7 @@ sd_Sige = .1;
 T = length(e_hat);
 
 % The likelihood function reads as follows:
-llk = @(x) ( -T/2*log(2*pi*x)  -1/(2)*e_hat*inv(x)*e_hat');
+llk = @(x) ( -T/2*log(2*pi*x)  -1/(2*x)*(e_hat*e_hat'));
 % Prior reads as
 lnprior = @(x)  log(normpdf(x,mu_Sige,sd_Sige));
 
@@ -119,20 +123,30 @@ title('Prior for $\hat{Q}$','Interpreter','latex')
 
 % Bayesian estimation
 % use fmincon to estimate theta
-theta0 = [0.01]; % initial guess e
-theta_MLE = fmincon(@(x) -llk(x),theta0);
-theta_BE = fmincon(@(x) -(llk(x) + lnprior(x)),theta0);
+theta0 = 0.01; % initial guess e
+theta_MLE = fmincon(@(x) -llk(x),theta0,[],[],[],[],1e-8);
+theta_BE = fmincon(@(x) -(llk(x) + lnprior(x)),theta0,[],[],[],[],1e-8);
 disp('Mode:')
 disp(['MLE: Est. Q ' num2str(theta_MLE)])
 disp(['BE : Est. Q ' num2str(theta_BE)])
 
-% compute covariance across estimated parameters
-H = hessian(@(x)-(llk(x) + lnprior(x)),theta_BE, [0.01;1])
-P = chol(inv(H));
+% Compute a one-dimensional Laplace approximation around the posterior mode.
+posterior_objective = @(x) -(llk(x) + lnprior(x));
+h = 1e-4*max(1,abs(theta_BE));
+posterior_hessian = (posterior_objective(theta_BE+h) ...
+    - 2*posterior_objective(theta_BE) ...
+    + posterior_objective(theta_BE-h))/h^2;
+assert(isfinite(posterior_hessian) && posterior_hessian > 0, ...
+    'The posterior Hessian must be finite and positive at the mode.');
+P = sqrt(1/posterior_hessian);
 % jump parameter that explore the density
 c=2.2;
 % number of draw per chain
-MCsims = 20000;
+if exist('BTM_MCMC_DRAWS','var')
+    MCsims = BTM_MCMC_DRAWS;
+else
+    MCsims = 20000;
+end
 
 % initialization
 theta_mcmc = nan(1,MCsims);
@@ -158,18 +172,18 @@ for i = 2:MCsims
 				best_pdata = pdata;
 				best_thetai = theta;
 				accept = accept+1;
-				disp([num2str(i) ' accept - AR:' num2str(100*accept/(i-1)) '%']);
-		else
-				disp([num2str(i) ' reject - AR:' num2str(100*accept/(i-1)) '%']);
 		end
 		theta_mcmc(i)=best_thetai;
 		pdata_mcmc(i)=best_pdata;
 		AR_mcmc(i) = 100*accept/(i-1);
+		if mod(i,500) == 0 || i == MCsims
+			disp([num2str(i) ' draws - AR:' num2str(AR_mcmc(i)) '%']);
+		end
 end
 
 figure;
 subplot(1,3,1)
-hist(theta_mcmc,100)
+histogram(theta_mcmc,100)
 title('Posterior of $\hat{Q}$','Interpreter','latex')
 xlabel('Q')
 ylabel('density')

@@ -1,4 +1,4 @@
-# Bayesian Techniques in Macroeconomics — 2026--2027
+# Bayesian Techniques in Macroeconomics — 2026–2027
 
 Graduate course at Université Paris-Dauphine PSL, taught by Gauthier Vermandel.
 Four sessions connect economic mechanisms to equilibrium conditions, state-space
@@ -20,23 +20,27 @@ code, assessment models and concise oral decks.
 | 26 November 2026, 08:30--11:45 | Bayesian Estimation of DSGE Models |
 
 Detailed learning outcomes and teaching sequence are in
-[docs/course-plan.md](docs/course-plan.md).
+[docs/course-plan.md](docs/course-plan.md). A fuller academic description of the
+course's model-to-estimation pipeline is in
+[docs/course-description.md](docs/course-description.md).
 
 ## Materials
 
 | Session | Handout | Slides | Code |
 | --- | --- | --- | --- |
-| 1. Modern Business Cycle Theory | [PDF](handouts/session1-modern-business-cycle-theory.pdf) | [PDF](slides/session1-modern-business-cycle-theory.pdf) | [MATLAB/Dynare](code/session1/) |
-| 2. A Production Economy | [PDF](handouts/session2-production-economy.pdf) | [PDF](slides/session2-production-economy.pdf) | [MATLAB/Dynare](code/session2/) |
-| 3. Maximum Likelihood Estimation | [PDF](handouts/session3-maximum-likelihood.pdf) | [PDF](slides/session3-maximum-likelihood.pdf) | [MATLAB/Dynare](code/session3/) |
-| 4. Bayesian Estimation of DSGE Models | [PDF](handouts/session4-bayesian-estimation.pdf) | [PDF](slides/session4-bayesian-dsge.pdf) | [MATLAB/Dynare](code/session4/) |
+| 1. Modern Business Cycle Theory | [PDF](handouts/session1-modern-business-cycle-theory.pdf) | [PDF](slides/session1-modern-business-cycle-theory.pdf) | [Browse](code/session1/) · [ZIP](downloads/session1-code.zip) |
+| 2. A Production Economy | [PDF](handouts/session2-production-economy.pdf) | [PDF](slides/session2-production-economy.pdf) | [Browse](code/session2/) · [ZIP](downloads/session2-code.zip) |
+| 3. Maximum Likelihood Estimation | [PDF](handouts/session3-maximum-likelihood.pdf) | [PDF](slides/session3-maximum-likelihood.pdf) | [Browse](code/session3/) · [ZIP](downloads/session3-code.zip) |
+| 4. Bayesian Estimation of DSGE Models | [PDF](handouts/session4-bayesian-dsge.pdf) | [PDF](slides/session4-bayesian-dsge.pdf) | [Browse](code/session4/) · [ZIP](downloads/session4-code.zip) |
 
-The slide sources and the course-local copy of the Sorbonne Beamer assets are
-in `slides/`. Compile a deck with `latexmk -pdf <file>.tex` from that folder.
+The public release contains the compiled handout and slide PDFs. LaTeX sources
+and local theme assets are maintained in the private Dropbox master and are
+intentionally excluded from GitHub.
 
 ## Software and data
 
-Use a current MATLAB release and a compatible Dynare version. From MATLAB,
+The course code is validated with MATLAB R2025a and Dynare 7.0. A compatible
+Dynare 7.x release may also be used. From MATLAB,
 move to an example directory and run `dynare filename.mod`. Begin with the
 simulation examples in `code/session2`, then the likelihood example in
 `code/session3`, and finally the Bayesian example in `code/session4`.

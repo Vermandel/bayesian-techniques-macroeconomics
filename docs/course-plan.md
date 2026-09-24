@@ -1,4 +1,4 @@
-# Course architecture: four sessions of four hours
+# Course architecture: four three-hour sessions, each with a 15-minute break
 
 ## Session 1 — Modern business-cycle theory and data
 
@@ -10,7 +10,7 @@
 
 **Examples and activities.** Reproduce alternative GDP-cycle measures; compare endpoint behaviour; interpret volatility and correlations; solve the small `dyn_toy_model.mod` analytically and in Dynare.
 
-**Four-hour sequence.** 0:00–0:40 motivation and measurement; 0:40–1:30 filters; 1:30–1:40 break; 1:40–2:25 facts and propagation; 2:25–3:10 linearization; 3:10–3:20 break; 3:20–4:00 MATLAB/Dynare manipulation and synthesis.
+**Session sequence.** 0:00–0:35 motivation and measurement; 0:35–1:20 filters; 1:20–1:30 facts and propagation; 1:30–1:45 break; 1:45–2:25 expectations and propagation; 2:25–2:55 linearization; 2:55–3:15 MATLAB/Dynare manipulation and synthesis.
 
 **Files.** `handouts/session1-modern-business-cycle-theory.pdf`; `code/session1/logGDP.m`, `BSmeasures.m`, `bpass.m`, `toy_model.m`, `dyn_toy_model.mod`.
 
@@ -26,9 +26,9 @@
 
 **Examples and activities.** Derive the Euler equation and steady state; map equations to `RBC.mod`; compare hand solution, basic Dynare implementation and enriched model; perturb a structural parameter and explain the IRF change.
 
-**Four-hour sequence.** 0:00–0:50 economic mechanism; 0:50–1:35 equilibrium derivation; 1:35–1:45 break; 1:45–2:30 steady state and linearization; 2:30–3:10 Dynare syntax and checks; 3:10–3:20 break; 3:20–4:00 IRF experiment and debrief.
+**Session sequence.** 0:00–0:40 economic mechanism; 0:40–1:25 equilibrium derivation; 1:25–1:30 synthesis; 1:30–1:45 break; 1:45–2:25 steady state and linearization; 2:25–2:55 Dynare syntax and checks; 2:55–3:15 IRF experiment and debrief.
 
-**Files.** `handouts/session2-production-economy.pdf`; `code/session2/RBC.mod`, `basicRBC.mod`, `compareRBC.mod`, `compareRBC.m`.
+**Files.** `handouts/session2-production-economy.pdf`; `code/session2/RBC.mod`, `basicRBC.mod`, `compareRBC.mod`.
 
 **Expected outcome.** Students can explain every model equation, obtain the steady state and diagnose whether an IRF is economically plausible.
 
@@ -42,9 +42,9 @@
 
 **Examples and activities.** Walk through `KF.m` and `KalmanLLK.m`; match `varobs` to transformed data; estimate the RBC productivity process; compare filtered states with observed output growth; run identification thought experiments.
 
-**Four-hour sequence.** 0:00–0:45 state-space mapping; 0:45–1:30 Kalman prediction/update; 1:30–1:40 break; 1:40–2:30 likelihood and optimization; 2:30–3:10 observables and data transformations; 3:10–3:20 break; 3:20–4:00 coding exercise and identification clinic.
+**Session sequence.** 0:00–0:40 state-space mapping; 0:40–1:25 Kalman prediction/update; 1:25–1:30 synthesis; 1:30–1:45 break; 1:45–2:25 likelihood and optimization; 2:25–2:55 observables and data transformations; 2:55–3:15 coding exercise and identification clinic.
 
-**Files.** `handouts/session3-maximum-likelihood.pdf`; `code/session3/KF.m`, `KalmanLLK.m`, `MLE.m`, `RBC_by_hand.m`, `RBC_estim.mod`, `mydata.mat`.
+**Files.** `handouts/session3-maximum-likelihood.pdf`; `code/session3/KF.m`, `KalmanLLK.m`, `MLE.m`, `RBC_by_hand.m`, `RBC_estim.mod`, `mydb.m` (which generates the local `mydata.mat`).
 
 **Expected outcome.** Students can write the measurement equation, explain each Kalman-filter object and recognize an underidentified or singular estimation design.
 
@@ -58,9 +58,9 @@
 
 **Examples and activities.** Read the `estimated_params` block; critique alternative priors; run a short diagnostic chain then a production chain; compare prior and posterior; connect posterior IRFs to mechanisms; scope the assessment project.
 
-**Four-hour sequence.** 0:00–0:45 prior elicitation; 0:45–1:30 posterior mode; 1:30–1:40 break; 1:40–2:30 MCMC mechanics; 2:30–3:10 diagnostics and posterior objects; 3:10–3:20 break; 3:20–4:00 assessment design clinic.
+**Session sequence.** 0:00–0:40 prior elicitation; 0:40–1:25 posterior mode; 1:25–1:30 synthesis; 1:30–1:45 break; 1:45–2:25 MCMC mechanics; 2:25–2:55 diagnostics and posterior objects; 2:55–3:15 assessment design clinic.
 
-**Files.** `handouts/session4-bayesian-estimation.pdf`; `code/session4/RBC_estim.mod`, `fullRBC.mod`, `bayesianRBC.m`, `mydata.mat`, `myobs.mat`.
+**Files.** `handouts/session4-bayesian-estimation.pdf`; `code/session4/RBC_estim.mod`, `fullRBC.mod`, `bayesianRBC.m`, `mydb.m` (which generates the local `mydata.mat`).
 
 **Expected outcome.** Students can defend priors, diagnose a chain, interpret posterior uncertainty and specify a reproducible estimation project.
 

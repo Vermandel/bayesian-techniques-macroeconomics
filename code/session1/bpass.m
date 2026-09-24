@@ -1,4 +1,8 @@
-function [fX] = bandpass(X,pl,pu)
+% Course: Bayesian Techniques in Macroeconomics (2026-2027)
+% Instructor: Gauthier Vermandel
+% Institution: Universite Paris-Dauphine PSL
+%
+function [fX] = bpass(X,pl,pu)
 %
 %	MATLAB COMMAND FOR BAND PASS FILTER: fX = bpass(X,pl,pu)
 %
@@ -51,7 +55,7 @@ undrift = 1;
 j = 1:T;
 if undrift == 1
    drift = (X(T,1)-X(1,1))/(T-1);
-   Xun = X-[(j'-1)*drift];
+   Xun = X-(j'-1)*drift;
 else
    Xun = X;
 end
@@ -63,7 +67,7 @@ a=2*pi/pu;
 bnot = (b-a)/pi;
 bhat = bnot/2;
 
-B = [(sin(j*b)-sin(j*a))./(j*pi)]';
+B = ((sin(j*b)-sin(j*a))./(j*pi))';
 B(2:T,1) = B(1:T-1,1);
 B(1,1) = bnot;
 

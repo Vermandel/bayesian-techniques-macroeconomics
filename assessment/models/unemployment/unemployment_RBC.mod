@@ -1,3 +1,7 @@
+// Course: Bayesian Techniques in Macroeconomics (2026-2027)
+// Instructor: Gauthier Vermandel
+// Institution: Universite Paris-Dauphine PSL
+//
 % Toy model of unemployment
 % gauthier@vermandel.fr
 
@@ -27,7 +31,7 @@ var e_a e_g e_c e_m e_i;
 
 varexo eta_a eta_g eta_c eta_m eta_i;
 
-parameters beta delta alpha sigmaC sigmaL Uss delta_N phi gy  eta gamma kappa
+parameters beta delta alpha sigmaC Uss delta_N phi gy eta gamma kappa
 			rho_a rho_g rho_c rho_m rho_i;
             
             
@@ -42,7 +46,6 @@ delta 	= 0.025;	% Depreciation rate
 alpha 	= 0.30;		% Capital share
 gy 		= 0.2;   	% Public spending in GDP
 sigmaC 	= 1;		% Consumption risk aversion
-sigmaL 	= 2; 		% Elasticity of labor
 kappa	= 4;		% adjustment costs on investment
 gamma	= .5;		% unemployment insurance as % of real wage
 Uss 	= .075;		% structural unemployment rate

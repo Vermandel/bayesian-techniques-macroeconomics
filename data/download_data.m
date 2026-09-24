@@ -1,3 +1,7 @@
+% Course: Bayesian Techniques in Macroeconomics (2026-2027)
+% Instructor: Gauthier Vermandel
+% Institution: Universite Paris-Dauphine PSL
+%
 function download_data()
 %DOWNLOAD_DATA Fetch a small reproducible DBnomics demonstration dataset.
 % Run this function from the repository root (or add that root to the path).
