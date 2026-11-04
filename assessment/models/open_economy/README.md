@@ -6,8 +6,7 @@ The baseline model contains home/foreign households and production, trade flows,
 
 An empirical version may use home and foreign output growth, the real exchange rate and a trade quantity. Explicitly map national sources, currencies, price deflators and seasonal adjustment. Keep the observable set smaller than the effective number of innovations unless justified measurement errors are added.
 
-The student baseline is explicitly linear. The foreign labour-disutility scale uses
-the foreign steady-state wage. Price and monetary-policy shocks from the richer
+The student baseline is explicitly linear. Labor-disutility scales support the country-specific steady-state wages. Price and monetary-policy shocks from the richer
 theory note are not part of this reduced real model and have been removed instead
 of leaving inactive innovations. Reintroducing them requires the corresponding
 nominal equations, not only new AR(1) processes.
@@ -15,3 +14,9 @@ nominal equations, not only new AR(1) processes.
 Run `python3 download_data.py` to preserve the raw home/foreign DBnomics
 responses, then run `run_all` from MATLAB after adding Dynare to the path.
 Country pairing and exchange-rate construction must be documented explicitly.
+
+The supplied output pair is the United States and France, not the euro area. No exchange-rate series is provided by the starter downloader.
+
+Import-demand shocks are indexed by the importing country. Home exports therefore depend on the foreign import-demand shock, and conversely. The export definitions and resource constraints use the same convention.
+
+Both producer relative prices enter the CPI identities and consumption-unit wages. Foreign assets are converted into home consumption units for international clearing. Import shocks are reduced-form demand wedges, not changes in CES weights. Foreign innovations are declared but have zero baseline variance.

@@ -42,7 +42,7 @@ parameters 	beta_I beta_P lambda sigmaL delta j m
 %----------------------------------------------------------------
 beta_I 	= .95;		% Discount factor impatient household
 beta_P 	= .99;		% Discount factor patient household
-lambda 	= .75;		% Share of patient households
+lambda 	= .75;		% Patient labor exponent in production
 j		= .0924;	% Preference parameter on housing
 m		= .85;		% LTV ratio of collateral constraint
 sigmaL 	= 1;		% Disutility of labor
@@ -68,9 +68,9 @@ model(linear);
 	#Wss_P	= lambda*Yss/Lss_P;
 	#Wss_I	= (1-lambda)*Yss/Lss_I;
 	#PHIss_I= 1-beta_I/beta_P;	
-	#Css_I 	= Wss_I*Lss_I/(1+delta*j/(1-(1-delta)*beta_I-PHIss_I*m)+(Rss-1)/Rss*m*j/((1-(1-delta)*beta_I-PHIss_I*m)));
+	#Css_I 	= Wss_I*Lss_I/(1+delta*j/(1-(1-delta)*beta_I-PHIss_I*m/Rss)+(Rss-1)/Rss*m*j/((1-(1-delta)*beta_I-PHIss_I*m/Rss)));
 	#LBss_I = (Css_I)^-1;
-	#Hss_I 	= j/((1-(1-delta)*beta_I-PHIss_I*m)*LBss_I);
+	#Hss_I 	= j/((1-(1-delta)*beta_I-PHIss_I*m/Rss)*LBss_I);
  	#Hss_P	= (Yss - delta*Hss_I  - Css_I)/((1-(1-delta)*beta_P)/j+delta);
 	#Css	= Yss - delta*(Hss_I+Hss_P);
 	#Css_P	= Css - Css_I;
@@ -86,17 +86,19 @@ model(linear);
 	[name='marginal utility consumption']
 	lb_I = e_c-c_I;
 	lb_P = e_c-c_P;
+	% Linearization of 1-phi_I(level)=beta_I*E(lambda_I(+1))/lambda_I*R.
 	[name='Euler consumption']
-	-PHIss_I*phi_I 	= lb_I(+1)-lb_I+r;
+	-PHIss_I/(1-PHIss_I)*phi_I = lb_I(+1)-lb_I+r;
 	0	= lb_P(+1)-lb_P+r;
 	[name='FOC h']
 	e_h + sigmaL*l_I = lb_I+w_I;
 	e_h + sigmaL*l_P	= lb_P+w_P;
+	% The collateral service is phi_I(level)*m*exp(e_m)*E(q(+1))/R.
 	[name='housing utility']
-	q = j/(Hss_I*LBss_I)*(-h_I-lb_I) + (1-delta)*beta_I*(lb_I(+1)-lb_I+q(+1)) + PHIss_I*m*(lb_I(+1)-lb_I+q(+1));
+	q = j/(Hss_I*LBss_I)*(-h_I-lb_I) + (1-delta)*beta_I*(lb_I(+1)-lb_I+q(+1)) + PHIss_I*m/Rss*(phi_I+e_m+q(+1)-r);
 	q = j/(Hss_P*LBss_P)*(-h_P-lb_P) + (1-delta)*beta_P*(lb_P(+1)-lb_P+q(+1));
 	[name='budget constraint']
-	Css_I*c_I + Hss_I*(h_I-(1-delta)*h_I(-1)) + Rss*Bss*(r(-1)+b(-1)) = Bss*b + Wss_I*Lss_I*(w_I+l_I);
+	Css_I*c_I + Hss_I*(h_I-(1-delta)*h_I(-1)+delta*q) + Rss*Bss*(r(-1)+b(-1)) = Bss*b + Wss_I*Lss_I*(w_I+l_I);
 	[name='borrowing constraint']
 	b+r = e_m+q(+1)+h_I;
 	

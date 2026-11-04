@@ -29,14 +29,14 @@ parameters beta_E beta_H delta alpha sigmaC sigmaL chi gy mh mk kappa hh
 % 2. Calibration
 %----------------------------------------------------------------
 
-beta_H 	= 0.993; 	% Discount factor firms
+beta_H 	= 0.993; 	% Discount factor patient households
 beta_E  = 0.980;	% Discount factor entrepreneurs
 delta 	= 0.025;	% Depreciation rate
 alpha 	= 0.30;		% Capital share
 gy 		= 0.2;   	% Public spending in GDP
 hh		= 0.3;		% Consumption habits
 sigmaC 	= 1;		% Consumption risk aversion
-sigmaL 	= 1; 		% Elasticity of labor
+sigmaL 	= 1; 		% Inverse Frisch elasticity of labor supply
 mk      = 0.8;		% Capital borrowing constraint
 mh      = 1;		% Labor borrowing constraint
 kappa	= 4;		% adjustment costs on investment
@@ -133,6 +133,7 @@ shocks;
 	var eta_i;	stderr 1;
 end;
 	
+steady;
 resid(non_zero);
 check;
 

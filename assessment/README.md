@@ -27,15 +27,15 @@ Dynare-generated source files, machine-specific paths or licensed toolboxes.
 3. Verify the steady state, residuals, determinacy and baseline simulation.
 4. Define estimated parameters and priors, with economic/statistical justification and valid support.
 5. Report mode-finding information and MCMC settings.
-6. Assess acceptance, trace/mixing and convergence; explain any remedial action.
+6. Assess acceptance, trace/mixing and convergence, and explain any remedial action.
 7. Report prior/posterior comparisons, parameter uncertainty and economically relevant posterior IRFs.
 8. Discuss identification, fit, limitations and sensitivity to at least one consequential modelling choice.
 
 ## Expected figures and tables
 
-At minimum: a data/observable table; prior and posterior parameter table;
-prior--posterior density comparison; MCMC diagnostic figure; posterior IRFs with
-credible intervals; and one model-specific empirical result.
+At minimum, provide a data/observable table, a prior and posterior parameter table,
+a prior--posterior density comparison, an MCMC diagnostic figure, posterior IRFs
+with credible intervals, and one model-specific empirical result.
 
 ## Marking rubric (100 points)
 
@@ -57,3 +57,7 @@ The four folders contain a theory PDF, a baseline Dynare simulation model and a
 reproducible starting script. They deliberately do **not** contain a completed
 estimation block or instructor solution. Each folder README identifies the
 empirical work students must add.
+
+## Data scope
+
+The supplied downloaders retrieve raw archived OECD series, not an estimation-ready dataset. Check the vintage, units and economic meaning before choosing observables. In particular, manufacturing hours are not a housing measure, and nominal investment is not directly comparable with real output. The model-specific READMEs explain the available series and the additional work required.

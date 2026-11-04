@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Download quarterly US and euro-area output from DBnomics as raw JSON."""
+"""Download quarterly US and French output from DBnomics as raw JSON."""
 from pathlib import Path
 from urllib.request import urlopen
 

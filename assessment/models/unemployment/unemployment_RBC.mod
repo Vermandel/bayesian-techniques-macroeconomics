@@ -40,7 +40,7 @@ parameters beta delta alpha sigmaC Uss delta_N phi gy eta gamma kappa
 %----------------------------------------------------------------
 delta_N = .1;		% separation rate
 eta		= .5;		% negotiation share
-phi		= 0.15;		% shape hiring cost function
+phi		= 0.15;		% Elasticity of marginal hiring costs
 beta 	= 0.993; 	% Discount factor firms
 delta 	= 0.025;	% Depreciation rate
 alpha 	= 0.30;		% Capital share
@@ -87,6 +87,8 @@ model(linear);
 	lb(+1)-lb+rr = 0;
 	[name='Labor Supply']
 	VHss*v_H = Wss*w  + chi/LBss*lb + beta*(1-delta_N)*VHss*(lb(+1)-lb+v_H(+1));
+	% x is hires per current unemployed worker, not a probability.
+	% The aggregate pool u is taken as given by individual agents.
 	[name='Employment law of motion']
 	n = (1-delta_N)*n(-1) + Xss*Uss/Nss*(x+u);
 	[name='Unemployment rate']
@@ -113,7 +115,7 @@ model(linear);
 	
 	%% AGGREGATION
 	[name='Resources Constraint']
-	y = Css/Yss*c + Iss/Yss*i + gy*e_g + Gam/(1+phi)*Xss^(1+phi)*Uss*((1+phi)*x+u);
+	y = Css/Yss*c + Iss/Yss*i + gy*e_g + Gam/(1+phi)*Xss^(1+phi)*Uss/Yss*((1+phi)*x+u);
 	
 	[name='productivity shock']
 	e_a = rho_a*e_a(-1)+eta_a;
@@ -134,7 +136,7 @@ end;
 
 
 %%% SIMULATIONS
-% this should be remove to set your estimation block after this
+% Simulation starter only. The estimation specification is student work.
 shocks;
 	var eta_a;	stderr 1;
 	var eta_g;	stderr 1;

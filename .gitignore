@@ -85,3 +85,9 @@ worker-logs/
 Notes_BTM.xlsx
 Notes_BTM - Copie.xlsx
 Template_courseQEA_VERMANDEL.doc
+
+# Private editable master and assessment source
+latex/
+assessment/internal-source/
+reports/
+reports-night/

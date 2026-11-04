@@ -14,3 +14,5 @@ without preserving the Dynare log.
 Run `python3 download_data.py` to preserve raw output and investment responses,
 then run `run_all` from MATLAB after adding Dynare to the path. A credit-stock
 series and lending-rate construction must be added and documented before estimation.
+
+The archived output series is chained volume, but the supplied investment series is at current prices. Do not use nominal investment as the model real investment observable without a documented deflator or volume replacement. Both retrieved raw series end in 2023Q4. No corrected observations are supplied.

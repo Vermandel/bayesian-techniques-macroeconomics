@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Download quarterly US output and a housing-market indicator as raw JSON."""
+"""Download quarterly US output and manufacturing weekly hours as raw JSON."""
 from pathlib import Path
 from urllib.request import urlopen
 

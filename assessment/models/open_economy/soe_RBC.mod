@@ -48,7 +48,7 @@ sigmaH		= 2;		% labor supply
 alpha		= .7;		% share of labor in production
 chi_B		= 0.007;	% cost of foreign debt
 mu			= 2;		% Substitution between home/foreign goods
-alpha_C		= .1;		% Share of home goods in consumption basket
+alpha_C		= .1;		% Share of imported goods in consumption basket
 n			= .4;	% share of home country
 					% size of foreign country 1-n
 rho_z_H 	= .95;
@@ -94,26 +94,28 @@ model(linear);
 	y_H = e_z_H + alpha*h_H;
 	y_F = e_z_F + alpha*h_F;
 	[name='FOC h']
-	w_H = y_H-h_H;
-	w_F = y_F-h_F;
+	w_H = p_H+y_H-h_H;
+	w_F = p_F+y_F-h_F;
 	[name='Resources constraint']
 	Yss_H*y_H = (1-alpha_C)*Css_H*(-mu*p_H+c_H) + (1-n)/n*alpha_C*Css_F*(-mu*(p_H-rer)+c_F+e_x_F);
 	Yss_F*y_F = (1-alpha_C)*Css_F*(-mu*p_F+c_F) + n/(1-n)*alpha_C*Css_H*(-mu*(p_F+rer)+c_H+e_x_H);
 
+	% CPI prices: imported home price is p_H-rer in Foreign, and p_F+rer in Home.
 	[name='CES price index']
-	0 = (1-alpha_C)*p_H + alpha_C*rer;
-	0 = (1-alpha_C)*p_F - alpha_C*rer;
+	0 = (1-alpha_C)*p_H + alpha_C*(p_F+rer);
+	0 = (1-alpha_C)*p_F + alpha_C*(p_H-rer);
 	
 	%%% Common macro variables from the Home country perspective
 	[name='Net Foreign assets accumulation']
 	Bss_H*b_H = Rss_F*Bss_H*(r_F(-1)+b_H(-1)+rer-rer(-1)) + (1-alpha_C)*Css_H*((1-mu)*p_H+c_H) + alpha_C*(1-n)/n*Css_F*((1-mu)*p_H+mu*rer+c_F+e_x_F) - Css_H*c_H;
+	% Foreign assets are valued in foreign consumption units, so convert by RER.
 	[name='International financial markets accounting']
-	n*Bss_H*b_H + (1-n)*Bss_F*b_F = 0;
+	n*Bss_H*b_H + (1-n)*Bss_F*(b_F+rer) = 0;
 	[name='Real exchange rate']
 	rer(+1)-rer = r_H-r_F-e_e+chi_B*Bss_H*b_H;
 	[name='Exports']
-	ex_H = e_x_H - mu*(p_H-rer) + c_F;
-	ex_F = e_x_F - mu*(p_F+rer) + c_H;
+	ex_H = e_x_F - mu*(p_H-rer) + c_F;
+	ex_F = e_x_H - mu*(p_F+rer) + c_H;
 	
 	[name='Country specific shocks']
 	e_z_H = rho_z_H*e_z_H(-1) + eta_z_H;
