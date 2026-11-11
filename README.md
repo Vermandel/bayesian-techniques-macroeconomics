@@ -14,10 +14,10 @@ code, assessment models and concise oral decks.
 
 | Date | Session |
 | --- | --- |
-| 5 November 2026, 08:30--11:45 | Modern Business Cycle Theory |
-| 12 November 2026, 08:30--11:45 | A Production Economy |
-| 19 November 2026, 08:30--11:45 | Maximum Likelihood Estimation |
-| 26 November 2026, 08:30--11:45 | Bayesian Estimation of DSGE Models |
+| 12 November 2026, 08:30--11:45 | Modern Business Cycle Theory |
+| 19 November 2026, 08:30--11:45 | A Production Economy |
+| 26 November 2026, 08:30--11:45 | Maximum Likelihood Estimation |
+| 3 December 2026, 08:30--11:45 | Bayesian Estimation of DSGE Models |
 
 Detailed learning outcomes and teaching sequence are in
 [docs/course-plan.md](docs/course-plan.md). A fuller academic description of the

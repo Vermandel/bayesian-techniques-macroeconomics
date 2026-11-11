@@ -16,19 +16,19 @@ course:
 schedule:
   sessions:
     - number: 1
-      date: "2026-11-05"
+      date: "2026-11-12"
       time: "08:30-11:45"
       title: Modern Business Cycle Theory
     - number: 2
-      date: "2026-11-12"
+      date: "2026-11-19"
       time: "08:30-11:45"
       title: A Production Economy
     - number: 3
-      date: "2026-11-19"
+      date: "2026-11-26"
       time: "08:30-11:45"
       title: Maximum Likelihood Estimation
     - number: 4
-      date: "2026-11-26"
+      date: "2026-12-03"
       time: "08:30-11:45"
       title: Bayesian Estimation of DSGE Models
 
