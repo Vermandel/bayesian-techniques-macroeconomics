@@ -28,10 +28,10 @@ course's model-to-estimation pipeline is in
 
 | Session | Handout | Slides | Code |
 | --- | --- | --- | --- |
-| 1. Modern Business Cycle Theory | [PDF](session1/handout1.pdf) | [Compact](session1/slides1.pdf) · [Progressive](session1/slides1_extended.pdf) | [Browse](session1/codes/) |
-| 2. A Production Economy | [PDF](session2/handout2.pdf) | [Compact](session2/slides2.pdf) · [Progressive](session2/slides2_extended.pdf) | [Browse](session2/codes/) |
-| 3. Maximum Likelihood Estimation | [PDF](session3/handout3.pdf) | [Compact](session3/slides3.pdf) · [Progressive](session3/slides3_extended.pdf) | [Browse](session3/codes/) |
-| 4. Bayesian Estimation of DSGE Models | [PDF](session4/handout4.pdf) | [Compact](session4/slides4.pdf) · [Progressive](session4/slides4_extended.pdf) | [Browse](session4/codes/) |
+| 1. Modern Business Cycle Theory | [PDF](session1/handout1.pdf) | [Compact](session1/slides1.pdf) | [Browse](session1/codes/) |
+| 2. A Production Economy | [PDF](session2/handout2.pdf) | [Compact](session2/slides2.pdf) | [Browse](session2/codes/) |
+| 3. Maximum Likelihood Estimation | [PDF](session3/handout3.pdf) | [Compact](session3/slides3.pdf) | [Browse](session3/codes/) |
+| 4. Bayesian Estimation of DSGE Models | [PDF](session4/handout4.pdf) | [Compact](session4/slides4.pdf) | [Browse](session4/codes/) |
 
 The public release contains the compiled handout and slide PDFs. LaTeX sources
 and local theme assets are maintained in the private Dropbox master and are
@@ -76,4 +76,6 @@ downloaded data, generated outputs, private material and solutions. See
 
 ## Folder layout
 
-Each `sessionN/` contains `handoutN.pdf`, `slidesN.pdf` and `slidesN_extended.pdf` at its root, with individual MATLAB/Dynare files under `codes/`. Download the required files together, open that codes directory in MATLAB, and follow its README. LaTeX sources under `latex/` and shared build assets exist only in the private editable master.
+Each `sessionN/` contains `handoutN.pdf` and `slidesN.pdf` at its root, with individual MATLAB/Dynare files under `codes/`. Download the required files together, open that codes directory in MATLAB, and follow its README. LaTeX sources under `latex/` and shared build assets exist only in the private editable master.
+
+Publication rule: extended/progressive slide PDFs are INSTRUCTOR_ONLY and must not be exported to student releases. The editable master retains the instructor copies. Follow publication-manifest.yml for the explicit Session 1 code display list; generic DBnomics downloads belong to the DBnomics resource block, not Session 1.

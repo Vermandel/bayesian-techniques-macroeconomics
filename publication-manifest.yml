@@ -69,22 +69,21 @@ resources:
     - title: Modern Business Cycle Theory
       handout: {type: PDF, url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/session1/handout1.pdf}
       slides: {type: PDF, url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/session1/slides1.pdf}
-      slides_progressive: {type: PDF, url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/session1/slides1_extended.pdf}
       code: {type: MATLAB, url: https://github.com/Vermandel/bayesian-techniques-macroeconomics/tree/main/session1/codes/}
+      code_display_files: ["BSmeasures.m", "bpass.m", "download_data.m", "dyn_toy_model.mod", "logGDP.m", "toy_model.m", "toy_model_bootstrap.m"]
+      code_display_exclude: ["call_dbnomics.m", "example_single_series.m", "example_multiple_countries.m", "example_multiple_series.m", "example_plot_inflation.m"]
+      code_display_note: "Use this explicit display list, not directory enumeration. DBnomics generic examples belong to software.DBnomics; keep local helper dependencies."
     - title: A Production Economy
       handout: {type: PDF, url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/session2/handout2.pdf}
       slides: {type: PDF, url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/session2/slides2.pdf}
-      slides_progressive: {type: PDF, url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/session2/slides2_extended.pdf}
       code: {type: Dynare, url: https://github.com/Vermandel/bayesian-techniques-macroeconomics/tree/main/session2/codes/}
     - title: Maximum Likelihood Estimation
       handout: {type: PDF, url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/session3/handout3.pdf}
       slides: {type: PDF, url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/session3/slides3.pdf}
-      slides_progressive: {type: PDF, url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/session3/slides3_extended.pdf}
       code: {type: MATLAB, url: https://github.com/Vermandel/bayesian-techniques-macroeconomics/tree/main/session3/codes/}
     - title: Bayesian Estimation of DSGE Models
       handout: {type: PDF, url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/session4/handout4.pdf}
       slides: {type: PDF, url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/session4/slides4.pdf}
-      slides_progressive: {type: PDF, url: https://raw.githubusercontent.com/Vermandel/bayesian-techniques-macroeconomics/main/session4/slides4_extended.pdf}
       code: {type: Dynare, url: https://github.com/Vermandel/bayesian-techniques-macroeconomics/tree/main/session4/codes/}
   data:
     label: Course data downloader
@@ -108,6 +107,24 @@ software:
     type: Data
     text: DBnomics is the canonical source for general macroeconomic data retrieval guidance.
     repository: https://github.com/Vermandel/dbnomics-teaching
-    guide_pdf: https://raw.githubusercontent.com/Vermandel/dbnomics-teaching/main/guide/call_dbnomics-guide.pdf
-    repository_commit: 3e9bd970ddf25708f85354a50a98ee76e65ca81b
+    guide_pdf: https://raw.githubusercontent.com/Vermandel/dbnomics-teaching/d0a59bf337b63e8000c707ab129e557fd629eb70/guide/call_dbnomics-guide.pdf
+    repository_commit: d0a59bf337b63e8000c707ab129e557fd629eb70
+    publication_manifest: https://raw.githubusercontent.com/Vermandel/dbnomics-teaching/11be5376054a8e776f5cd0273682d3dc3868b20f/publication-manifest.json
+    downloads:
+      - {label: call_dbnomics.m, type: MATLAB, url: https://raw.githubusercontent.com/Vermandel/dbnomics-teaching/1ff66c0c5d96b06556e5c0a202877cdc4a117d74/code/call_dbnomics.m}
+      - {label: example_single_series.m, type: MATLAB, url: https://raw.githubusercontent.com/Vermandel/dbnomics-teaching/1ff66c0c5d96b06556e5c0a202877cdc4a117d74/examples/example_single_series.m}
+      - {label: example_multiple_countries.m, type: MATLAB, url: https://raw.githubusercontent.com/Vermandel/dbnomics-teaching/1ff66c0c5d96b06556e5c0a202877cdc4a117d74/examples/example_multiple_countries.m}
+      - {label: example_multiple_series.m, type: MATLAB, url: https://raw.githubusercontent.com/Vermandel/dbnomics-teaching/1ff66c0c5d96b06556e5c0a202877cdc4a117d74/examples/example_multiple_series.m}
+      - {label: example_plot_inflation.m, type: MATLAB, url: https://raw.githubusercontent.com/Vermandel/dbnomics-teaching/1ff66c0c5d96b06556e5c0a202877cdc4a117d74/examples/example_plot_inflation.m}
+      - {label: example_plot_datetime.m, type: MATLAB, url: https://raw.githubusercontent.com/Vermandel/dbnomics-teaching/1ff66c0c5d96b06556e5c0a202877cdc4a117d74/examples/example_plot_datetime.m}
+      - {label: example_plot_numeric.m, type: MATLAB, url: https://raw.githubusercontent.com/Vermandel/dbnomics-teaching/1ff66c0c5d96b06556e5c0a202877cdc4a117d74/examples/example_plot_numeric.m}
     status: ready
+
+publication_policy:
+  audience: students
+  extended_slides: INSTRUCTOR_ONLY
+  exclude_globs: ["**/*extended*.pdf", "archive/**", "private/**"]
+  student_slides: compact_only
+  dbnomics_generic_resources_section: software.DBnomics
+  preserve_local_dependencies: true
+  historical_git_objects: "Not purged; old immutable URLs can remain publicly accessible."

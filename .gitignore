@@ -91,3 +91,7 @@ latex/
 assessment/internal-source/
 reports/
 reports-night/
+
+# Instructor-only slides; never stage in student releases
+*extended*.pdf
+archive/
