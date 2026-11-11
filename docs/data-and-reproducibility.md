@@ -12,7 +12,7 @@ The robust workflow is provider/dataset/series identifiers plus a scripted HTTPS
 
 Use the standard `call_dbnomics.m` included in the relevant session’s `codes/` folder. It returns a numeric matrix with datenums in column 1 and observations thereafter, a table of observations, and a numeric date vector expressed in fractional years. The course scripts convert the matrix date column to `datetime` explicitly when needed.
 
-The [DBnomics guide](call_dbnomics-guide.pdf) explains individual series, country groups, alignment and plots. Its runnable examples are in [session 1](../session1/codes/). There is no course-specific wrapper. Internet access is required for retrieval. Estimation then uses the locally generated `mydata.mat`. The included OECD/QNA series are archived vintages, not current-quarter releases. Check the coverage returned by each request before choosing an estimation sample.
+The [DBnomics guide](https://raw.githubusercontent.com/Vermandel/dbnomics-teaching/main/guide/call_dbnomics-guide.pdf) explains individual series, country groups, alignment and plots. Its runnable examples are in [session 1](../session1/codes/). There is no course-specific wrapper. Internet access is required for retrieval. Estimation then uses the locally generated `mydata.mat`. The included OECD/QNA series are archived vintages, not current-quarter releases. Check the coverage returned by each request before choosing an estimation sample.
 
 ## Folder contract for assessment work
 

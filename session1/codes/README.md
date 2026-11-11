@@ -30,6 +30,6 @@ No horizon, shock distribution, calibration or utility curvature is silently har
 
 Use the included standard `call_dbnomics.m`, without a course-specific wrapper. Its outputs are a numeric matrix (datenum in column 1, series thereafter), a table, and numeric readable dates. The course scripts explicitly convert the matrix dates to `datetime` for plots and calendar operations. Do not interpret the third output as a `datetime`.
 
-See the [DBnomics guide](../../docs/call_dbnomics-guide.pdf) for single and multiple series, country selection, date alignment and plotting. Data are downloaded on execution and are not bundled.
+See the [DBnomics guide](https://raw.githubusercontent.com/Vermandel/dbnomics-teaching/main/guide/call_dbnomics-guide.pdf) for single and multiple series, country selection, date alignment and plotting. Data are downloaded on execution and are not bundled.
 
 The optional `download_data.m` saves the raw demonstration table and date vectors in `btm_demo_data.mat` in this folder. The four `example_*.m` files reproduce the guide’s requests and plot.

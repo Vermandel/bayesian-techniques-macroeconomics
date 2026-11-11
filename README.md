@@ -53,7 +53,7 @@ provider, dataset and identifier, retrieval date, sample, frequency, units,
 seasonal adjustment, transformations and missing-value treatment. The
 [DBnomics teaching repository](https://github.com/Vermandel/dbnomics-teaching)
 and its [guide PDF](https://github.com/Vermandel/dbnomics-teaching/blob/main/guide/call_dbnomics-guide.pdf)
-are the canonical general reference. A [local copy of the guide](docs/call_dbnomics-guide.pdf) is included for convenience, with runnable download and plot examples in `session1/codes/`. Assessment downloaders and course-specific
+are the canonical general reference. There is no course-specific guide or duplicate PDF; runnable download and plot examples are in `session1/codes/`. Assessment downloaders and course-specific
 scripts remain in this repository. See [docs/data-and-reproducibility.md](docs/data-and-reproducibility.md).
 
 ## Assessment

@@ -32,6 +32,6 @@ The full model follows the adjustment-cost and external-habit derivations in the
 
 Use the included standard `call_dbnomics.m`, without a course-specific wrapper. Its outputs are a numeric matrix (datenum in column 1, series thereafter), a table, and numeric readable dates. The course scripts explicitly convert the matrix dates to `datetime` for plots and calendar operations. Do not interpret the third output as a `datetime`.
 
-See the [DBnomics guide](../../docs/call_dbnomics-guide.pdf) for single and multiple series, country selection, date alignment and plotting. Data are downloaded on execution and are not bundled.
+See the [DBnomics guide](https://raw.githubusercontent.com/Vermandel/dbnomics-teaching/main/guide/call_dbnomics-guide.pdf) for single and multiple series, country selection, date alignment and plotting. Data are downloaded on execution and are not bundled.
 
 After aligning all seven series, mydb.m checks consecutive calendar quarters before any difference. An internal gap or duplicate quarter stops execution explicitly, without interpolation. fullRBC.mod defines steady-state coefficients as model-local expressions, so changes in alpha, beta, delta or gy update them during solution and estimation. Hours remain normalized to one third, with the preference weight implied by this normalization.
