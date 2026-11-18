@@ -43,14 +43,14 @@ steady;
 check;
 
 % perform stochastic simulations
-stoch_simul(order=1,irf=30) c k a;
+stoch_simul(order=1,irf=30,nograph) c k a;
 
 % model in dynare reads as
-% y(t) = F*x(t-1) + G*e(t)
+% y(t) = P*x(t-1) + Q*e(t)
 % y : all variables
 % k : state variables
-Fdynare = oo_.dr.ghx;
-Gdynare = oo_.dr.ghu;
+Pdynare = oo_.dr.ghx;
+Qdynare = oo_.dr.ghu;
 
 
 %%% Compare RBCs with Dynare
@@ -61,25 +61,25 @@ k3 = Css/Kss;
 c1 = beta*alpha*Kss^(alpha-1);
 c2 = beta*alpha*Kss^(alpha-1)*(alpha-1);
 %% Get closed-form solution of the form:
-% x(t) = F*x(t-1) + G*e(t)
-% 1) Compute matrix F:
+% x(t) = P*x(t-1) + Q*e(t)
+% 1) Compute matrix P:
 % find roots of the equation - roots([A*x^2 B*x C])
-Fcs = roots([-k3 (-1+k3*c2+k2) -k2*c2]);
+Pcs = roots([-k3 (-1+k3*c2+k2) -k2*c2]);
 % pick the stable one
-stable = abs(imag(Fcs)) < 1e-10 & abs(k2-k3*real(Fcs)) < 1;
+stable = abs(imag(Pcs)) < 1e-10 & abs(k2-k3*real(Pcs)) < 1;
 assert(nnz(stable)==1, 'Expected exactly one stable capital-transition root.');
-Fc = real(Fcs(stable));
-Fk = k2 - k3*Fc;
-% 2) Compute matrix G:
-Gc = ((Fc-c2)*k1-c1*rho_A)/((Fc-c2)*k3+1-rho_A);
-Gk = k1-k3*Gc;
+Pc = real(Pcs(stable));
+Pk = k2 - k3*Pc;
+% 2) Compute matrix Q:
+Qc = ((Pc-c2)*k1-c1*rho_A)/((Pc-c2)*k3+1-rho_A);
+Qk = k1-k3*Qc;
 
 % build model's matrices
 % x = [ k, a, c]'
-F = [ 	Fk,	Gk*rho_A,	0;
+P = [ 	Pk,	Qk*rho_A,	0;
 		0,	rho_A,		0;
-		Fc,	Gc*rho_A,	0];
-G = [ Gk;	1;	Gc];
+		Pc,	Qc*rho_A,	0];
+Q = [ Qk;	1;	Qc];
 
 %% Simulate an IRF
 x_ = zeros(M_.endo_nbr,options_.irf+1);
@@ -88,18 +88,69 @@ e_ = zeros(M_.exo_nbr,options_.irf+1);
 % shock in t=2;
 e_(:,2) = chol(M_.Sigma_e);
 for t = 2:(options_.irf+1)
-	x_(:,t) = F*x_(:,t-1)+G*e_(t);
+	x_(:,t) = P*x_(:,t-1)+Q*e_(t);
 end
 
-% draw result
-figure;
-subplot(1,3,1)
-plot(1:options_.irf,x_(1,2:end),1:options_.irf,oo_.irfs.k_e_a,'o')
-title('k')
-subplot(1,3,2)
-plot(1:options_.irf,x_(2,2:end),1:options_.irf,oo_.irfs.a_e_a,'o')
-title('a')
-subplot(1,3,3)
-plot(1:options_.irf,x_(3,2:end),1:options_.irf,oo_.irfs.c_e_a,'o')
-title('c')
-legend('By hand solution','Dynare')
+% Plot both solutions in percentage deviations from the steady state.
+% The zero on the horizontal axis is the date of the productivity shock.
+horizon = 0:options_.irf-1;
+figure('Color','w','Units','centimeters','Position',[2 2 25 9]);
+subplot(1,3,1);
+	plot(horizon,100*x_(1,2:end),'Color',[0 0.32 0.55],'LineWidth',1.8);
+	hold on;
+	plot(horizon,100*oo_.irfs.k_e_a,'o','Color',[0.78 0.32 0.12], ...
+		'MarkerSize',4,'MarkerIndices',1:3:options_.irf,'LineWidth',1);
+	yline(0,':','Color',[0.6 0.6 0.6]);
+	title('Capital');
+	ylabel('Deviation from steady state (%)');
+	xlabel('Periods after the shock');
+	grid on;
+	box off;
+	set(gca,'FontName','Arial','FontSize',10,'GridAlpha',0.12);
+	xlim([0 options_.irf-1]);
+subplot(1,3,2);
+	plot(horizon,100*x_(2,2:end),'Color',[0 0.32 0.55],'LineWidth',1.8);
+	hold on;
+	plot(horizon,100*oo_.irfs.a_e_a,'o','Color',[0.78 0.32 0.12], ...
+		'MarkerSize',4,'MarkerIndices',1:3:options_.irf,'LineWidth',1);
+	yline(0,':','Color',[0.6 0.6 0.6]);
+	title('Productivity');
+	xlabel('Periods after the shock');
+	grid on;
+	box off;
+	set(gca,'FontName','Arial','FontSize',10,'GridAlpha',0.12);
+	xlim([0 options_.irf-1]);
+subplot(1,3,3);
+	plot(horizon,100*x_(3,2:end),'Color',[0 0.32 0.55],'LineWidth',1.8);
+	hold on;
+	plot(horizon,100*oo_.irfs.c_e_a,'o','Color',[0.78 0.32 0.12], ...
+		'MarkerSize',4,'MarkerIndices',1:3:options_.irf,'LineWidth',1);
+	yline(0,':','Color',[0.6 0.6 0.6]);
+	title('Consumption');
+	xlabel('Periods after the shock');
+	grid on;
+	box off;
+	set(gca,'FontName','Arial','FontSize',10,'GridAlpha',0.12);
+	xlim([0 options_.irf-1]);
+	legend('Analytical solution','Dynare','Orientation','horizontal', ...
+		'Position',[0.33 0.01 0.4 0.055],'Box','off');
+
+% Reserve a shared bottom strip for the legend, outside all three panels.
+axes_list = findall(gcf,'Type','axes');
+for panel = 1:numel(axes_list)
+	position = axes_list(panel).Position;
+	position(2) = position(2)+0.10;
+	position(4) = position(4)-0.10;
+	axes_list(panel).Position = position;
+end
+
+% Export the actual comparison used in the handout.
+exportgraphics(gcf,'compareRBC_figure.pdf','ContentType','vector');
+exportgraphics(gcf,'compareRBC_figure.png','Resolution',180);
+
+% Record numerical agreement, in log-deviation units.
+irf_error = max(abs(x_(:,2:end)- ...
+	[oo_.irfs.k_e_a; oo_.irfs.a_e_a; oo_.irfs.c_e_a]),[],'all');
+disp(['Maximum analytical/Dynare IRF discrepancy: ' num2str(irf_error,16)]);
+assert(irf_error < 1e-10,'Analytical and Dynare solutions disagree.');
+save('compareRBC_validation.mat','irf_error','x_','P','Q','horizon');
